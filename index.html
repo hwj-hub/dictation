@@ -1,0 +1,3322 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f2a44">
+<title>받아쓰기 연습 · 급수표 문장을 소리로 불러 주고 채점까지 — 1·2·3학년 급수표, 시험지·따라쓰기 PDF (무료)</title>
+<meta name="description" content="받아쓰기 급수표 문장을 휴대폰·컴퓨터가 소리 내어 불러 줍니다. 빠르기·반복·띄어 읽기를 고르고, 아이는 공책이나 화면에 쓰고, 자판으로 쓴 답은 틀린 글자·띄어쓰기·문장 부호까지 바로 채점합니다. 1·2·3학년 기본 급수표 12급(받침·겹받침·된소리·헷갈리는 모음·띄어쓰기)과 학교에서 받은 급수표 붙여 넣기·엑셀 불러오기, 받아쓰기 시험지·정답지·따라쓰기·급수표·오답 노트 PDF와 엑셀 기록까지. 쓴 내용은 서버로 전송되지 않습니다.">
+<meta property="og:title" content="받아쓰기 연습 · 급수표 문장을 소리로 불러 주고 채점까지">
+<meta property="og:description" content="급수표 문장을 소리로 불러 주고, 쓴 답을 글자·띄어쓰기까지 채점. 1·2·3학년 기본 급수표와 시험지·따라쓰기·오답 노트 PDF. 서버로 전송되지 않습니다.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://hwj-hub.github.io/dictation/">
+<!-- 링크 미리보기 그림: 스크래퍼는 절대 주소만 읽으므로 배포 주소로 적는다. 그림은 make_thumbnail.py 가 만든 og-image.png(1200×630) -->
+<meta property="og:image" content="https://hwj-hub.github.io/dictation/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="받아쓰기 연습 — 소리로 불러 준 문장을 아이가 쓰고, 틀린 글자와 띄어쓰기를 표시한 채점 화면과 받아쓰기 시험지">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='88'%3E%E2%9C%8F%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<style>
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  color-scheme:light dark;
+  --bg:#eef2f6; --card:#fff; --card2:#f4f7fa; --fg:#14202a; --muted:#566573; --line:#dbe3ea;
+  --accent:#1f5fd6; --accent2:#0b9488; --afg:#fff;
+  --ok:#0f766e; --okbg:#e6f3f7; --warn:#b45309; --warnbg:#fef4e6; --danger:#c81e1e; --dangerbg:#fdecec;
+  --info:#475569; --infobg:#eef1f6;
+  --shadow:0 1px 2px rgba(20,28,36,.05),0 8px 24px -14px rgba(20,28,36,.32);
+  --r:16px;
+}
+@media (prefers-color-scheme:dark){
+ :root{
+  --bg:#0b1117; --card:#131c25; --card2:#111821; --fg:#e8f0f7; --muted:#a2b3c2; --line:#26323d;
+  --accent:#8db4ff; --accent2:#5fd6c8; --afg:#0b1a33;
+  --ok:#34d399; --okbg:#0f2a22; --warn:#fbbf24; --warnbg:#2a2110; --danger:#f87171; --dangerbg:#2c1414;
+  --info:#c3ccd8; --infobg:#1f242e;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px -16px rgba(0,0,0,.8);
+ }
+}
+html,body{margin:0;padding:0}
+body{background:var(--bg);color:var(--fg);line-height:1.55;word-break:keep-all;overflow-wrap:anywhere;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",Roboto,sans-serif;
+  -webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}
+.wrap{max-width:1180px;margin:0 auto;padding:0 14px calc(70px + env(safe-area-inset-bottom))}
+.hide{display:none !important}
+.nw{white-space:nowrap}
+
+/* ══ 광고 슬롯 ══ 자리만 비워 두고 화면 폭에 맞는 크기를 AD 가 채운다.
+   크기를 미리 잡아 두어 광고가 늦게 떠도 화면이 밀리지 않는다(애드핏: 광고 공간은 고정되어야 함) */
+.ad-slot{display:flex;align-items:center;justify-content:center;margin:10px auto;max-width:100%}
+.ad-top{width:320px;height:50px;max-width:100%}
+.ad-ph{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);
+  border-radius:8px;background:var(--card2);color:var(--muted);font-size:11px;letter-spacing:.08em;font-weight:600}
+/* ── 인앱 브라우저 안내 띠 ── 앱 안 WebView 는 파일을 내려받지 못한다 */
+.iabar{display:none;align-items:center;gap:10px;margin:10px 0 0;padding:11px 12px;border-radius:12px;
+  background:var(--warnbg);border:1px solid color-mix(in srgb,var(--warn) 34%,transparent);line-height:1.5}
+body.inapp .iabar{display:flex}
+.iabar .ia-t{flex:1 1 auto;min-width:0;font-size:12.5px;font-weight:700;color:var(--fg)}
+.iabar .ia-t small{display:block;font-size:11.5px;font-weight:600;color:var(--muted);margin-top:2px}
+.iabar .ia-go{flex:0 0 auto;font:inherit;font-size:12.5px;font-weight:800;color:#fff;border:0;border-radius:999px;
+  padding:9px 14px;min-height:38px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2))}
+@media (prefers-color-scheme:dark){.iabar .ia-go{color:var(--afg)}}
+/* 닫기는 휴대폰에서 누르기 쉽게 36px(터치 대상 최소) */
+.iabar .ia-x{flex:0 0 auto;width:36px;height:36px;border-radius:50%;border:1px solid var(--line);background:transparent;
+  color:var(--muted);font:inherit;font-size:12px;line-height:1;cursor:pointer}
+/* ── 앱 안에서 열었을 때 막는 창 ── 토스트(z-index 99)보다는 아래에 둔다 */
+.iamodal{position:fixed;inset:0;z-index:90;display:none;align-items:center;justify-content:center;padding:18px;
+  background:rgba(8,14,20,.72);-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+body.ia-lock{overflow:hidden}
+body.ia-lock .iamodal{display:flex}
+body.ia-lock .wrap{pointer-events:none}
+.iasheet{background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow);
+  width:100%;max-width:420px;max-height:92vh;overflow:auto;padding:22px 18px 16px;text-align:center}
+.iasheet .iaic{font-size:34px;line-height:1;margin-bottom:10px}
+.iasheet h2{font-size:17.5px;font-weight:800;letter-spacing:-.02em;margin:0 0 10px;line-height:1.45}
+.iap{font-size:13.5px;font-weight:600;color:var(--muted);line-height:1.7;margin:0 0 14px}
+.iap b{color:var(--fg);font-weight:800}
+.iasteps{text-align:left;margin:0 0 16px;padding:12px 14px 12px 32px;border-radius:12px;background:var(--card2);
+  font-size:13px;font-weight:600;color:var(--muted);line-height:1.7}
+.iasteps li+li{margin-top:5px}
+.iasteps b{color:var(--fg);font-weight:800}
+.iabtn{display:block;width:100%;font:inherit;font-size:15px;font-weight:800;color:#fff;border:0;border-radius:12px;
+  padding:14px;min-height:52px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));
+  box-shadow:var(--shadow)}
+@media (prefers-color-scheme:dark){.iabtn{color:var(--afg)}}
+.iafine{margin:12px 0 0;font-size:12px;font-weight:600;color:var(--muted);line-height:1.6}
+.iafine button{font:inherit;font-size:12px;font-weight:700;color:var(--muted);background:none;border:0;padding:6px 8px;
+  text-decoration:underline;cursor:pointer;min-height:36px}
+.dwarn{margin:10px 0 0;padding:10px 12px;border-radius:10px;background:var(--warnbg);font-size:12.5px;font-weight:700;line-height:1.6}
+/* 문장 속 단추라 줄 높이는 그대로 두고(음수 여백) 누르는 면만 넓힌다 */
+.dwarn button{font:inherit;font-size:12.5px;font-weight:800;color:var(--accent);background:none;border:0;padding:9px 2px;margin:-9px 0;
+  text-decoration:underline;cursor:pointer}
+.ad-lab{display:block;text-align:center;font-size:9.5px;font-weight:700;letter-spacing:.14em;color:var(--muted);opacity:.7;margin:12px 0 -4px}
+body.no-ad .ad-slot,.ad-none{display:none !important}
+/* PC 옆 칸 — 미리보기 카드 바로 위 320×50 · 옆 칸 맨 아래(점검 결과 밑) 320×100 (좁은 화면에서는 둘 다 숨긴다) */
+@media (max-width:979px){#ad-side,#ad-mid-pc{display:none}}
+@media (min-width:980px){#ad-side{margin:14px auto 0}#ad-mid{display:none}#ad-mid-pc{margin:12px auto 0}}
+/* 본문 광고는 버튼·입력칸에서 넉넉히 떼어 놓는다 — 실수로 눌리는 자리는 금지 */
+#ad-mid{margin:18px auto}
+
+/* ── 하단 오버형 ── 콘텐츠를 가리지 않도록 본문 아래 여백을 같이 늘린다(애드핏: 콘텐츠를 덮는 배치 금지).
+   입력 중(아래 바가 떠 있을 때)에는 띄우지 않는다 — 핵심 행동 중 광고 노출 금지 조항 */
+#anchor{position:fixed;left:0;right:0;bottom:0;z-index:45;display:flex;align-items:center;justify-content:center;
+  background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 22px -14px rgba(0,0,0,.55);
+  padding:8px 4px calc(8px + env(safe-area-inset-bottom));transform:translateY(120%);
+  /* 내려가 있어도 「광고」 라벨(top:-11px)과 닫기(top:-38px)는 바 위쪽에 붙어 있어 화면에 걸쳐 보인다 → 통째로 감춘다.
+     미끄러져 내려간 뒤(.22s) 감추고, 올라올 때는 바로 보이게 한다.
+     ins 는 바가 올라온 뒤에 preload 로 만들므로 애드핏 보임 검사와는 무관하다 */
+  visibility:hidden;pointer-events:none;transition:transform .22s,visibility 0s linear .22s}
+#anchor.on{transform:none;visibility:visible;pointer-events:auto;transition:transform .22s,visibility 0s}
+#anchor .ad-slot{margin:0}
+#anchor .amk{position:absolute;left:10px;top:-11px;font-size:9px;font-weight:700;letter-spacing:.1em;color:var(--muted);
+  background:var(--card);border:1px solid var(--line);border-radius:5px;padding:0 5px;line-height:15px}
+/* 닫기는 광고 영역 밖에 둔다 — 광고 안에 닫기 버튼을 넣는 것은 금지(오클릭 방지) */
+#anchor .axl{position:absolute;right:6px;top:-38px;width:36px;height:36px;border-radius:50%;cursor:pointer;
+  border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:13px;line-height:1;box-shadow:var(--shadow)}
+#anchor .axl::before{content:'';position:absolute;inset:-6px}
+body.anch .wrap{padding-bottom:calc(124px + env(safe-area-inset-bottom))}
+body.anch #toast{bottom:calc(118px + env(safe-area-inset-bottom))}
+@media (min-width:980px){#anchor{display:none}}
+
+/* ── 저장 완료 카드 ── 화면을 덮지 않고 본문 흐름 안에 펼친다(애드핏: 콘텐츠를 덮거나 가리는 영역에 광고 배치 금지) */
+#doneCard{border-color:color-mix(in srgb,var(--ok) 40%,var(--line))}
+#doneCard .ad-lab{margin-top:16px}
+.dmsg{margin:0 0 10px;font-size:14px;font-weight:700;line-height:1.6}
+.dsteps{margin:0;padding:0 0 0 20px;font-size:13px;font-weight:600;line-height:1.75;color:var(--muted)}
+.dsteps b{color:var(--fg);font-weight:800}
+
+header{text-align:center;padding:14px 0 2px}
+.logo{display:inline-flex;align-items:center;gap:9px;font-size:22px;font-weight:800;letter-spacing:-.02em}
+.logo .ico{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-size:17px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:var(--shadow)}
+.tag{font-size:14.5px;font-weight:600;color:var(--muted);margin:8px 0 0;text-wrap:balance}
+.tag b{color:var(--fg)}
+.badges{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px}
+.badge{font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:999px;background:var(--okbg);color:var(--ok);border:1px solid transparent}
+.badge.gray{background:var(--card2);color:var(--muted);border-color:var(--line)}
+
+.toolbar{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+
+/* ── 두 칸 배치 · 넓은 화면에서 미리보기를 옆에 붙인다 ── */
+.layout{display:grid;grid-template-columns:minmax(0,1fr);gap:0 16px}
+@media (min-width:980px){
+  .layout{grid-template-columns:minmax(0,1fr) 430px;align-items:start}
+  /* 옆 칸 맨 위에 광고가 들어가므로 미리보기 높이를 그만큼 줄여 「PDF로 저장」이 화면 안에 남게 한다.
+     옆 칸은 화면 높이 안에서 따로 스크롤한다 — sticky 만 두면 옆 칸이 화면보다 길 때
+     맨 위에서 저장했을 때 펼쳐지는 완료 카드(300×250)가 화면 아래로 빠진다 */
+  .side{position:sticky;top:8px;max-height:100vh;overflow:auto;padding-bottom:10px;scrollbar-width:thin}
+  .side .pv-pages{max-height:calc(100vh - 480px);min-height:320px;overflow:auto}
+}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);padding:16px;margin-top:14px}
+.card h2{font-size:12px;font-weight:800;color:var(--muted);margin:0 0 12px;letter-spacing:.07em;
+  display:flex;align-items:center;justify-content:space-between;gap:8px}
+.card h2 .n{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:6px;margin-right:6px;
+  background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent);letter-spacing:0;font-size:11.5px}
+.card h2 .opt{font-size:10.5px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px;letter-spacing:.02em}
+
+/* ── 폼 ── */
+.row{margin-top:14px}
+.lab{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:800;margin-bottom:7px}
+.lab .hint{font-weight:500;color:var(--muted);font-size:12px;text-align:right}
+.lab>span:first-child{flex:0 0 auto}
+input[type=text],input[type=tel],input[type=date],select,textarea{font:inherit;font-size:16px;color:var(--fg);background:var(--card2);
+  border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-height:46px;width:100%;min-width:0}
+input[type=date]{-webkit-appearance:none;appearance:none;display:block}
+input::placeholder,textarea::placeholder{color:color-mix(in srgb,var(--muted) 70%,transparent)}
+textarea{resize:vertical;line-height:1.6}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:transparent}
+.grid2{display:flex;gap:10px;flex-wrap:wrap}
+.grid2>div{flex:1 1 180px;min-width:0}
+.grid2>div.wide{flex:2 1 240px}
+.seg{display:flex;gap:5px;flex-wrap:wrap}
+.seg button,.rgrid button,.tgrid button{flex:1 1 0;border:1px solid var(--line);background:var(--card2);color:var(--muted);font:inherit;
+  font-size:13.5px;font-weight:800;padding:9px 8px;border-radius:10px;cursor:pointer;min-height:46px;transition:.15s;min-width:72px}
+.seg button:hover,.rgrid button:hover,.tgrid button:hover{border-color:var(--accent)}
+.seg button.on,.rgrid button.on,.tgrid button.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 10%,transparent)}
+.seg button .s,.rgrid button .s,.tgrid button .s{display:block;font-size:11px;font-weight:600;color:var(--muted);margin-top:1px;line-height:1.4}
+.seg button.on .s,.rgrid button.on .s,.tgrid button.on .s{color:var(--accent)}
+.rgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+.rgrid button{min-width:0;padding:8px 6px}
+@media (min-width:600px){.rgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* 문서 종류 — 휴대폰 2칸, 넓으면 4칸 */
+.tgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.tgrid button{min-width:0;padding:11px 10px;text-align:left;min-height:64px}
+.tgrid button b{display:block;font-size:14.5px;font-weight:800;color:var(--fg)}
+.tgrid button.on b{color:var(--accent)}
+@media (min-width:600px){.tgrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.rinfo{margin-top:10px;border-radius:11px;padding:9px 11px 9px 12px;font-size:12.5px;font-weight:700;line-height:1.65;border-left:3px solid}
+.rinfo:empty{display:none}
+.rinfo.ok{background:var(--okbg);color:var(--ok)}
+.rinfo.warn{background:var(--warnbg);color:var(--warn)}
+.rinfo.info{background:var(--infobg);color:var(--info)}
+.chk{display:flex;align-items:flex-start;gap:9px;font-size:14px;font-weight:700;cursor:pointer;padding:8px 0;margin-top:4px}
+.chk input{width:20px;height:20px;accent-color:var(--accent);flex:0 0 auto;margin:2px 0 0}
+.chk .d{display:block;font-size:12.5px;font-weight:600;color:var(--muted);line-height:1.6;margin-top:1px}
+.unit{display:flex;gap:8px;align-items:center}
+.unit input{flex:1 1 auto}
+.unit span{flex:0 0 auto;font-size:14px;font-weight:800;color:var(--muted)}
+.unit.short input{flex:0 1 90px;text-align:center}
+.sub{border-left:3px solid color-mix(in srgb,var(--accent) 30%,transparent);padding-left:12px;margin-left:2px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.chips:empty{display:none}
+.chips button{border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:12.5px;font-weight:700;
+  padding:6px 11px;border-radius:999px;cursor:pointer;min-height:38px;text-align:left}
+.chips button:hover{border-color:var(--accent);color:var(--accent)}
+.chips button.on{border-color:var(--accent);color:var(--accent);background:color-mix(in srgb,var(--accent) 9%,transparent)}
+.party{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:12px;background:var(--card2)}
+.party.first{margin-top:0}
+.party .grid2{margin-top:8px}
+.party .grid2:first-of-type{margin-top:0}
+.party input,.party textarea{background:var(--card)}
+.ph{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:800;margin-bottom:9px}
+.ph em{font-style:normal;font-size:11.5px;font-weight:700;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:1px 8px;background:var(--card)}
+.fine{font-size:12px;font-weight:600;color:var(--muted);line-height:1.65;margin:9px 0 0}
+.fine b{color:var(--fg)}
+.cnote{font-size:12px;font-weight:700;color:var(--accent);margin:7px 0 0;line-height:1.6}
+.cnote:empty{display:none}
+
+.mini{border:1px solid var(--line);background:var(--card);color:var(--fg);font:inherit;font-size:13px;font-weight:700;
+  padding:9px 14px;border-radius:999px;cursor:pointer;min-height:42px;transition:.15s}
+.mini:hover{border-color:var(--accent)}
+.btn{flex:1 1 130px;border:1px solid var(--line);background:var(--card2);color:var(--fg);font:inherit;font-size:14px;font-weight:800;
+  padding:11px 12px;border-radius:12px;cursor:pointer;min-height:48px;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-align:center}
+.btn:hover:not(:disabled){border-color:var(--accent)}
+.btn:disabled{opacity:.5;cursor:progress}
+.btn.pri{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;border-color:transparent;box-shadow:var(--shadow)}
+@media (prefers-color-scheme:dark){.btn.pri{color:var(--afg)}}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.actions .btn.pri{flex-basis:100%}
+
+/* ── 서명 목록 ── */
+.pv h2 .pvinfo{letter-spacing:.02em;font-weight:700}
+.pv-pages{display:flex;flex-direction:column;gap:12px;background:color-mix(in srgb,var(--muted) 14%,var(--card2));border-radius:12px;padding:12px;
+  border:1px solid var(--line)}
+.pv-pages canvas{display:block;width:100%;height:auto;background:#fff;border-radius:2px;box-shadow:0 1px 3px rgba(0,0,0,.18),0 6px 18px -10px rgba(0,0,0,.35);cursor:zoom-in}
+
+/* ── 점검 ── */
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.checks li{position:relative;border-radius:11px;padding:9px 11px 9px 34px;font-size:12.5px;font-weight:600;line-height:1.65}
+.checks li b{font-weight:800}
+.checks li::before{position:absolute;left:10px;top:9px;width:17px;height:17px;border-radius:50%;display:grid;place-items:center;
+  font-size:10.5px;font-weight:900;line-height:1}
+.checks li.ok{background:var(--okbg);color:var(--ok)}
+.checks li.ok::before{content:"✓";background:var(--ok);color:var(--okbg)}
+.checks li.info{background:var(--infobg);color:var(--info)}
+.checks li.info::before{content:"i";background:var(--info);color:var(--infobg)}
+.checks li.warn{background:var(--warnbg);color:var(--warn)}
+.checks li.warn::before{content:"!";background:var(--warn);color:var(--warnbg)}
+.checks li.bad{background:var(--dangerbg);color:var(--danger)}
+.checks li.bad::before{content:"✕";background:var(--danger);color:var(--dangerbg)}
+
+/* ── 안내 ── */
+.steps{list-style:none;margin:0;padding:0;counter-reset:st}
+.steps li{position:relative;padding-left:32px;margin-bottom:12px;font-size:14px;font-weight:600;line-height:1.7;counter-increment:st}
+.steps li:last-child{margin-bottom:0}
+.steps li::before{content:counter(st);position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:7px;display:grid;place-items:center;
+  font-size:12px;font-weight:800;background:color-mix(in srgb,var(--accent) 14%,transparent);color:var(--accent)}
+.steps li b{font-weight:800}
+.steps li .d{display:block;font-size:12.5px;color:var(--muted);margin-top:2px}
+.tbw{overflow-x:auto;margin:0 -2px;-webkit-overflow-scrolling:touch}
+table.kt{width:100%;min-width:560px;border-collapse:collapse;font-size:13px;line-height:1.6}
+table.kt th,table.kt td{border:1px solid var(--line);padding:9px 10px;vertical-align:top;text-align:left}
+table.kt th{background:var(--card2);font-weight:800;white-space:nowrap}
+table.kt td b{font-weight:800}
+table.kt td.k{font-weight:800;white-space:nowrap}
+.tnote{font-size:12px;font-weight:600;color:var(--muted);line-height:1.7;margin:10px 0 0}
+details{border-top:1px solid var(--line);padding:12px 0}
+details:first-of-type{border-top:0}
+summary{cursor:pointer;font-weight:700;font-size:14px;list-style:none;padding:10px 0;margin:-10px 0}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"＋ ";color:var(--accent);font-weight:800}
+details[open] summary::before{content:"－ "}
+details p{margin:8px 0 0;font-size:13.5px;color:var(--muted);line-height:1.8}
+details p b{color:var(--fg)}
+
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:22px;line-height:1.8}
+footer b{color:var(--fg)}
+footer a{color:inherit}
+
+/* ══ 주의 문구 ══ */
+.nbx{border:1px solid var(--warn);border-radius:14px;background:var(--warnbg);padding:14px 15px;margin-top:14px}
+.nbx-h{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:800;color:var(--warn);margin:0 0 10px}
+.nbx-h .ic{flex:0 0 auto;width:19px;height:19px;border-radius:6px;background:var(--warn);color:var(--warnbg);
+  font-size:12px;font-weight:800;display:grid;place-items:center;line-height:1}
+.nbx ul{list-style:none;margin:0;padding:0}
+.nbx li{position:relative;padding-left:12px;margin-bottom:7px;font-size:12px;font-weight:600;line-height:1.68;color:var(--warn)}
+.nbx li:last-child{margin-bottom:0}
+.nbx li::before{content:"·";position:absolute;left:1px;top:-1px;font-weight:800}
+.nbx li b{font-weight:800}
+.nbx .nbx-f{margin:11px 0 0;padding-top:10px;border-top:1px solid color-mix(in srgb,var(--warn) 32%,transparent);
+  font-size:12px;font-weight:700;line-height:1.72;color:var(--warn)}
+.nbx .nbx-f b{font-weight:800}
+
+/* ── 모달 (서명 · 크게 보기) ── */
+.modal{position:fixed;inset:0;z-index:80;background:rgba(8,16,13,.6);display:flex;align-items:flex-end;justify-content:center;
+  padding:0}
+@media (min-width:640px){.modal{align-items:center;padding:20px}}
+.sheet{background:var(--card);border-radius:18px 18px 0 0;width:100%;max-width:560px;padding:14px 14px calc(14px + env(safe-area-inset-bottom));
+  box-shadow:0 -10px 40px -10px rgba(0,0,0,.5)}
+@media (min-width:640px){.sheet{border-radius:18px}}
+.sh-h{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:15px;margin-bottom:10px}
+.sh-h b{font-weight:800}
+.x{border:0;background:var(--card2);color:var(--fg);width:40px;height:40px;border-radius:50%;font-size:16px;cursor:pointer}
+.padwrap{position:relative;border:1px dashed color-mix(in srgb,var(--muted) 60%,transparent);border-radius:12px;background:#fff;overflow:hidden;touch-action:none}
+#pad{display:block;width:100%;height:220px;touch-action:none;cursor:crosshair}
+.padhint{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:12.5px;font-weight:700;color:#9a9eb0;pointer-events:none}
+.padline{position:absolute;left:8%;right:8%;bottom:40px;border-bottom:1px solid #e1e3ec;pointer-events:none}
+.sh-a{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.sh-a .btn{flex:1 1 100px}
+.viewer{position:absolute;inset:0;display:flex;flex-direction:column;background:#4c5552}
+.vbar{display:flex;align-items:center;gap:8px;padding:8px 10px calc(8px);background:var(--card);border-bottom:1px solid var(--line)}
+.vbar b{flex:1 1 auto;font-size:14px;font-weight:800}
+.vpages{flex:1 1 auto;overflow:auto;padding:14px;-webkit-overflow-scrolling:touch}
+.vpages canvas{display:block;margin:0 auto 14px;background:#fff;box-shadow:0 4px 18px rgba(0,0,0,.4)}
+
+/* ── 모바일 하단 바 ── */
+#mbar{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(115%);transition:transform .22s;
+  background:var(--card);border-top:1px solid var(--line);box-shadow:0 -8px 22px -14px rgba(0,0,0,.55);
+  padding:9px 14px calc(9px + env(safe-area-inset-bottom))}
+#mbar.on{transform:none}
+#mbar .in{max-width:700px;margin:0 auto;display:flex;align-items:center;gap:10px}
+#mbar .k{flex:1 1 auto;min-width:0;font-size:11px;font-weight:800;color:var(--muted);letter-spacing:.03em}
+#mbar .k b{display:block;font-size:13.5px;font-weight:800;color:var(--fg);letter-spacing:-.01em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#mbar .go{flex:0 0 auto;font:inherit;font-size:13px;font-weight:800;color:#fff;padding:10px 15px;border-radius:999px;border:0;cursor:pointer;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));min-height:42px}
+@media (prefers-color-scheme:dark){#mbar .go{color:var(--afg)}}
+@media (min-width:980px){#mbar{display:none}}
+
+#toast{position:fixed;left:50%;bottom:calc(76px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:#14201c;color:#fff;font-size:13.5px;font-weight:700;line-height:1.5;
+  padding:10px 16px;border-radius:14px;width:max-content;opacity:0;pointer-events:none;transition:.25s;z-index:99;max-width:92vw;text-align:center}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-color-scheme:dark){#toast{background:#e8f1ee;color:#0b1f19}}
+
+#printArea{display:none}
+@media print{
+  @page{size:A4;margin:0}
+  html,body{background:#fff !important}
+  body>*:not(#printArea){display:none !important}
+  #printArea{display:block !important}
+  #printArea img{display:block;width:210mm;height:297mm;page-break-after:always;break-after:page}
+  #printArea img:last-child{page-break-after:auto;break-after:auto}
+}
+
+@media (max-width:430px){
+  .lab{flex-direction:column;align-items:stretch;gap:2px}
+  .lab .hint{text-align:left}
+  .card{padding:14px}
+  .seg button{font-size:13px;min-width:0}
+  .rgrid button{font-size:13px}
+  .tag{font-size:14px}
+  .rsbox{padding-left:0}
+  .tgrid button b{font-size:14px}
+}
+
+/* ══ 받아쓰기 연습 — 도구 전용 ══ */
+.maptools{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.maptools .btn{flex:0 1 auto}
+.btn.file{cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.absd{margin-top:12px;border:1px solid var(--line);border-radius:12px;padding:0 12px;background:var(--card2)}
+.absd summary{padding:12px 0;margin:0;font-size:13.5px;font-weight:800}
+.absd summary .hint{font-size:12px;font-weight:600;color:var(--muted)}
+.absd[open]{padding-bottom:12px}
+.absd textarea,.absd input[type=text]{background:var(--card);margin-top:8px}
+.seg.tabs button{padding-top:10px;padding-bottom:10px;font-weight:800}
+.tgrid button{text-align:left}
+.tgrid button small{display:block;font-size:11.5px;font-weight:600;color:var(--muted);margin-top:2px;line-height:1.35}
+.tgrid button.on small{color:var(--accent)}
+
+/* 저장한 급수표 목록 */
+.mlist{display:flex;flex-direction:column;gap:6px}
+.mlist:empty::before{content:'아직 없습니다. 아래 「급수표 넣기」를 펼쳐 붙여 넣으세요.';font-size:13px;color:var(--muted)}
+.mitem{display:flex;align-items:center;gap:6px;border:1px solid var(--line);border-radius:10px;background:var(--card2);padding:4px 4px 4px 12px}
+.mitem.on{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.mitem .mt{flex:1;min-width:0;border:0;background:none;color:var(--fg);font:inherit;font-size:14px;font-weight:700;text-align:left;padding:8px 0;cursor:pointer;min-height:40px}
+.mitem .mt small{display:block;font-size:11.5px;color:var(--muted);font-weight:600}
+.mitem .mx{border:0;background:none;color:var(--muted);font-size:13px;min-width:42px;min-height:40px;cursor:pointer;border-radius:8px}
+.mitem .mx:hover{color:var(--danger);background:var(--dangerbg)}
+
+/* 문장 보기 */
+.peek{margin:6px 0 0;padding-left:26px;font-size:14.5px;line-height:1.75}
+.peek li::marker{color:var(--muted);font-size:12.5px}
+.peek .h{font-size:12px;color:var(--muted);margin-left:6px}
+
+/* 불러 주기 */
+.player{margin-top:14px;border-radius:16px;padding:16px 14px 14px;text-align:center;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--accent) 9%,var(--card)) 0%,var(--card2) 100%);border:1px solid var(--line)}
+.pnum{display:flex;align-items:baseline;justify-content:center;gap:6px}
+.pnum b{font-size:46px;line-height:1.05;font-weight:900;color:var(--accent);font-variant-numeric:tabular-nums}
+.pnum b::after{content:'번';font-size:20px;margin-left:2px}
+.pnum span{font-size:15px;color:var(--muted);font-weight:700}
+.pmsg{min-height:22px;font-size:14.5px;font-weight:700;color:var(--fg);margin-top:4px}
+.pmsg.speak{color:var(--accent2)}
+.pdots{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;margin:10px auto 2px;max-width:420px}
+.pdots button{width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--muted);font:inherit;font-size:12px;font-weight:800;cursor:pointer;padding:0}
+.pdots button.done{background:color-mix(in srgb,var(--accent) 16%,var(--card));color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.pdots button.cur{background:var(--accent);color:var(--afg);border-color:var(--accent)}
+.ptext{margin:12px auto 0;max-width:560px;font-size:22px;font-weight:800;line-height:1.5;padding:12px 14px;border-radius:12px;background:var(--card);border:1px dashed var(--line);word-break:keep-all}
+.ptext.big{font-size:27px}
+.ptext .h{display:block;font-size:13px;color:var(--muted);font-weight:700;margin-top:4px}
+.pbtns{display:flex;justify-content:center;align-items:center;gap:14px;margin-top:14px}
+.pb{width:64px;height:64px;border-radius:50%;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:20px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1;font-family:inherit}
+.pb span{font-size:11px;font-weight:800;color:var(--muted)}
+.pb.main{width:88px;height:88px;font-size:28px;background:var(--accent);color:var(--afg);border-color:var(--accent);box-shadow:0 8px 20px -10px var(--accent)}
+.pb.main span{color:var(--afg);font-size:12.5px}
+.pb:disabled{opacity:.4;cursor:default}
+.pb.main.busy{animation:pulse 1.2s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@media (prefers-reduced-motion:reduce){.pb.main.busy{animation:none}}
+.pbtns2{display:flex;justify-content:center;gap:6px;margin-top:12px;flex-wrap:wrap}
+.pbtns2 .mini[aria-pressed=true]{border-color:var(--accent);color:var(--accent)}
+.cdown{display:block;font-size:12.5px;color:var(--muted);font-weight:700;margin-top:2px}
+
+.ans{margin-top:12px}
+.ansh{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:13.5px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.ansh b{color:var(--accent)}
+#inkPad{display:block;width:100%;height:auto;border-radius:12px;border:1px solid var(--line);background:#fff;touch-action:none;cursor:crosshair}
+#typeIn{font-size:20px;font-weight:700;padding:14px 12px;letter-spacing:.5px}
+.pend{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:12px;padding:12px 14px;border-radius:12px;background:var(--okbg);color:var(--ok);font-weight:800;font-size:14px}
+
+/* 채점 */
+.score{display:flex;align-items:center;gap:14px;padding:12px 14px;border-radius:14px;background:var(--card2);border:1px solid var(--line)}
+.score .sc{flex:0 0 auto;width:86px;height:86px;border-radius:50%;border:3px solid var(--danger);color:var(--danger);display:flex;align-items:center;justify-content:center;transform:rotate(-8deg)}
+.score .sc b{font-size:34px;font-weight:900;line-height:1;font-variant-numeric:tabular-nums}
+.score .sc span{font-size:14px;font-weight:800;margin:10px 0 0 1px}
+.score .sd{min-width:0;display:flex;flex-direction:column;gap:2px}
+.score .sd b{font-size:16px}
+.score .sd span{font-size:13px;color:var(--muted)}
+.score.wait .sc{border-color:var(--line);color:var(--muted)}
+.gopts{display:flex;gap:4px 14px;flex-wrap:wrap;margin-top:6px}
+.gopts .chk{flex:1 1 240px;margin-top:6px}
+.glist{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.glist:empty::before{content:'불러 줄 문제를 먼저 고르세요.';font-size:13px;color:var(--muted)}
+.gi{border:1px solid var(--line);border-radius:12px;padding:10px 10px 10px 12px;background:var(--card)}
+.gi.m-o{border-color:color-mix(in srgb,var(--ok) 45%,var(--line));background:color-mix(in srgb,var(--ok) 5%,var(--card))}
+.gi.m-x{border-color:color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 4%,var(--card))}
+.gi .gtop{display:flex;flex-wrap:wrap;align-items:flex-start;gap:4px 8px}
+.gi .gno{flex:0 0 auto;min-width:26px;height:26px;border-radius:50%;background:var(--card2);border:1px solid var(--line);font-size:12.5px;font-weight:800;color:var(--muted);display:flex;align-items:center;justify-content:center;margin-top:5px}
+.gi .gkey{flex:1 1 220px;min-width:0;display:flex;flex-wrap:wrap;gap:0;align-items:center;padding-top:2px}
+.gi .gkey button{border:1px solid transparent;background:none;font:inherit;font-size:20px;font-weight:700;color:var(--fg);min-width:22px;height:40px;padding:0 1px;border-radius:7px;cursor:pointer}
+.gi .gkey button.sp{min-width:12px;color:transparent}
+.gi .gkey .w{display:inline-flex;white-space:nowrap}
+.gi .gkey button:hover{border-color:var(--line)}
+.gi .gkey button.bad{color:var(--danger);background:var(--dangerbg);border-color:color-mix(in srgb,var(--danger) 35%,transparent)}
+.gi .gkey button.sp.bad{color:var(--danger)}
+.gi .gox{flex:0 0 auto;display:flex;gap:4px;margin-left:auto}
+.gi .gox button{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--card2);font-size:19px;cursor:pointer;color:var(--muted);font-family:inherit}
+.gi .gox button.on.bo{background:var(--okbg);border-color:var(--ok);color:var(--ok)}
+.gi .gox button.on.bx{background:var(--dangerbg);border-color:var(--danger);color:var(--danger)}
+.gi .ghint{font-size:12px;color:var(--muted);margin:2px 0 0 34px}
+.gi .gans{margin:6px 0 0 34px;font-size:16px;line-height:1.7;word-break:keep-all}
+.gi .gans .lb{font-size:11.5px;color:var(--muted);font-weight:700;margin-right:6px}
+.gi .gnote{font-size:12px;font-weight:700;margin:2px 0 0 34px;color:var(--muted)}
+.gi.m-x .gnote{color:var(--danger)}
+.gi .gink{display:block;margin:6px 0 0 34px;max-width:calc(100% - 34px);height:auto;border-radius:8px;border:1px solid var(--line);background:#fff}
+.gm{font-style:normal}
+b.gm{color:var(--danger);text-decoration:underline wavy color-mix(in srgb,var(--danger) 60%,transparent);text-underline-offset:4px}
+b.gm.extra{text-decoration:line-through}
+b.gm.miss{opacity:.75;background:var(--dangerbg);border-radius:3px}
+i.gm.sp,i.gm.xs{color:var(--danger);font-weight:900;font-size:.85em;margin:0 1px;position:relative;top:-.3em}
+.gact{margin-top:12px}
+
+/* 인쇄·저장 */
+.dseg button{padding-left:4px;padding-right:4px;font-size:13px}
+.pvopts{display:flex;flex-direction:column;gap:8px;margin:10px 0 2px}
+.seg.sm button{padding-top:6px;padding-bottom:6px;font-size:12.5px;min-height:36px}
+.pvchk{display:flex;flex-wrap:wrap;gap:2px 12px}
+.chk.sm{margin-top:0;font-size:13px;align-items:center;min-height:36px}
+.chk.sm input{width:18px;height:18px}
+#who{padding:9px 11px;font-size:14px}
+
+/* 기록 */
+.hbars{display:flex;align-items:flex-end;gap:4px;height:84px;margin:8px 0 4px;padding:0 2px;border-bottom:1px solid var(--line)}
+.hbars:empty{display:none}
+.hbars i{flex:1 1 0;max-width:26px;border-radius:5px 5px 0 0;background:color-mix(in srgb,var(--accent) 55%,transparent);position:relative;min-height:3px}
+.hbars i.full{background:var(--ok)}
+.hbars i span{position:absolute;bottom:100%;left:50%;transform:translateX(-50%);font-size:10px;font-style:normal;color:var(--muted);font-weight:700;margin-bottom:1px}
+.hmiss{margin-top:8px;font-size:13px}
+.hmiss:empty{display:none}
+.hmiss b{display:block;font-size:12.5px;color:var(--muted);margin-bottom:4px}
+.hmiss ol{margin:0;padding-left:20px;line-height:1.7}
+.hmiss em{font-style:normal;color:var(--danger);font-weight:800;font-size:12px;margin-left:4px}
+.hact{margin-top:10px;justify-content:flex-start}
+#sumCard .checks:empty::before{content:'채점을 마치면 날짜와 점수가 여기에 쌓입니다.';font-size:13px;color:var(--muted)}
+
+@media (max-width:420px){
+  .pb{width:58px;height:58px}
+  .pb.main{width:80px;height:80px}
+  .gi .gkey button{font-size:19px;min-width:20px}
+  .gi .gkey{flex-basis:100%;order:3;padding-left:34px}
+  .gi .gno{order:1}
+  .gi .gox{order:2}
+  .gi .gox button{width:42px;height:42px}
+  .dseg button{font-size:12px}
+}
+@media (prefers-color-scheme:dark){
+  .pb.main{color:var(--afg)}
+  #inkPad{background:#fbfcfd}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<!-- ╔══════════════════════════════════════════════════════════════════════╗
+     ║  광고 자리 ① 맨 위 · 320×50 (모바일·PC 공통)                        ║
+     ║  단위 ID 는 스크립트 아래쪽 AD.units 한 곳에서 바꿉니다.               ║
+     ║  한 화면에 4곳 — 모바일 ① 맨 위 ② 본문 ③ 저장 완료 카드 ④ 하단 오버형  ║
+     ║              PC   ① 맨 위 ② 미리보기 위 ③ 옆 칸 맨 아래 ④ 완료 카드    ║
+     ╚══════════════════════════════════════════════════════════════════════╝ -->
+<div class="ad-slot ad-top" id="ad-top"></div>
+
+<!-- 네이버·카카오 앱 안에서 열렸을 때만 보이는 띠 (body.inapp) -->
+<div class="iabar" id="iabar">
+  <div class="ia-t"><span id="iaMsg">앱 안에서 열려서 소리·파일 저장이 안 될 수 있어요.</span>
+    <small id="iaSub">크롬이나 사파리로 옮기면 됩니다.</small></div>
+  <button class="ia-go" id="iaGo" type="button">크롬에서 열기</button>
+  <button class="ia-x" id="iaX" type="button" aria-label="안내 닫기">✕</button>
+</div>
+
+<header>
+  <div class="logo"><span class="ico">✏️</span><span>받아쓰기 연습</span></div>
+  <p class="tag"><span class="nw"><b>급수표 문장</b>을</span> <span class="nw"><b>소리로 불러 주고</b></span> <span class="nw"><b>채점</b>까지</span> · <span class="nw">시험지·따라쓰기·오답 노트 PDF</span></p>
+  <div class="badges">
+    <span class="badge">🔒 쓴 내용이 서버로 전송되지 않음</span>
+    <span class="badge gray">1·2·3학년 기본 급수표 12급</span>
+    <span class="badge gray">내 급수표 붙여 넣기 · 엑셀</span>
+    <span class="badge gray">무료 · 설치·가입 없음</span>
+  </div>
+</header>
+
+<div class="layout">
+<main id="form">
+
+  <!-- ① 문제 고르기 -->
+  <section class="card" id="cSet">
+    <h2><span><span class="n">1</span>문제 고르기</span><span class="opt" id="setInfo"></span></h2>
+    <div class="seg tabs" data-seg="src">
+      <button type="button" data-v="base">기본 급수표<span class="s">1·2·3학년 12급</span></button>
+      <button type="button" data-v="mine">내 급수표<span class="s">학교에서 받은 것</span></button>
+    </div>
+
+    <div id="srcBase">
+      <div class="row"><div class="lab"><span>학년</span></div>
+        <div class="seg" data-seg="grade">
+          <button type="button" data-v="1">1학년</button>
+          <button type="button" data-v="2">2학년</button>
+          <button type="button" data-v="3">3학년</button>
+        </div></div>
+      <div class="row"><div class="lab"><span>급</span><span class="hint">맞춤법 갈래마다 10문장</span></div>
+        <div class="tgrid" id="baseGrid"></div></div>
+    </div>
+
+    <div id="srcMine" class="hide">
+      <div class="row" id="mineListRow"><div class="lab"><span>저장한 급수표</span><span class="hint">이 브라우저에만 저장됩니다</span></div>
+        <div class="mlist" id="mineList"></div></div>
+      <div class="row" id="mineGradeRow"><div class="lab"><span>급</span></div>
+        <div class="tgrid" id="mineGrid"></div></div>
+      <details class="absd" id="mineAdd">
+        <summary>급수표 넣기 <span class="hint">붙여 넣기 · 엑셀·글 파일</span></summary>
+        <p class="fine">학교에서 받은 급수표를 <b>그대로 복사해 붙여 넣으세요.</b> 「1급」「2급」 같은 줄이 있으면 급으로 나누고, 문장 앞 번호(1. ① 1))는 저절로 지웁니다. 사진뿐이라면 휴대폰 사진 앱의 <b>글자 복사</b>(텍스트 인식)로 옮겨 오면 됩니다.</p>
+        <input type="text" id="mineName" maxlength="30" autocomplete="off" placeholder="급수표 이름 (예: 1학년 2학기 급수표)" aria-label="급수표 이름">
+        <textarea id="mineText" rows="8" spellcheck="false" aria-label="급수표 문장" placeholder="1급&#10;1. 우리 집에 강아지가 있어요.&#10;2. 하늘이 참 파래요.&#10;…&#10;2급&#10;1. 동화책을 읽어요.&#10;…"></textarea>
+        <div class="maptools">
+          <button class="btn pri" id="btnParse" type="button">📥 급수표로 만들기</button>
+          <label class="btn file">📂 파일 불러오기<input type="file" id="mineFile" accept=".txt,.csv,.xlsx,text/plain,text/csv" hidden></label>
+        </div>
+        <p class="rinfo" id="parseInfo"></p>
+      </details>
+    </div>
+
+    <details class="absd" id="peek">
+      <summary>문장 보기 <span class="hint">아이에게는 가려 두세요</span></summary>
+      <p class="fine" id="setDesc"></p>
+      <ol class="peek" id="peekList"></ol>
+    </details>
+  </section>
+
+  <!-- ② 불러 주기 -->
+  <section class="card" id="cPlay">
+    <h2><span><span class="n">2</span>불러 주기</span><span class="opt" id="voiceInfo"></span></h2>
+    <div class="row" style="margin-top:0"><div class="lab"><span>어디에 쓰나요</span></div>
+      <div class="seg" data-seg="mode">
+        <button type="button" data-v="note">공책에<span class="s">어른이 채점</span></button>
+        <button type="button" data-v="ink">화면에 손으로<span class="s">손가락·펜</span></button>
+        <button type="button" data-v="type">자판으로<span class="s">바로 채점</span></button>
+      </div></div>
+
+    <div class="player" id="player">
+      <div class="pnum"><b id="pNo">1</b><span id="pOf">/ 10</span></div>
+      <div class="pmsg" id="pMsg">「시작」을 누르면 1번부터 불러 줍니다.</div>
+      <div class="pdots" id="pDots"></div>
+      <div class="ptext hide" id="pText"></div>
+      <div class="pbtns">
+        <button class="pb" id="pPrev" type="button" aria-label="이전 문장">⏮<span>이전</span></button>
+        <button class="pb main" id="pPlay" type="button">▶<span id="pPlayLab">시작</span></button>
+        <button class="pb" id="pNext" type="button" aria-label="다음 문장">⏭<span>다음</span></button>
+      </div>
+      <div class="pbtns2">
+        <button class="mini" id="pShow" type="button" aria-pressed="false">👀 문장 보기 (어른용)</button>
+        <button class="mini" id="pStop" type="button">■ 멈춤</button>
+      </div>
+    </div>
+
+    <div class="ans hide" id="ansInk">
+      <div class="ansh"><span>여기에 쓰세요 <b id="inkNo">1번</b></span><button class="mini" id="inkClear" type="button">지우기</button></div>
+      <canvas id="inkPad" aria-label="손으로 쓰는 칸"></canvas>
+    </div>
+    <div class="ans hide" id="ansType">
+      <div class="ansh"><span>여기에 쓰세요 <b id="typeNo">1번</b></span><span class="hint">다 쓰면 「다음」</span></div>
+      <input type="text" id="typeIn" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="next" aria-label="받아쓴 문장">
+    </div>
+    <p class="fine" id="noteTip">아이는 공책에 <b>1번부터 차례로</b> 쓰면 됩니다. 다 쓰면 아래 「채점」에서 정답을 보고 맞았는지 눌러 주세요.</p>
+
+    <div class="pend hide" id="pEnd">
+      <span>마지막 문장까지 불렀어요.</span>
+      <button class="btn pri" id="goGrade" type="button">✔️ 채점하러 가기</button>
+    </div>
+
+    <details class="absd" id="howRead">
+      <summary>읽는 방법 <span class="hint" id="howInfo"></span></summary>
+      <div class="row"><div class="lab"><span>빠르기</span></div>
+        <div class="seg" data-seg="rate">
+          <button type="button" data-v="0.7">느리게</button>
+          <button type="button" data-v="0.85">보통</button>
+          <button type="button" data-v="1">조금 빠르게</button>
+        </div></div>
+      <div class="row"><div class="lab"><span>한 문장을</span></div>
+        <div class="seg" data-seg="repeat">
+          <button type="button" data-v="1">한 번</button>
+          <button type="button" data-v="2">두 번</button>
+          <button type="button" data-v="3">세 번</button>
+        </div></div>
+      <div class="row"><div class="lab"><span>띄어 읽기</span><span class="hint">어절마다 쉬어서</span></div>
+        <div class="seg" data-seg="chunk">
+          <button type="button" data-v="off">안 함</button>
+          <button type="button" data-v="second">두 번째부터</button>
+          <button type="button" data-v="all">늘</button>
+        </div></div>
+      <div class="row"><div class="lab"><span>다음 문장</span></div>
+        <div class="seg" data-seg="auto">
+          <button type="button" data-v="0">「다음」 누를 때</button>
+          <button type="button" data-v="15">15초 뒤</button>
+          <button type="button" data-v="25">25초 뒤</button>
+          <button type="button" data-v="40">40초 뒤</button>
+        </div></div>
+      <label class="chk"><input type="checkbox" id="optNum"><span>번호 먼저 읽기<span class="d">「1번.」 하고 문장을 읽습니다</span></span></label>
+      <label class="chk"><input type="checkbox" id="optPunct"><span>문장 부호도 말해 주기<span class="d">「와 쉼표 눈이 온다 느낌표」처럼 — 부호를 막 배울 때</span></span></label>
+      <label class="chk"><input type="checkbox" id="optShuffle"><span>순서 섞기<span class="d">급수표 순서를 외워서 쓰지 않게</span></span></label>
+      <label class="chk"><input type="checkbox" id="optSelf"><span>어른이 직접 읽어 줄게요<span class="d">소리를 끄고 문장을 크게 보여 줍니다</span></span></label>
+      <div class="row" id="voiceRow"><div class="lab"><span>목소리</span><span class="hint">기기에 깔린 한국어 목소리</span></div>
+        <select id="voiceSel" aria-label="목소리"></select></div>
+      <p class="rinfo warn hide" id="ttsWarn"></p>
+    </details>
+  </section>
+
+  <!-- ③ 채점 -->
+  <section class="card" id="cGrade">
+    <h2><span><span class="n">3</span>채점</span><span class="opt" id="gradeInfo"></span></h2>
+    <div class="score" id="scoreBox">
+      <div class="sc"><b id="scNum">–</b><span>점</span></div>
+      <div class="sd"><b id="scLine">아직 채점 전이에요</b><span id="scSub">문제를 불러 준 뒤 정답을 보고 ⭕·❌ 를 눌러 주세요.</span></div>
+    </div>
+    <div class="gopts" id="gOpts">
+      <label class="chk"><input type="checkbox" id="optSpace"><span>띄어쓰기도 채점<span class="d">끄면 표시만 하고 틀린 것으로 세지 않아요</span></span></label>
+      <label class="chk"><input type="checkbox" id="optPunctG"><span>문장 부호도 채점<span class="d">마침표·쉼표·물음표·느낌표</span></span></label>
+    </div>
+    <p class="fine" id="gradeTip">정답 글자 가운데 <b>틀린 글자를 누르면</b> 빨갛게 표시되어 오답 노트에 들어갑니다.</p>
+    <ol class="glist" id="gList"></ol>
+    <div class="actions gact">
+      <button class="btn pri" id="btnRetry" type="button">🔁 틀린 것만 다시</button>
+      <button class="btn" id="btnAgain" type="button">↺ 처음부터 다시</button>
+      <button class="btn" id="btnCardImg" type="button">🏅 점수 카드</button>
+      <button class="btn" id="btnWrongPdf" type="button">📒 오답 노트 PDF</button>
+    </div>
+  </section>
+</main>
+
+<aside class="side" id="side">
+  <!-- 광고 자리 · PC 미리보기 위 320×50 (모바일에서는 숨깁니다) -->
+  <div class="ad-slot" id="ad-side"></div>
+  <section class="card pv" id="pvCard">
+    <h2><span>인쇄 · 저장</span><span class="pvinfo" id="pvInfo"></span></h2>
+    <div class="seg dseg" data-seg="doc">
+      <button type="button" data-v="sheet">시험지</button>
+      <button type="button" data-v="key">정답지</button>
+      <button type="button" data-v="trace">따라쓰기</button>
+      <button type="button" data-v="list">급수표</button>
+      <button type="button" data-v="wrong">오답 노트</button>
+    </div>
+    <div class="pvopts">
+      <div class="seg sm" data-seg="cell">
+        <button type="button" data-v="L">큰 칸</button>
+        <button type="button" data-v="M">보통 칸</button>
+        <button type="button" data-v="S">작은 칸</button>
+      </div>
+      <div class="pvchk">
+        <label class="chk sm"><input type="checkbox" id="optGuide"><span>칸 십자선</span></label>
+        <label class="chk sm"><input type="checkbox" id="optNameBox"><span>이름·점수 칸</span></label>
+        <label class="chk sm" id="spRow"><input type="checkbox" id="optSpMark"><span>띄어쓰기 ∨</span></label>
+        <label class="chk sm" id="blankRow"><input type="checkbox" id="optBlank2"><span>빈 줄 두 번</span></label>
+        <label class="chk sm" id="allRow"><input type="checkbox" id="optAllGroups"><span>모든 급 함께</span></label>
+      </div>
+      <input type="text" id="who" maxlength="12" autocomplete="off" placeholder="이름 (비워 두면 빈칸)" aria-label="시험지에 넣을 이름">
+    </div>
+    <div class="pv-pages" id="pvPages"></div>
+    <div class="actions">
+      <button class="btn pri" id="btnPdf" type="button">📄 PDF로 저장</button>
+      <button class="btn" id="btnPrint" type="button">🖨️ 인쇄</button>
+      <button class="btn" id="btnXlsx" type="button">📊 엑셀</button>
+      <button class="btn" id="btnImg" type="button">🖼️ 이미지</button>
+    </div>
+    <p class="fine" id="saveNote">엑셀에는 <b>급수표</b>와 <b>채점 기록</b>(날짜·점수·틀린 문장)이 시트로 나뉘어 들어갑니다.</p>
+  </section>
+
+  <!-- 저장 완료 카드 · 광고 자리 ③ — 저장을 누른 다음(핵심 행동이 끝난 뒤)에 펼쳐집니다.
+       창으로 화면을 덮지 않고 본문 흐름 안에 두며, 닫기는 광고 영역 밖 머리글에 둡니다. -->
+  <section class="card hide" id="doneCard">
+    <h2><span>저장했습니다</span><button class="mini" id="doneHide" type="button">닫기</button></h2>
+    <p class="dmsg" id="doneMsg"></p>
+    <ol class="dsteps" id="doneSteps"></ol>
+    <p class="dwarn hide" id="doneInapp">저장된 파일이 안 보이나요? 앱 안 브라우저는 내려받기가 막혀 있습니다.
+      <button type="button" id="doneGo">다른 브라우저로 열기</button></p>
+    <div id="doneAd"><span class="ad-lab">광고</span><div class="ad-slot" id="ad-done"></div></div>
+  </section>
+
+  <section class="card" id="sumCard">
+    <h2><span>받아쓰기 기록</span><span class="pvinfo" id="histInfo"></span></h2>
+    <div class="hbars" id="hBars"></div>
+    <ul class="checks" id="hList"></ul>
+    <div class="hmiss" id="hMiss"></div>
+    <div class="actions hact"><button class="mini" id="btnMissSet" type="button">자주 틀린 문장으로 연습</button><button class="mini" id="btnHistClear" type="button">기록 지우기</button></div>
+  </section>
+
+  <!-- 광고 자리 ② 320×100 · PC — 옆 칸 맨 아래. 휴대폰에서는 숨기고 아래 #ad-mid 자리를 씁니다 -->
+  <div class="ad-slot" id="ad-mid-pc"></div>
+</aside>
+</div>
+
+<!-- 광고 자리 ② 320×100 · 휴대폰 — 연습도 저장도 끝난 자리 -->
+<div class="ad-slot" id="ad-mid"></div>
+
+<!-- 안내 -->
+<section class="card">
+  <h2><span>받아쓰기 연습, 이렇게 합니다</span></h2>
+  <ol class="steps">
+    <li><b>문제를 고릅니다.</b><span class="d">기본 급수표에서 학년과 급을 누르거나, 학교에서 받은 급수표를 「내 급수표」에 붙여 넣으세요. 「1급」「2급」 줄이 있으면 급으로 나뉩니다.</span></li>
+    <li><b>어디에 쓸지 고르고 「시작」을 누릅니다.</b><span class="d">공책에 쓰면 학교 시험과 가장 비슷합니다. 휴대폰·태블릿이면 화면에 손가락으로, 자판을 칠 줄 알면 자판으로 써도 됩니다. 다시 듣고 싶으면 가운데 단추를 한 번 더 누르세요.</span></li>
+    <li><b>정답을 보고 채점합니다.</b><span class="d">자판으로 쓴 답은 바로 채점되고, 공책·화면에 쓴 답은 어른이 정답과 견주어 ⭕·❌ 를 누릅니다. 틀린 글자를 누르면 빨갛게 표시됩니다.</span></li>
+    <li><b>틀린 것만 다시, 오답 노트로 마무리합니다.</b><span class="d">「틀린 것만 다시」로 한 번 더 불러 주고, 오답 노트 PDF를 인쇄해 틀린 문장을 따라 쓰게 하세요. 점수는 「받아쓰기 기록」에 쌓입니다.</span></li>
+  </ol>
+</section>
+
+<section class="card">
+  <h2><span>기본 급수표에 든 것</span></h2>
+  <div class="tbw">
+    <table class="kt">
+      <thead><tr><th>학년</th><th>급</th><th>연습하는 것</th><th>예</th></tr></thead>
+      <tbody id="baseTable"></tbody>
+    </table>
+  </div>
+  <p class="tnote">기본 급수표는 이 도구가 맞춤법 갈래별로 새로 지은 문장입니다. 학교마다 급수표가 다르니, 시험 준비는 학교에서 받은 급수표를 「내 급수표」에 넣어 연습하세요.</p>
+</section>
+
+<section class="card">
+  <h2><span>채점은 이렇게 합니다</span></h2>
+  <div class="tbw">
+    <table class="kt">
+      <thead><tr><th>표시</th><th>뜻</th><th>예 (정답 → 쓴 답)</th></tr></thead>
+      <tbody>
+        <tr><td class="k"><b class="gm chg">빨간 글자</b></td><td>다른 글자를 썼거나 빠뜨림</td><td>읽어요 → 일거요</td></tr>
+        <tr><td class="k"><i class="gm sp">∨</i></td><td>띄어 써야 하는데 붙여 씀</td><td>세 개를 → 세개를</td></tr>
+        <tr><td class="k"><i class="gm xs">⌒</i></td><td>붙여 써야 하는데 띄어 씀</td><td>사이좋게 → 사이 좋게</td></tr>
+        <tr><td class="k"><b class="gm punct">.</b></td><td>문장 부호를 빠뜨리거나 다르게 씀</td><td>뭐예요? → 뭐예요.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="tnote">「사과 세 개」처럼 정답과 똑같이 써야 맞음입니다. 맞춤법에서 붙여 써도 되는 말(보조 용언 「가르쳐 주다/가르쳐주다」 등)은 정답과 다르면 띄어쓰기로 표시되니, 어른이 보고 ⭕ 로 바꿔 주세요.</p>
+</section>
+
+<section class="card">
+  <h2><span>자주 묻는 질문</span></h2>
+  <details>
+    <summary>소리가 안 나요.</summary>
+    <p>기기 소리가 꺼져 있지 않은지 먼저 보세요(아이폰은 옆면 무음 스위치). 네이버·카카오톡 앱 안에서 열면 안드로이드 휴대폰은 소리 내어 읽기를 못 합니다 — 위쪽 안내대로 <b>크롬이나 사파리</b>로 옮기세요. 그래도 안 되면 「읽는 방법」에서 <b>어른이 직접 읽어 줄게요</b>를 켜면 문장이 크게 보입니다.</p>
+  </details>
+  <details>
+    <summary>목소리를 바꿀 수 있나요?</summary>
+    <p>「읽는 방법 → 목소리」에서 기기에 깔린 한국어 목소리를 고를 수 있습니다. 윈도 크롬은 「Google 한국의」, 엣지는 「SunHi·InJoon(자연스러운 목소리)」, 아이폰은 「유나」가 많이 쓰입니다. 목소리는 기기마다 달라서 여기서 새로 받을 수는 없습니다.</p>
+  </details>
+  <details>
+    <summary>학교 급수표를 넣으려면요?</summary>
+    <p>「내 급수표 → 급수표 넣기」에 글을 그대로 붙여 넣고 「급수표로 만들기」를 누르세요. 엑셀·구글 시트에서 칸을 복사해도 되고, .xlsx·.csv·.txt 파일을 불러와도 됩니다. 종이뿐이면 휴대폰 사진 앱에서 글자를 길게 눌러 복사(텍스트 인식)한 뒤 붙여 넣으면 빠릅니다.</p>
+  </details>
+  <details>
+    <summary>정답지·시험지는 어떻게 다른가요?</summary>
+    <p>시험지는 빈 칸 공책이고, 정답지는 같은 칸에 정답 글자가 들어 있어 채점할 때 옆에 놓고 보기 좋습니다. 시험지는 문장 길이를 짐작하지 못하게 모든 문항의 줄 수를 똑같이 맞춥니다. 띄어 쓰는 칸은 정답지에 ∨ 로 표시됩니다.</p>
+  </details>
+  <details>
+    <summary>자판으로 쓴 답의 띄어쓰기가 틀렸다고 나와요.</summary>
+    <p>정답과 한 칸이라도 다르면 띄어쓰기로 표시합니다. 연습 초기에는 「띄어쓰기도 채점」을 끄면 표시만 하고 점수에서는 빼 줍니다. 붙여 써도 되는 말이면 ⭕ 를 눌러 맞음으로 바꾸세요.</p>
+  </details>
+  <details>
+    <summary>기록은 어디에 남나요?</summary>
+    <p>채점이 끝나면 날짜·급·점수·틀린 문장이 <b>이 브라우저에만</b> 남습니다. 다른 기기로 옮기거나 보관하려면 「엑셀」로 저장하세요. 「자주 틀린 문장으로 연습」을 누르면 여러 번 틀린 문장만 모아 다시 불러 줍니다.</p>
+  </details>
+  <details>
+    <summary>쓴 내용이 어디로 전송되나요?</summary>
+    <p>전송되지 않습니다. 소리 내어 읽기는 기기에 깔린 목소리로, 채점·PDF·엑셀은 모두 브라우저 안에서 합니다. 다만 일부 기기의 「온라인」 목소리(이름에 Online·Google 이 붙은 것)는 문장을 소리로 바꾸려고 그 회사 서버를 거칠 수 있습니다.</p>
+  </details>
+</section>
+
+<!-- ══ 주의 문구 ══ -->
+<div class="nbx">
+  <div class="nbx-h"><span class="ic">!</span><span>쓰기 전에 확인하세요</span></div>
+  <ul>
+    <li><b>시험 범위는 학교 급수표가 기준입니다.</b> 기본 급수표는 맞춤법 갈래별 연습 문장이라 학교 시험 문장과 다릅니다.</li>
+    <li><b>기계 목소리는 사람과 다르게 읽을 때가 있습니다.</b> 「신라」「같이」처럼 소리가 바뀌는 낱말을 어색하게 읽거나 문장 부호의 억양을 살리지 못할 수 있으니, 처음에는 어른이 함께 들어 보세요.</li>
+    <li><b>자동 채점은 정답 문장과 글자를 맞대어 볼 뿐입니다.</b> 맞춤법에서 두 가지 다 허용되는 띄어쓰기는 틀림으로 나올 수 있어요 — 최종 판단은 어른이 해 주세요.</li>
+    <li><b>인쇄 전에 미리보기를 확인하세요.</b> 인쇄할 때 「실제 크기(100%)」를 골라야 칸이 반듯합니다.</li>
+  </ul>
+  <p class="nbx-f">이 도구는 <b>있는 그대로 제공되며</b>, 연습 결과나 시험 점수에 대해 <b>제작자와 운영자는 법적 책임을 지지 않습니다.</b></p>
+</div>
+
+<footer>
+  <b>받아쓰기 연습</b> · 받아쓰기 급수표 · 1학년·2학년·3학년 받아쓰기 시험지·따라쓰기<br>
+  함께 보면 좋은 도구: <a href="https://hwj-hub.github.io/note_paper/" target="_blank" rel="noopener">노트 속지 만들기</a> · <a href="https://hwj-hub.github.io/timetable_maker/" target="_blank" rel="noopener">시간표 만들기</a> · <a href="https://hwj-hub.github.io/manuscript_paper/" target="_blank" rel="noopener">원고지 변환기</a><br>
+  PDF는 기기 글꼴의 윤곽선을 따 넣어 확대해도 깨지지 않습니다 · 엑셀은 .xlsx<br>
+  입력한 내용은 어디에도 전송되지 않으며, 페이지를 연 뒤에는 인터넷 없이도 동작합니다 · 외부 라이브러리 없음
+</footer>
+</div>
+
+<!-- 앱 안(네이버·카카오톡 등)에서 열렸을 때 띄우는 창 -->
+<div class="iamodal" id="iaModal" role="dialog" aria-modal="true" aria-labelledby="iaTitle">
+  <div class="iasheet">
+    <div class="iaic">📱</div>
+    <h2 id="iaTitle">앱 안에서는 소리가 나지 않습니다</h2>
+    <p class="iap" id="iaDesc"></p>
+    <ol class="iasteps" id="iaSteps"></ol>
+    <button class="iabtn" id="iaGo2" type="button">크롬에서 열기</button>
+    <p class="iafine"><button type="button" id="iaStay">어른이 직접 읽어 줄게요 · 그냥 쓸게요</button></p>
+  </div>
+</div>
+
+<!-- 광고 자리 ④ 하단 오버형 · 320×50 — 읽는 구간에서만 올라오고, 연습 중에는 내려가 있습니다. -->
+<div id="anchor"><span class="amk">광고</span><div class="ad-slot" id="ad-anchor"></div>
+  <button class="axl" id="anchorX" type="button" aria-label="광고 닫기">✕</button></div>
+
+<div id="mbar"><div class="in"><div class="k">인쇄 · 저장<b id="mbarTxt">받아쓰기 시험지</b></div><button class="go" id="mbarGo" type="button">시험지 보러 가기 ↓</button></div></div>
+<div id="printArea"></div>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+"use strict";
+/* ════════════════════════════════════════════════════════════
+   받아쓰기 연습 — 라이브러리 없이 순수 JS
+
+   [불러 주기] 브라우저 내장 음성 합성으로 급수표 문장을 읽는다(빠르기·반복·띄어 읽기·번호·부호)
+   [채점]     자판 답은 편집 거리로 글자·띄어쓰기·문장 부호를 가려 채점, 공책·손글씨 답은 어른이 ⭕❌
+   [저장]     같은 그리기 목록 → 미리보기·인쇄·PDF(시험지·정답지·따라쓰기·급수표·오답 노트) / 엑셀(급수표·기록)
+   PDF·엑셀 엔진은 같은 시리즈의 만다라트 도구와 같다.
+   ════════════════════════════════════════════════════════════ */
+const $ = id => document.getElementById(id);
+const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+const esc = s => String(s).replace(/[&<>"']/g, c => ESC[c]);
+let toastT = 0;
+function toast(msg, ms) {
+  const t = $('toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), ms || 2600);
+}
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+/* 배경 탭에서도 느려지지 않는 양보(타이머는 배경 탭에서 1초로 늘어난다) */
+const _ych = new MessageChannel(); const _yq = [];
+_ych.port1.onmessage = () => { const f = _yq.shift(); if (f) f(); };
+const yieldUI = () => new Promise(r => { _yq.push(r); _ych.port2.postMessage(0); });
+
+/* ── 날짜 (문자열 YYYY-MM-DD 로만 다룬다 — 시간대 오차를 피하려고) ── */
+function parseD(s) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(s || '');
+  if (!m) return null;
+  const y = +m[1], mo = +m[2], d = +m[3];
+  if (mo < 1 || mo > 12 || d < 1 || d > 31 || y < 1900 || y > 2200) return null;
+  return { y, m: mo, d };
+}
+const iso = (y, m, d) => y + '-' + String(m).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+function todayISO() { const t = new Date(); return iso(t.getFullYear(), t.getMonth() + 1, t.getDate()); }
+const WEEK = ['일', '월', '화', '수', '목', '금', '토'];
+function kDate(s) {
+  const p = parseD(s); if (!p) return '';
+  return `${p.y}. ${p.m}. ${p.d}.(${WEEK[new Date(p.y, p.m - 1, p.d).getDay()]})`;
+}
+/* 시각 'HH:MM' ↔ 분 */
+const hm2min = s => { const m = /^(\d{1,2}):(\d{2})$/.exec(s || ''); return m ? +m[1] * 60 + +m[2] : NaN; };
+/* 하루(24시)를 넘기면 앞에 「+1일」을 붙인다 */
+const min2hm = v => {
+  v = Math.round(v);
+  const d = Math.floor(v / 1440), r = ((v % 1440) + 1440) % 1440;
+  return (d > 0 ? '+' + d + '일 ' : '') + String(Math.floor(r / 60)).padStart(2, '0') + ':' + String(r % 60).padStart(2, '0');
+};
+
+/* ════════════════════════════════════════════════════════════
+   글꼴 · 글자 폭 · 윤곽선
+   — 같은 시리즈의 견적서 도구에서 가져온 방식. 기기 글꼴로 글자를 그려 윤곽선을 따고,
+     미리보기·이미지·PDF 가 모두 같은 글리프를 쓰게 한다(PDF 에서 확대해도 깨지지 않고 글자 복사·검색이 된다)
+   ════════════════════════════════════════════════════════════ */
+const FACES = {
+  sans: '"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo","Noto Sans KR","Noto Sans CJK KR","Nanum Gothic","NanumGothic",sans-serif'
+};
+const fkey = bold => bold ? 'sans-b' : 'sans';
+function fcss(key, px) {
+  const bold = key.slice(-2) === '-b';
+  return (bold ? 'bold ' : '') + px + 'px ' + FACES.sans;
+}
+let _mctx = null;
+function mctx() {
+  if (!_mctx) { const c = document.createElement('canvas'); c.width = 8; c.height = 8; _mctx = c.getContext('2d'); }
+  return _mctx;
+}
+/* 글자 폭 (em) — 1/1000 em 로 반올림해 PDF 의 Widths 와 똑같이 맞춘다 */
+const _adv = new Map();
+function adv(key, ch) {
+  const k = key + '|' + ch;
+  let v = _adv.get(k);
+  if (v === undefined) {
+    const c = mctx(); c.font = fcss(key, 200);
+    v = Math.round(c.measureText(ch).width / 200 * 1000) / 1000;
+    _adv.set(k, v);
+  }
+  return v;
+}
+/* 글줄 폭(pt) */
+function textW(s, z, bold) {
+  const key = fkey(bold);
+  let w = 0;
+  for (const ch of String(s)) w += adv(key, ch);
+  return w * z;
+}
+/* 폭 안에 들어가게 — 글자를 minZ 까지 줄이고, 그래도 넘치면 끝을 … 로 자른다 */
+function fitText(s, maxW, z, bold, minZ) {
+  s = String(s == null ? '' : s);
+  if (maxW <= 0) return { s: '', z };
+  let w = textW(s, z, bold);
+  if (w <= maxW) return { s, z };
+  const z2 = Math.max(minZ || z * 0.72, z * maxW / w);
+  w = textW(s, z2, bold);
+  if (w <= maxW) return { s, z: z2 };
+  const chars = Array.from(s);
+  while (chars.length > 1 && textW(chars.join('') + '…', z2, bold) > maxW) chars.pop();
+  return { s: chars.join('') + '…', z: z2 };
+}
+
+/* 알파 격자 → 닫힌 윤곽선들 (픽셀 좌표). 안쪽을 오른쪽에 두고 도는 방향으로 일관되게 만든다 */
+function marchAlpha(A, W, H, T) {
+  const HN = W * H;
+  const next = new Int32Array(2 * HN).fill(-1);
+  const px = new Float32Array(2 * HN), py = new Float32Array(2 * HN);
+  const cr = [0, 0, 0, 0], ct = [0, 0, 0, 0];
+  for (let y = 0; y < H - 1; y++) {
+    const r0 = y * W, r1 = r0 + W;
+    for (let x = 0; x < W - 1; x++) {
+      const tl = A[r0 + x], tr = A[r0 + x + 1], br = A[r1 + x + 1], bl = A[r1 + x];
+      const it = tl > T, ir = tr > T, ib = br > T, il = bl > T;
+      if (it === ir && ir === ib && ib === il) continue;
+      let n = 0;
+      if (it !== ir) { const e = r0 + x; px[e] = x + 0.5 + (T - tl) / (tr - tl); py[e] = y + 0.5; cr[n] = e; ct[n++] = it ? 1 : 0; }
+      if (ir !== ib) { const e = HN + r0 + x + 1; px[e] = x + 1.5; py[e] = y + 0.5 + (T - tr) / (br - tr); cr[n] = e; ct[n++] = ir ? 1 : 0; }
+      if (ib !== il) { const e = r1 + x; px[e] = x + 0.5 + (T - bl) / (br - bl); py[e] = y + 1.5; cr[n] = e; ct[n++] = ib ? 1 : 0; }
+      if (il !== it) { const e = HN + r0 + x; px[e] = x + 0.5; py[e] = y + 0.5 + (T - tl) / (bl - tl); cr[n] = e; ct[n++] = il ? 1 : 0; }
+      if (n === 2) {
+        if (ct[0]) next[cr[0]] = cr[1]; else next[cr[1]] = cr[0];
+      } else if (n === 4) {
+        const connected = (tl + tr + br + bl) / 4 > T;
+        for (let k = 0; k < 4; k++) if (ct[k]) next[cr[k]] = cr[connected ? (k + 1) % 4 : (k + 3) % 4];
+      }
+    }
+  }
+  const loops = [];
+  for (let e0 = 0; e0 < 2 * HN; e0++) {
+    if (next[e0] < 0) continue;
+    const pts = [];
+    let e = e0, guard = 0;
+    while (e >= 0 && guard++ < 1e6) {
+      const nx = next[e];
+      if (nx < 0) break;
+      pts.push(px[e], py[e]);
+      next[e] = -1;
+      e = nx;
+      if (e === e0) break;
+    }
+    if (pts.length >= 6) loops.push(pts);
+  }
+  return loops;
+}
+/* 더글러스-포이커 (닫힌 다각형) */
+function simplifyLoop(p, eps) {
+  const n = p.length / 2;
+  if (n <= 4) return p;
+  let far = 0, fd = -1;
+  for (let i = 1; i < n; i++) { const d = (p[2 * i] - p[0]) ** 2 + (p[2 * i + 1] - p[1]) ** 2; if (d > fd) { fd = d; far = i; } }
+  const keep = new Uint8Array(n); keep[0] = 1; keep[far] = 1;
+  const e2 = eps * eps;
+  const stack = [[0, far], [far, n]];
+  while (stack.length) {
+    const [a, b] = stack.pop();
+    if (b - a < 2) continue;
+    const ax = p[2 * a], ay = p[2 * a + 1], bi = b % n, bx = p[2 * bi], by = p[2 * bi + 1];
+    const dx = bx - ax, dy = by - ay, L2 = dx * dx + dy * dy;
+    let best = -1, bd = -1;
+    for (let i = a + 1; i < b; i++) {
+      const qx = p[2 * i] - ax, qy = p[2 * i + 1] - ay;
+      let d;
+      if (L2 < 1e-12) d = qx * qx + qy * qy;
+      else { const c = qx * dy - qy * dx; d = c * c / L2; }
+      if (d > bd) { bd = d; best = i; }
+    }
+    if (bd > e2) { keep[best] = 1; stack.push([a, best], [best, b]); }
+  }
+  const out = [];
+  for (let i = 0; i < n; i++) if (keep[i]) out.push(p[2 * i], p[2 * i + 1]);
+  return out;
+}
+const TRACE_EM = 256;
+const _trace = new Map();
+let _tcanvas = null;
+/* 글자 하나 → { adv, bbox:[x0,y0,x1,y1], path } — 좌표는 1/1000 em, y 는 위쪽이 + */
+function traceGlyph(key, ch) {
+  const ck = key + '|' + ch;
+  let g = _trace.get(ck);
+  if (g) return g;
+  g = { adv: Math.round(adv(key, ch) * 1000), bbox: [0, 0, 0, 0], path: '' };
+  if (!/\s/.test(ch)) {
+    const E = TRACE_EM, pad = 4;
+    if (!_tcanvas) _tcanvas = document.createElement('canvas');
+    const c0 = mctx(); c0.font = fcss(key, E);
+    const m = c0.measureText(ch);
+    const left = Math.ceil(Math.max(0, m.actualBoundingBoxLeft || 0)) + pad;
+    const right = Math.ceil(Math.max(m.width, m.actualBoundingBoxRight || m.width)) + pad;
+    const asc = Math.ceil(Math.max(m.actualBoundingBoxAscent || E, 1)) + pad;
+    const desc = Math.ceil(Math.max(m.actualBoundingBoxDescent || E * 0.3, 0)) + pad;
+    const W = Math.min(2048, left + right + 2), H = Math.min(2048, asc + desc + 2);
+    const c = _tcanvas; c.width = W; c.height = H;
+    const ctx = c.getContext('2d', { willReadFrequently: true });
+    ctx.clearRect(0, 0, W, H);
+    ctx.font = fcss(key, E);
+    ctx.textBaseline = 'alphabetic';
+    ctx.fillStyle = '#000';
+    ctx.fillText(ch, left, asc);
+    const d = ctx.getImageData(0, 0, W, H).data;
+    const A = new Uint8Array(W * H);
+    for (let i = 0, j = 3; i < A.length; i++, j += 4) A[i] = d[j];
+    const loops = marchAlpha(A, W, H, 127.5);
+    let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+    const parts = [];
+    const S = 1000 / E;
+    for (const lp of loops) {
+      const q = simplifyLoop(lp, 0.35);
+      if (q.length < 6) continue;
+      let area = 0;
+      for (let i = 0, n = q.length / 2; i < n; i++) { const j = (i + 1) % n; area += q[2 * i] * q[2 * j + 1] - q[2 * j] * q[2 * i + 1]; }
+      if (Math.abs(area) < 1.2) continue;
+      let s = '';
+      for (let i = 0; i < q.length; i += 2) {
+        const X = Math.round((q[i] - left) * S), Y = Math.round((asc - q[i + 1]) * S);
+        if (X < x0) x0 = X; if (X > x1) x1 = X; if (Y < y0) y0 = Y; if (Y > y1) y1 = Y;
+        s += X + ' ' + Y + (i ? ' l\n' : ' m\n');
+      }
+      parts.push(s + 'h\n');
+    }
+    if (parts.length) { g.path = parts.join('') + 'f\n'; g.bbox = [x0, y0, x1, y1]; }
+  }
+  _trace.set(ck, g);
+  return g;
+}
+
+/* ════════════════════════════════════════════════════════════
+   그리기 — 쪽마다 「그리기 목록(ops)」을 만들어 두고 캔버스(미리보기·이미지·인쇄)와 PDF 가 같은 목록을 그린다.
+   좌표는 pt(1/72 인치), 위쪽이 0. 색은 '#RRGGBB'
+     t 글자 {x, y(기준선), s, z(크기), b(굵게), c}
+     l 선   {x1, y1, x2, y2, w, c, d(점선 [칠, 빔])}
+     r 상자 {x, y, w, h, f(채움), s(테두리), lw, rr(모서리 둥글기)}
+     c 원   {x, y, r, f, s, lw}
+   ════════════════════════════════════════════════════════════ */
+const _p2d = new Map();
+function glyphPath(key, ch) {
+  const k = key + '|' + ch;
+  let p = _p2d.get(k);
+  if (p === undefined) {
+    const g = traceGlyph(key, ch);
+    p = null;
+    if (g.path) {
+      p = new Path2D();
+      for (const ln of g.path.split(/\n/)) {
+        const a = ln.split(' ');
+        if (a.length === 3) { if (a[2] === 'm') p.moveTo(+a[0], -a[1]); else p.lineTo(+a[0], -a[1]); }
+        else if (ln === 'h') p.closePath();
+      }
+    }
+    _p2d.set(k, p);
+  }
+  return p;
+}
+const hexRGB = h => [parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255];
+function roundRectPath(ctx, x, y, w, h, r) {
+  r = Math.max(0, Math.min(r, w / 2, h / 2));
+  ctx.beginPath();
+  ctx.moveTo(x + r, y); ctx.lineTo(x + w - r, y); ctx.arcTo(x + w, y, x + w, y + r, r);
+  ctx.lineTo(x + w, y + h - r); ctx.arcTo(x + w, y + h, x + w - r, y + h, r);
+  ctx.lineTo(x + r, y + h); ctx.arcTo(x, y + h, x, y + h - r, r);
+  ctx.lineTo(x, y + r); ctx.arcTo(x, y, x + r, y, r); ctx.closePath();
+}
+function paintPage(ctx, page, sc, vector) {
+  ctx.save();
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, page.W * sc, page.H * sc);
+  ctx.textBaseline = 'alphabetic';
+  ctx.lineCap = 'butt'; ctx.lineJoin = 'miter';
+  let font = '';
+  for (const op of page.ops) {
+    if (op.o === 't') {
+      const key = fkey(op.b), f = fcss(key, op.z * sc);
+      if (f !== font) { ctx.font = f; font = f; }
+      ctx.fillStyle = op.c || '#000000';
+      let x = op.x;
+      const gs = op.z * sc / 1000;
+      for (const ch of op.s) {
+        if (!/\s/.test(ch)) {
+          if (!vector) ctx.fillText(ch, x * sc, op.y * sc);
+          else { const p = glyphPath(key, ch); if (p) { ctx.save(); ctx.translate(x * sc, op.y * sc); ctx.scale(gs, gs); ctx.fill(p); ctx.restore(); } }
+        }
+        x += adv(key, ch) * op.z;
+      }
+    } else if (op.o === 'l') {
+      ctx.strokeStyle = op.c || '#000000'; ctx.lineWidth = Math.max(0.6, op.w * sc);
+      ctx.setLineDash(op.d ? op.d.map(v => v * sc) : []);
+      ctx.beginPath(); ctx.moveTo(op.x1 * sc, op.y1 * sc); ctx.lineTo(op.x2 * sc, op.y2 * sc); ctx.stroke();
+      if (op.d) ctx.setLineDash([]);
+    } else if (op.o === 'r') {
+      const rr = (op.rr || 0) * sc;
+      if (op.f) { ctx.fillStyle = op.f; if (rr) { roundRectPath(ctx, op.x * sc, op.y * sc, op.w * sc, op.h * sc, rr); ctx.fill(); } else ctx.fillRect(op.x * sc, op.y * sc, op.w * sc, op.h * sc); }
+      if (op.s) {
+        ctx.strokeStyle = op.s; ctx.lineWidth = Math.max(0.6, op.lw * sc);
+        if (rr) { roundRectPath(ctx, op.x * sc, op.y * sc, op.w * sc, op.h * sc, rr); ctx.stroke(); } else ctx.strokeRect(op.x * sc, op.y * sc, op.w * sc, op.h * sc);
+      }
+    } else if (op.o === 'c') {
+      ctx.beginPath(); ctx.arc(op.x * sc, op.y * sc, op.r * sc, 0, Math.PI * 2);
+      if (op.f) { ctx.fillStyle = op.f; ctx.fill(); }
+      if (op.s) { ctx.strokeStyle = op.s; ctx.lineWidth = Math.max(0.6, op.lw * sc); ctx.stroke(); }
+    }
+  }
+  ctx.restore();
+}
+function pageCanvas(page, sc, vector) {
+  const cv = document.createElement('canvas');
+  cv.width = Math.round(page.W * sc); cv.height = Math.round(page.H * sc);
+  paintPage(cv.getContext('2d'), page, sc, vector);
+  return cv;
+}
+const canvasBlob = (cv, type, q) => new Promise((res, rej) => cv.toBlob(b => b ? res(b) : rej(new Error('toBlob')), type || 'image/png', q));
+
+/* ════════════════════════════════════════════════════════════
+   PDF — 직접 쓴다 (글자는 Type3 윤곽선 + ToUnicode 라 복사·검색이 된다)
+   ════════════════════════════════════════════════════════════ */
+const te = new TextEncoder();
+const latin1 = s => { const u = new Uint8Array(s.length); for (let i = 0; i < s.length; i++) u[i] = s.charCodeAt(i) & 255; return u; };
+const pf = n => { const v = Math.round(n * 1000) / 1000; return Object.is(v, -0) ? '0' : String(v); };
+async function deflate(u8) {
+  if (typeof CompressionStream === 'undefined') return null;
+  try {
+    const st = new Blob([u8]).stream().pipeThrough(new CompressionStream('deflate'));
+    return new Uint8Array(await new Response(st).arrayBuffer());
+  } catch (e) { return null; }
+}
+async function pdfStream(dict, u8) {
+  const z = u8.length > 60 ? await deflate(u8) : null;
+  return z && z.length < u8.length ? { dict: dict + ' /Filter /FlateDecode', data: z } : { dict, data: u8 };
+}
+const utf16hex = s => { let h = 'FEFF'; for (let i = 0; i < s.length; i++) h += s.charCodeAt(i).toString(16).toUpperCase().padStart(4, '0'); return h; };
+class PdfW {
+  constructor() { this.objs = [null]; }
+  alloc() { this.objs.push(null); return this.objs.length - 1; }
+  set(n, body) { this.objs[n] = body; }
+  blob(root, info) {
+    const parts = [], offs = [];
+    let off = 0;
+    const push = u => { parts.push(u); off += u.length; };
+    push(latin1('%PDF-1.7\n%' + String.fromCharCode(226, 227, 207, 211) + '\n'));
+    for (let i = 1; i < this.objs.length; i++) {
+      offs[i] = off;
+      const o = this.objs[i];
+      if (o && o.data) {
+        push(latin1(`${i} 0 obj\n<< ${o.dict} /Length ${o.data.length} >>\nstream\n`)); push(o.data); push(latin1('\nendstream\nendobj\n'));
+      } else push(latin1(`${i} 0 obj\n${o == null ? 'null' : o}\nendobj\n`));
+    }
+    const xref = off;
+    let x = `xref\n0 ${this.objs.length}\n0000000000 65535 f \n`;
+    for (let i = 1; i < this.objs.length; i++) x += String(offs[i]).padStart(10, '0') + ' 00000 n \n';
+    let id = ''; for (let i = 0; i < 16; i++) id += Math.floor(Math.random() * 256).toString(16).padStart(2, '0');
+    x += `trailer\n<< /Size ${this.objs.length} /Root ${root} 0 R /Info ${info} 0 R /ID [<${id}> <${id}>] >>\nstartxref\n${xref}\n%%EOF\n`;
+    push(latin1(x));
+    return new Blob(parts, { type: 'application/pdf' });
+  }
+}
+/* 새 글자용 Type3 글꼴 묶음 — 한 벌에 코드 223개(33~255, 32 는 띄어쓰기), 넘치면 다음 벌 */
+class Type3Set {
+  constructor() { this.byKey = new Map(); this.seq = 0; }
+  encode(key, text) {
+    let list = this.byKey.get(key);
+    if (!list) { list = []; this.byKey.set(key, list); }
+    const out = [];
+    let cur = null;
+    for (const ch of Array.from(text)) {
+      let chunk = null, code = 0;
+      if (ch === ' ') { chunk = (cur && cur.chunk) || list[list.length - 1] || this.newChunk(key, list); code = 32; }
+      else {
+        for (const c of list) { const v = c.codes.get(ch); if (v !== undefined) { chunk = c; code = v; break; } }
+        if (!chunk) {
+          chunk = list[list.length - 1];
+          if (!chunk || chunk.next > 255) chunk = this.newChunk(key, list);
+          code = chunk.next++;
+          chunk.codes.set(ch, code);
+        }
+      }
+      if (!cur || cur.chunk !== chunk) { cur = { chunk, codes: [], chars: [] }; out.push(cur); }
+      cur.codes.push(code); cur.chars.push(ch);
+    }
+    return out;
+  }
+  newChunk(key, list) { const c = { key, id: ++this.seq, codes: new Map([[' ', 32]]), next: 33, ref: 0 }; list.push(c); return c; }
+  count() { let n = 0; for (const list of this.byKey.values()) for (const c of list) n += c.codes.size; return n; }
+  async build(W, progress) {
+    const total = this.count(); let done = 0;
+    for (const [key, list] of this.byKey) {
+      for (const c of list) {
+        const fontRef = W.alloc();
+        c.ref = fontRef;
+        const procs = [], diffs = [], uni = [];
+        const widths = new Array(224).fill(0);
+        let bx0 = 0, by0 = 0, bx1 = 0, by1 = 0;
+        const entries = Array.from(c.codes.entries()).sort((a, b) => a[1] - b[1]);
+        for (const [ch, code] of entries) {
+          const g = traceGlyph(key, ch);
+          const body = `${g.adv} 0 ${g.bbox.join(' ')} d1\n${g.path}`;
+          const n = W.alloc();
+          W.set(n, await pdfStream('', te.encode(body)));
+          procs.push(`/g${code} ${n} 0 R`);
+          diffs.push(`${code} /g${code}`);
+          widths[code - 32] = g.adv;
+          bx0 = Math.min(bx0, g.bbox[0]); by0 = Math.min(by0, g.bbox[1]); bx1 = Math.max(bx1, g.bbox[2]); by1 = Math.max(by1, g.bbox[3]);
+          uni.push([code, ch]);
+          if (++done % 24 === 0) { if (progress) progress(done / total); await yieldUI(); }
+        }
+        const tu = W.alloc();
+        W.set(tu, await pdfStream('', te.encode(toUnicodeCMap(uni))));
+        W.set(fontRef, `<< /Type /Font /Subtype /Type3 /FontBBox [${bx0} ${by0} ${bx1} ${by1}] /FontMatrix [0.001 0 0 0.001 0 0] ` +
+          `/CharProcs << ${procs.join(' ')} >> /Encoding << /Type /Encoding /Differences [${diffs.join(' ')}] >> ` +
+          `/FirstChar 32 /LastChar 255 /Widths [${widths.join(' ')}] /Resources << /ProcSet [/PDF] >> /ToUnicode ${tu} 0 R >>`);
+      }
+    }
+  }
+}
+function toUnicodeCMap(pairs) {
+  const hx = (v, n) => v.toString(16).toUpperCase().padStart(n, '0');
+  let s = '/CIDInit /ProcSet findresource begin\n12 dict begin\nbegincmap\n/CIDSystemInfo << /Registry (Adobe) /Ordering (UCS) /Supplement 0 >> def\n' +
+    '/CMapName /Adobe-Identity-UCS def\n/CMapType 2 def\n1 begincodespacerange\n<00> <FF>\nendcodespacerange\n';
+  for (let i = 0; i < pairs.length; i += 100) {
+    const blk = pairs.slice(i, i + 100);
+    s += blk.length + ' beginbfchar\n';
+    for (const [code, ch] of blk) {
+      let u = '';
+      for (let k = 0; k < ch.length; k++) u += hx(ch.charCodeAt(k), 4);
+      s += '<' + hx(code, 2) + '> <' + u + '>\n';
+    }
+    s += 'endbfchar\n';
+  }
+  return s + 'endcmap\nCMapName currentdict /CMap defineresource pop\nend\nend\n';
+}
+const fillC = c => hexRGB(c || '#000000').map(pf).join(' ') + ' rg';
+const strokeC = c => hexRGB(c || '#000000').map(pf).join(' ') + ' RG';
+/* 둥근 상자·원은 베지어 곡선으로 (k = 원을 네 토막 낸 3차 곡선의 손잡이 비율) */
+const KAPPA = 0.5523;
+function pdfRoundRect(x, y, w, h, r) {
+  r = Math.max(0, Math.min(r, w / 2, h / 2));
+  if (!r) return `${pf(x)} ${pf(y)} ${pf(w)} ${pf(h)} re`;
+  const k = r * KAPPA, X2 = x + w, Y2 = y + h;
+  return [`${pf(x + r)} ${pf(y)} m`, `${pf(X2 - r)} ${pf(y)} l`, `${pf(X2 - r + k)} ${pf(y)} ${pf(X2)} ${pf(y + r - k)} ${pf(X2)} ${pf(y + r)} c`,
+    `${pf(X2)} ${pf(Y2 - r)} l`, `${pf(X2)} ${pf(Y2 - r + k)} ${pf(X2 - r + k)} ${pf(Y2)} ${pf(X2 - r)} ${pf(Y2)} c`,
+    `${pf(x + r)} ${pf(Y2)} l`, `${pf(x + r - k)} ${pf(Y2)} ${pf(x)} ${pf(Y2 - r + k)} ${pf(x)} ${pf(Y2 - r)} c`,
+    `${pf(x)} ${pf(y + r)} l`, `${pf(x)} ${pf(y + r - k)} ${pf(x + r - k)} ${pf(y)} ${pf(x + r)} ${pf(y)} c`, 'h'].join(' ');
+}
+function pdfCircle(cx, cy, r) {
+  const k = r * KAPPA;
+  return [`${pf(cx + r)} ${pf(cy)} m`, `${pf(cx + r)} ${pf(cy + k)} ${pf(cx + k)} ${pf(cy + r)} ${pf(cx)} ${pf(cy + r)} c`,
+    `${pf(cx - k)} ${pf(cy + r)} ${pf(cx - r)} ${pf(cy + k)} ${pf(cx - r)} ${pf(cy)} c`,
+    `${pf(cx - r)} ${pf(cy - k)} ${pf(cx - k)} ${pf(cy - r)} ${pf(cx)} ${pf(cy - r)} c`,
+    `${pf(cx + k)} ${pf(cy - r)} ${pf(cx + r)} ${pf(cy - k)} ${pf(cx + r)} ${pf(cy)} c`, 'h'].join(' ');
+}
+async function makePDF(pages, title, progress) {
+  const W = new PdfW();
+  const cat = W.alloc(), pagesN = W.alloc(), info = W.alloc();
+  const t3 = new Type3Set();
+  const contents = [];
+  for (const pg of pages) {
+    const out = ['0 J 0 j'];
+    const fonts = new Set();
+    const PH = pg.H;
+    let lastFill = '';
+    const fill = g => { if (g !== lastFill) { out.push(fillC(g)); lastFill = g; } };
+    for (const op of pg.ops) {
+      if (op.o === 't') {
+        const key = fkey(op.b);
+        fill(op.c || '#000000');
+        let x = op.x;
+        const y = PH - op.y;
+        for (const sg of t3.encode(key, op.s)) {
+          fonts.add(sg.chunk);
+          let hex = '';
+          for (const cd of sg.codes) hex += cd.toString(16).padStart(2, '0');
+          out.push(`BT /T${sg.chunk.id} ${pf(op.z)} Tf ${pf(x)} ${pf(y)} Td <${hex}> Tj ET`);
+          for (const ch of sg.chars) x += adv(key, ch) * op.z;
+        }
+      } else if (op.o === 'l') {
+        out.push(`${op.d ? '[' + op.d.map(pf).join(' ') + '] 0 d ' : ''}${pf(op.w)} w ${strokeC(op.c)} ${pf(op.x1)} ${pf(PH - op.y1)} m ${pf(op.x2)} ${pf(PH - op.y2)} l S${op.d ? ' [] 0 d' : ''}`);
+      } else if (op.o === 'r') {
+        const path = pdfRoundRect(op.x, PH - op.y - op.h, op.w, op.h, op.rr || 0);
+        if (op.f) { fill(op.f); out.push(path + ' f'); }
+        if (op.s) out.push(`${pf(op.lw)} w ${strokeC(op.s)} ${path} S`);
+      } else if (op.o === 'c') {
+        const path = pdfCircle(op.x, PH - op.y, op.r);
+        if (op.f) { fill(op.f); out.push(path + ' f'); }
+        if (op.s) out.push(`${pf(op.lw)} w ${strokeC(op.s)} ${path} S`);
+      }
+    }
+    contents.push({ s: out.join('\n') + '\n', fonts, W: pg.W, H: PH });
+  }
+  await t3.build(W, progress);
+  const kids = [];
+  for (const ct of contents) {
+    const cn = W.alloc();
+    W.set(cn, await pdfStream('', latin1(ct.s)));
+    const fr = Array.from(ct.fonts).map(c => `/T${c.id} ${c.ref} 0 R`).join(' ');
+    const pn = W.alloc();
+    W.set(pn, `<< /Type /Page /Parent ${pagesN} 0 R /MediaBox [0 0 ${pf(ct.W)} ${pf(ct.H)}] ` +
+      `/Resources << /ProcSet [/PDF /Text] /Font << ${fr} >> >> /Contents ${cn} 0 R >>`);
+    kids.push(pn);
+  }
+  W.set(pagesN, `<< /Type /Pages /Kids [${kids.map(k => k + ' 0 R').join(' ')}] /Count ${kids.length} >>`);
+  W.set(cat, `<< /Type /Catalog /Pages ${pagesN} 0 R /ViewerPreferences << /DisplayDocTitle true >> >>`);
+  const t = new Date(), p2 = v => String(v).padStart(2, '0');
+  const ds = `${t.getFullYear()}${p2(t.getMonth() + 1)}${p2(t.getDate())}${p2(t.getHours())}${p2(t.getMinutes())}${p2(t.getSeconds())}`;
+  W.set(info, `<< /Title <${utf16hex(title)}> /Creator <${utf16hex('받아쓰기 연습')}> /Producer (dictation) /CreationDate (D:${ds}) >>`);
+  return W.blob(cat, info);
+}
+
+/* ── zip — xlsx 꾸러미용. xml 은 브라우저 내장 CompressionStream 으로 압축 ── */
+const te8 = new TextEncoder();
+const CRC_T = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++) { let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u) { let c = 0xFFFFFFFF; for (let i = 0; i < u.length; i++) c = CRC_T[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+async function deflateRaw(u) {
+  if (typeof CompressionStream === 'undefined') return null;
+  try {
+    const cs = new CompressionStream('deflate-raw');
+    const buf = await new Response(new Blob([u]).stream().pipeThrough(cs)).arrayBuffer();
+    return new Uint8Array(buf);
+  } catch (e) { return null; }
+}
+async function zipFiles(files, mime) {
+  const d = new Date();
+  const dt = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate(), tm = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+  const parts = [], central = [];
+  let off = 0;
+  for (const f of files) {
+    const nmb = te8.encode(f.name), crc = crc32(f.data), sz = f.data.length;
+    let data = f.data, method = 0;
+    if (!f.store && sz > 128) { const z = await deflateRaw(f.data); if (z && z.length < sz) { data = z; method = 8; } }
+    const h = new DataView(new ArrayBuffer(30));
+    h.setUint32(0, 0x04034b50, true); h.setUint16(4, 20, true); h.setUint16(6, 0x0800, true); h.setUint16(8, method, true);
+    h.setUint16(10, tm, true); h.setUint16(12, dt, true); h.setUint32(14, crc, true); h.setUint32(18, data.length, true); h.setUint32(22, sz, true);
+    h.setUint16(26, nmb.length, true); h.setUint16(28, 0, true);
+    parts.push(new Uint8Array(h.buffer), nmb, data);
+    const c = new DataView(new ArrayBuffer(46));
+    c.setUint32(0, 0x02014b50, true); c.setUint16(4, 20, true); c.setUint16(6, 20, true); c.setUint16(8, 0x0800, true); c.setUint16(10, method, true);
+    c.setUint16(12, tm, true); c.setUint16(14, dt, true); c.setUint32(16, crc, true); c.setUint32(20, data.length, true); c.setUint32(24, sz, true);
+    c.setUint16(28, nmb.length, true); c.setUint32(42, off, true);
+    central.push(new Uint8Array(c.buffer), nmb);
+    off += 30 + nmb.length + data.length;
+  }
+  const cdSize = central.reduce((a, u) => a + u.length, 0);
+  const e = new DataView(new ArrayBuffer(22));
+  e.setUint32(0, 0x06054b50, true); e.setUint16(8, files.length, true); e.setUint16(10, files.length, true);
+  e.setUint32(12, cdSize, true); e.setUint32(16, off, true);
+  return new Blob(parts.concat(central, [new Uint8Array(e.buffer)]), { type: mime || 'application/zip' });
+}
+
+/* ════════════════════════════════════════════════════════════
+   기본 급수표 — 학년마다 맞춤법 갈래 하나를 「급」 하나로 묶었다.
+   교과서 문장을 옮기지 않고 이 도구를 위해 새로 지은 문장이다.
+   · 문장 뒤 [ ] 는 소리 나는 대로 적은 것 — 채점 화면에서 어른에게만 보여 준다
+   ════════════════════════════════════════════════════════════ */
+const BASE_SETS = [
+  { id: 'g1a', g: 1, t: '받침 있는 낱말', d: 'ㄱ·ㄴ·ㄹ·ㅁ·ㅇ 같은 쉬운 받침과 「-어요」로 끝나는 문장', s: [
+    '우리 집에 강아지가 있어요.', '하늘이 참 파래요.', '엄마와 시장에 갔어요.', '동생이 공을 던졌어요.', '나는 사과를 좋아해요.',
+    '친구와 손을 잡고 걸어요.', '바람이 솔솔 불어요.', '고양이가 잠을 자요.', '선생님, 안녕하세요?', '운동장에서 줄넘기를 해요.'] },
+  { id: 'g1b', g: 1, t: '소리와 글자가 다른 낱말', d: '받침이 뒤로 넘어가 소리 나는 낱말 — 들리는 대로 쓰면 틀립니다', s: [
+    '음악 시간에 노래를 불러요.[으막]', '동화책을 읽어요.[일거요]', '꽃이 활짝 피었어요.[꼬치]', '옷을 입고 밖에 나가요.[오슬 · 바께]', '목요일에 만나요.[모교일]',
+    '손이 깨끗해야 해요.[소니 · 깨끄태야]', '웃음소리가 들려요.[우슴소리]', '밥을 맛있게 먹었어요.[바블 · 마싣께]', '낮에는 따뜻해요.[나제는]', '놀이터에서 놀았어요.[노리터]'] },
+  { id: 'g1c', g: 1, t: '된소리와 거센소리', d: 'ㄲ·ㄸ·ㅃ·ㅆ·ㅉ 과 ㅋ·ㅌ·ㅍ·ㅊ 이 들어간 낱말', s: [
+    '아빠가 빵을 사 오셨어요.', '토끼가 깡충깡충 뛰어요.', '쓰레기는 쓰레기통에 버려요.', '짝꿍과 사이좋게 지내요.', '코끼리는 코가 길어요.',
+    '키가 쑥쑥 자라요.', '뜨거운 국을 후후 불어요.', '털이 복슬복슬한 강아지예요.', '꽃밭에 나비가 날아와요.', '칠판에 글씨를 써요.'] },
+  { id: 'g1d', g: 1, t: '문장 부호', d: '마침표(.)·쉼표(,)·물음표(?)·느낌표(!)를 알맞게', s: [
+    '와, 눈이 온다!', '이게 뭐예요?', '나는 학교에 갑니다.', '엄마, 사랑해요.', '어디에 가니?',
+    '할머니께서 웃으셨어요.', '우리 같이 놀자.', '비가 오면 우산을 써요.', '오늘은 무슨 요일이에요?', '고마워, 친구야!'] },
+  { id: 'g2a', g: 2, t: '겹받침', d: 'ㄺ·ㄶ·ㄵ·ㄾ·ㄼ·ㅄ·ㄻ 처럼 받침이 두 개인 낱말', s: [
+    '닭이 꼬끼오 울어요.[달기]', '동생이 많이 컸어요.[마니]', '의자에 앉아서 책을 읽어요.[안자서 · 일거요]', '흙을 만지며 놀았어요.[흘글]', '강아지가 내 손을 핥았어요.[할타써요]',
+    '꽃을 밟지 마세요.[밥찌]', '값이 너무 비싸요.[갑씨]', '넓은 바다를 보았어요.[널븐]', '연필이 하나도 없어요.[업써요]', '감자를 삶아 먹었어요.[살마]'] },
+  { id: 'g2b', g: 2, t: '헷갈리는 모음', d: 'ㅐ와 ㅔ, ㅚ·ㅙ·ㅞ, ㅒ와 ㅖ — 소리가 비슷해 자주 틀립니다', s: [
+    '게가 옆으로 걸어가요.', '개가 멍멍 짖어요.', '세수를 하고 이를 닦아요.', '새해 복 많이 받으세요.', '시계가 열두 시를 가리켜요.',
+    '왜 그렇게 생각했니?', '웬일로 일찍 일어났어?', '외갓집에 놀러 갔어요.', '얘들아, 이리 와.', '예쁜 꽃을 선물했어요.'] },
+  { id: 'g2c', g: 2, t: '소리가 바뀌는 낱말', d: '「같이[가치]」「국물[궁물]」처럼 이어 말하면 소리가 바뀌는 낱말', s: [
+    '해돋이를 보러 갔어요.[해도지]', '친구와 같이 놀아요.[가치]', '굳이 오지 않아도 돼요.[구지]', '국물이 정말 맛있어요.[궁무리]', '신라 시대 이야기를 읽었어요.[실라]',
+    '숙제를 다 끝냈어요.[끈내써요]', '문이 저절로 닫혔어요.[다처써요]', '첫눈이 펑펑 내려요.[천누니]', '학교 앞 문방구에 들렀어요.[문빵구]', '맏이는 우리 언니예요.[마지]'] },
+  { id: 'g2d', g: 2, t: '띄어쓰기', d: '「개·살·권·수·것·지·때」처럼 띄어 써야 하는 말', s: [
+    '사과 세 개를 샀어요.', '아는 것이 힘이에요.', '할 수 있다고 믿어요.', '먹을 만큼만 담아요.', '동생은 일곱 살이에요.',
+    '집에 온 지 한 시간이 지났어요.', '열심히 공부할 거예요.', '책 두 권과 연필 한 자루를 샀어요.', '그럴 줄 알았어요.', '학교에 갈 때 우산을 챙겨요.'] },
+  { id: 'g2e', g: 2, t: '높임말과 흉내 내는 말', d: '「께서·진지·댁」 같은 높임말과 「반짝반짝」 같은 흉내 내는 말', s: [
+    '할아버지께서 진지를 드세요.', '선생님께 편지를 드렸어요.', '할머니 댁에 다녀왔습니다.', '아버지께서 말씀하셨어요.', '어머니께서 주무세요.',
+    '반짝반짝 빛나는 별을 보았어요.', '데굴데굴 굴러가는 공을 잡았어요.', '하얀 눈이 소복소복 쌓였어요.', '귀여운 다람쥐가 도토리를 먹어요.', '친구에게 고맙다고 말했어요.'] },
+  { id: 'g3a', g: 3, t: '헷갈리는 맞춤법', d: '되/돼, 안/않, 맞히다/맞추다, 가르치다/가리키다, 잃다/잊다', s: [
+    '내일 다시 만나면 돼요.', '숙제를 안 해서 혼났어요.', '감기가 빨리 나았으면 좋겠어요.', '정답을 맞힌 사람은 손을 드세요.', '선생님께서 수학을 가르쳐 주셨어요.',
+    '손가락으로 북쪽을 가리켰어요.', '편지를 봉투에 넣어 부쳤어요.', '우산을 잃어버려서 비를 맞았어요.', '그 일은 절대 잊지 않을게요.', '왠지 기분이 좋은 날이에요.'] },
+  { id: 'g3b', g: 3, t: '사이시옷과 -이·-히', d: '「나뭇잎·바닷가」의 사이시옷, 「깨끗이·꼼꼼히」의 끝소리', s: [
+    '나뭇잎이 바람에 흔들려요.[나문니피]', '바닷가에서 조개를 주웠어요.[바다까]', '햇볕이 따뜻하게 비춰요.[핻뼈치]', '냇물에 발을 담갔어요.[낸무레]', '빗물이 고여 웅덩이가 생겼어요.[빈물]',
+    '장난감을 깨끗이 정리했어요.', '꼼꼼히 확인하고 내요.', '일찍이 집을 나섰어요.', '곰곰이 생각해 보았어요.', '솔직히 말하면 조금 무서웠어요.'] },
+  { id: 'g3c', g: 3, t: '긴 문장 띄어쓰기', d: '낱말이 많아진 문장 — 꾸며 주는 말과 「하러·지·것」 띄어쓰기', s: [
+    '우리 반은 다음 주에 동물원에 가요.', '도서관에서 빌린 책을 내일까지 돌려줘야 해요.', '비가 올 것 같아서 우산을 가지고 나왔어요.', '아침마다 운동장을 두 바퀴씩 달려요.', '엄마는 시장에서 배추 한 포기와 무 두 개를 사셨어요.',
+    '동생이 그린 그림이 상을 받았어요.', '우리 가족은 주말마다 공원에 산책하러 가요.', '친구가 아파서 학교에 오지 못했어요.', '할머니께서 만들어 주신 김치가 제일 맛있어요.', '내 꿈은 멋진 과학자가 되는 거예요.'] }
+];
+/* 문장 끝 [소리] 를 떼어 { t, h } 로 */
+function splitHint(s) {
+  const m = /^(.*?)\s*\[([^\]]+)\]\s*$/.exec(s);
+  return m ? { t: m[1].trim(), h: m[2].trim() } : { t: s.trim(), h: '' };
+}
+/* 학년별 급 번호 — 1학년 1급, 1학년 2급 … */
+function baseGroups(g) {
+  return BASE_SETS.filter(x => x.g === g).map((x, i) => ({
+    id: x.id, name: g + '학년 ' + (i + 1) + '급', sub: x.t, d: x.d, items: x.s.map(splitHint)
+  }));
+}
+const GRADES = [1, 2, 3];
+
+/* ════════════════════════════════════════════════════════════
+   내 급수표 읽기 — 학교에서 받은 급수표를 붙여 넣거나 파일로
+   · 「1급」「제 3 급」「[2급]」 같은 줄은 급 제목, 그 밑의 줄이 문장
+   · 줄 앞 번호(1. 1) ① (1) - •)는 떼어 낸다
+   · 엑셀에서 복사한 칸(탭으로 나뉜 줄)은 한글이 가장 긴 칸을 문장으로 본다
+   · 급 제목이 하나도 없고 문장이 많으면 10개씩 나눈다
+   ════════════════════════════════════════════════════════════ */
+const CIRC = '①②③④⑤⑥⑦⑧⑨⑩⑪⑫⑬⑭⑮⑯⑰⑱⑲⑳';
+function stripNum(s) {
+  return s.replace(/^\s*(?:[-•·*▶▷○●□■◇◆]+\s*|\(?\d{1,3}\s*[.)．、]\s*|\(\d{1,3}\)\s*|[①-⑳]\s*|\d{1,3}\s+(?=[가-힣]))/, '').trim();
+}
+const HEAD_RE = /^\s*[\[(<【]?\s*(?:제\s*)?(\d{1,2})\s*급\s*[\])>】]?\s*[:：.)\-–]?\s*(.*)$/;
+function parseList(text) {
+  const groups = [];
+  let cur = null;
+  const add = s => {
+    s = stripNum(s).replace(/\s+/g, ' ').trim();
+    if (!s || !/[가-힣]/.test(s)) return;
+    /* 급 제목보다 앞에 있는 「2학기 받아쓰기 급수표」 같은 표 제목은 문장이 아니다 */
+    if (!cur && /급수표|받아쓰기|학년|학기/.test(s) && !/[.?!]$/.test(s)) return;
+    if (!cur) { cur = { name: '', items: [] }; groups.push(cur); }
+    cur.items.push(splitHint(s));
+  };
+  for (let line of String(text || '').replace(/\r/g, '').split('\n')) {
+    if (!line.trim()) continue;
+    let gradeCell = '';
+    if (line.indexOf('\t') >= 0) {           /* 엑셀·구글 시트에서 복사한 줄 */
+      const cells = line.split('\t').map(c => c.trim()).filter(Boolean);
+      /* 「급 | 번호 | 문장」 같은 머리글 줄은 건너뛴다 */
+      if (cells.length && cells.every(c => /^(급|번호|번|문장|문제|낱말|글자\s*수|소리.*|no\.?|#)$/i.test(c))) continue;
+      const g = cells.find(c => /^(?:제\s*)?\d{1,2}\s*급$/.test(c) || /^\d\s*학년\s*\d{1,2}\s*급(\s|$)/.test(c));
+      if (g) gradeCell = g;
+      /* 문장 칸 = 한글이 든 칸 가운데 가장 긴 것(급 칸·[소리] 칸은 빼고) */
+      const ko = cells.filter(c => /[가-힣]/.test(c) && c !== g && !/^\[.*\]$/.test(c)).sort((a, b) => b.length - a.length);
+      line = ko[0] || '';
+      if (gradeCell) {
+        const name = /학년/.test(gradeCell) ? gradeCell.replace(/\s+/g, ' ') : gradeCell.replace(/\s+/g, '').replace(/^제/, '');
+        if (!cur || cur.name !== name) { cur = { name, items: [] }; groups.push(cur); }
+      }
+      if (line) add(line);
+      continue;
+    }
+    const h = HEAD_RE.exec(line);
+    if (h && (!h[2] || h[2].length < 40)) {
+      cur = { name: +h[1] + '급', items: [] }; groups.push(cur);
+      /* 「1급: 우리 집에 …」처럼 한 줄에 문장이 붙어 있으면 그것도 문장 */
+      if (h[2] && /[가-힣]{2,}/.test(h[2]) && !/^(받아쓰기|급수표)/.test(h[2])) add(h[2]);
+      continue;
+    }
+    add(line);
+  }
+  let out = groups.filter(g => g.items.length);
+  if (out.length === 1 && !out[0].name && out[0].items.length > 12) {
+    const all = out[0].items; out = [];
+    for (let i = 0; i < all.length; i += 10) out.push({ name: (i + 1) + '~' + Math.min(all.length, i + 10) + '번', items: all.slice(i, i + 10) });
+  }
+  out.forEach((g, i) => { if (!g.name) g.name = out.length > 1 ? (i + 1) + '급' : '내 문장'; });
+  return out;
+}
+
+/* ── 파일에서 글 꺼내기: txt·csv(utf-8 / euc-kr) · xlsx(첫 시트) ── */
+async function fileText(file) {
+  const buf = new Uint8Array(await file.arrayBuffer());
+  if (buf[0] === 0x50 && buf[1] === 0x4B) return xlsxText(buf);
+  let s = new TextDecoder('utf-8').decode(buf);
+  if (/�/.test(s)) { try { s = new TextDecoder('euc-kr').decode(buf); } catch (e) { /* 그대로 */ } }
+  if (/\.csv$/i.test(file.name)) s = s.split(/\r?\n/).map(l => csvCells(l).join('\t')).join('\n');
+  return s.replace(/^﻿/, '');
+}
+function csvCells(line) {
+  const out = []; let cur = '', q = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (q) { if (c === '"') { if (line[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true;
+    else if (c === ',') { out.push(cur); cur = ''; }
+    else cur += c;
+  }
+  out.push(cur);
+  return out;
+}
+/* zip 중앙 목록을 읽어 필요한 파일만 푼다(deflate-raw 는 브라우저 내장) */
+async function unzipPick(buf, want) {
+  const dv = new DataView(buf.buffer, buf.byteOffset, buf.byteLength);
+  let e = buf.length - 22;
+  while (e >= 0 && dv.getUint32(e, true) !== 0x06054b50) e--;
+  if (e < 0) throw new Error('엑셀 파일을 읽지 못했습니다');
+  let p = dv.getUint32(e + 16, true);
+  const n = dv.getUint16(e + 10, true), out = {};
+  for (let i = 0; i < n; i++) {
+    if (dv.getUint32(p, true) !== 0x02014b50) break;
+    const meth = dv.getUint16(p + 10, true), csz = dv.getUint32(p + 20, true);
+    const fl = dv.getUint16(p + 28, true), xl = dv.getUint16(p + 30, true), cl = dv.getUint16(p + 32, true);
+    const lo = dv.getUint32(p + 42, true);
+    const name = new TextDecoder().decode(buf.subarray(p + 46, p + 46 + fl));
+    if (want(name)) {
+      const ds = lo + 30 + dv.getUint16(lo + 26, true) + dv.getUint16(lo + 28, true);
+      const raw = buf.subarray(ds, ds + csz);
+      if (meth === 0) out[name] = raw;
+      else if (meth === 8) out[name] = new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer());
+    }
+    p += 46 + fl + xl + cl;
+  }
+  return out;
+}
+async function xlsxText(buf) {
+  if (typeof DecompressionStream === 'undefined') throw new Error('이 브라우저는 엑셀 파일을 열 수 없습니다. 칸을 복사해 붙여 넣어 주세요');
+  const f = await unzipPick(buf, n => n === 'xl/sharedStrings.xml' || /^xl\/worksheets\/sheet\d+\.xml$/.test(n));
+  const dec = u => new TextDecoder().decode(u);
+  const xmlDoc = u => new DOMParser().parseFromString(dec(u), 'application/xml');
+  const ss = [];
+  if (f['xl/sharedStrings.xml']) {
+    for (const si of xmlDoc(f['xl/sharedStrings.xml']).getElementsByTagName('si')) {
+      let t = ''; for (const x of si.getElementsByTagName('t')) t += x.textContent; ss.push(t);
+    }
+  }
+  const sheets = Object.keys(f).filter(n => /sheet\d+\.xml$/.test(n)).sort((a, b) => parseInt(a.match(/(\d+)\.xml/)[1]) - parseInt(b.match(/(\d+)\.xml/)[1]));
+  if (!sheets.length) throw new Error('시트를 찾지 못했습니다');
+  const lines = [];
+  for (const row of xmlDoc(f[sheets[0]]).getElementsByTagName('row')) {
+    const cells = [];
+    for (const c of row.getElementsByTagName('c')) {
+      const t = c.getAttribute('t'), v = c.getElementsByTagName('v')[0];
+      if (t === 's' && v) cells.push(ss[+v.textContent] || '');
+      else if (t === 'inlineStr') { let s = ''; for (const x of c.getElementsByTagName('t')) s += x.textContent; cells.push(s); }
+      else cells.push(v ? v.textContent : '');
+    }
+    lines.push(cells.join('\t'));
+  }
+  return lines.join('\n');
+}
+
+/* ════════════════════════════════════════════════════════════
+   엑셀(xlsx) — Office Open XML 을 직접 쓴다(같은 시리즈의 근무표 도구와 같은 틀)
+   · 점검 칸에는 고르기 목록(데이터 유효성)을 걸고, 고른 기호에 따라 칸 색이 바뀌는 조건부 서식을 넣는다
+   ════════════════════════════════════════════════════════════ */
+const COLN = n => { let s = ''; n = n + 1; while (n > 0) { const r = (n - 1) % 26; s = String.fromCharCode(65 + r) + s; n = Math.floor((n - 1) / 26); } return s; };
+const xesc = s => String(s).replace(/[\x00-\x08\x0B\x0C\x0E-\x1F\x7F]/g, '').replace(/[&<>"]/g, c => ESC[c]);
+const XL_FONT = '맑은 고딕';
+const xlHex = c => 'FF' + c.replace('#', '').toUpperCase();
+class XStyles {
+  constructor() {
+    this.fonts = []; this.fills = ['<fill><patternFill patternType="none"/></fill>', '<fill><patternFill patternType="gray125"/></fill>'];
+    this.borders = ['<border><left/><right/><top/><bottom/><diagonal/></border>'];
+    this.xfs = []; this.fm = new Map(); this.flm = new Map(); this.bm = new Map(); this.xm = new Map();
+    this.numFmts = []; this.nm = new Map(); this.dxfs = []; this.dm = new Map();
+    this.font({});
+    this.xf({});
+  }
+  font(o) {
+    const k = [o.b ? 1 : 0, o.sz || 10, o.c || ''].join('|');
+    if (!this.fm.has(k)) {
+      this.fm.set(k, this.fonts.length);
+      this.fonts.push(`<font>${o.b ? '<b/>' : ''}<sz val="${o.sz || 10}"/>${o.c ? `<color rgb="${o.c}"/>` : ''}<name val="${XL_FONT}"/><family val="2"/></font>`);
+    }
+    return this.fm.get(k);
+  }
+  fill(c) {
+    if (!c) return 0;
+    if (!this.flm.has(c)) { this.flm.set(c, this.fills.length); this.fills.push(`<fill><patternFill patternType="solid"><fgColor rgb="${c}"/><bgColor indexed="64"/></patternFill></fill>`); }
+    return this.flm.get(c);
+  }
+  border(bd) {
+    if (!bd) return 0;
+    const side = (t, v) => v ? `<${t} style="${v[0]}"><color rgb="${v[1] || 'FF9AA4AE'}"/></${t}>` : `<${t}/>`;
+    const k = JSON.stringify([bd.l, bd.r, bd.t, bd.b]);
+    if (k === '[null,null,null,null]') return 0;
+    if (!this.bm.has(k)) { this.bm.set(k, this.borders.length); this.borders.push('<border>' + side('left', bd.l) + side('right', bd.r) + side('top', bd.t) + side('bottom', bd.b) + '<diagonal/></border>'); }
+    return this.bm.get(k);
+  }
+  fmt(code) {
+    if (!code) return 0;
+    if (!this.nm.has(code)) { const id = 176 + this.numFmts.length; this.nm.set(code, id); this.numFmts.push(`<numFmt numFmtId="${id}" formatCode="${xesc(code)}"/>`); }
+    return this.nm.get(code);
+  }
+  xf(st) {
+    const k = JSON.stringify(st);
+    if (this.xm.has(k)) return this.xm.get(k);
+    const fo = this.font(st), fi = this.fill(st.fill), bo = this.border(st.bd), nf = this.fmt(st.fmt);
+    const al = `<alignment${st.h ? ` horizontal="${st.h}"` : ''} vertical="${st.v || 'center'}"${st.wrap ? ' wrapText="1"' : ''}${st.shrink ? ' shrinkToFit="1"' : ''}/>`;
+    const id = this.xfs.length;
+    this.xfs.push(`<xf numFmtId="${nf}" fontId="${fo}" fillId="${fi}" borderId="${bo}" xfId="0" applyNumberFormat="1" applyFont="1" applyFill="1" applyBorder="1" applyAlignment="1">${al}</xf>`);
+    this.xm.set(k, id);
+    return id;
+  }
+  /* 조건부 서식의 모양(글자색·채움) */
+  dxf(fg, bg) {
+    const k = fg + '|' + bg;
+    if (!this.dm.has(k)) {
+      this.dm.set(k, this.dxfs.length);
+      this.dxfs.push(`<dxf><font><b/><color rgb="${fg}"/></font><fill><patternFill patternType="solid"><fgColor rgb="${bg}"/><bgColor rgb="${bg}"/></patternFill></fill></dxf>`);
+    }
+    return this.dm.get(k);
+  }
+  xml() {
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><styleSheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+      (this.numFmts.length ? `<numFmts count="${this.numFmts.length}">${this.numFmts.join('')}</numFmts>` : '') +
+      `<fonts count="${this.fonts.length}">${this.fonts.join('')}</fonts>` +
+      `<fills count="${this.fills.length}">${this.fills.join('')}</fills>` +
+      `<borders count="${this.borders.length}">${this.borders.join('')}</borders>` +
+      '<cellStyleXfs count="1"><xf numFmtId="0" fontId="0" fillId="0" borderId="0"/></cellStyleXfs>' +
+      `<cellXfs count="${this.xfs.length}">${this.xfs.join('')}</cellXfs>` +
+      '<cellStyles count="1"><cellStyle name="표준" xfId="0" builtinId="0"/></cellStyles>' +
+      `<dxfs count="${this.dxfs.length}">${this.dxfs.join('')}</dxfs></styleSheet>`;
+  }
+}
+class XSheet {
+  constructor(name) {
+    this.name = name; this.cells = new Map(); this.colW = []; this.rowH = []; this.merges = []; this.land = true;
+    this.fx = 0; this.fy = 0; this.maxR = 0; this.maxC = 0; this.cf = []; this.dv = []; this.paper = 'A4';
+  }
+  cell(r, c) {
+    const k = r * 4096 + c;
+    let x = this.cells.get(k);
+    if (!x) { x = { r, c, v: '', f: null, st: {} }; this.cells.set(k, x); if (r > this.maxR) this.maxR = r; if (c > this.maxC) this.maxC = c; }
+    return x;
+  }
+  put(r, c, v, st, f) {
+    const x = this.cell(r, c);
+    x.v = v == null ? '' : v; x.f = f || null;
+    if (st) x.st = Object.assign({}, x.st, st, { bd: Object.assign({}, x.st.bd, st.bd) });
+    return x;
+  }
+  merge(r1, c1, r2, c2) { this.merges.push(COLN(c1) + (r1 + 1) + ':' + COLN(c2) + (r2 + 1)); }
+  ref(r1, c1, r2, c2) { return COLN(c1) + (r1 + 1) + (r2 == null ? '' : ':' + COLN(c2) + (r2 + 1)); }
+  xml(ST) {
+    let cols = '<cols>';
+    for (let c = 0; c <= this.maxC; c++) cols += `<col min="${c + 1}" max="${c + 1}" width="${this.colW[c] || 8.5}" customWidth="1"/>`;
+    cols += '</cols>';
+    const byRow = new Map();
+    for (const x of this.cells.values()) { if (!byRow.has(x.r)) byRow.set(x.r, []); byRow.get(x.r).push(x); }
+    let sd = '<sheetData>';
+    const rowsN = Math.max(this.maxR, this.rowH.length - 1);
+    for (let r = 0; r <= rowsN; r++) {
+      const list = (byRow.get(r) || []).sort((a, b) => a.c - b.c);
+      const h = this.rowH[r];
+      if (!list.length && !h) continue;
+      sd += `<row r="${r + 1}"${h ? ` ht="${h}" customHeight="1"` : ''}>`;
+      for (const x of list) {
+        const ref = COLN(x.c) + (r + 1), s = ST.xf(x.st);
+        if (x.f) {
+          if (typeof x.v === 'number') sd += `<c r="${ref}" s="${s}"><f>${xesc(x.f)}</f><v>${x.v}</v></c>`;
+          else sd += `<c r="${ref}" s="${s}" t="str"><f>${xesc(x.f)}</f><v>${xesc(x.v)}</v></c>`;
+        } else if (typeof x.v === 'number') sd += `<c r="${ref}" s="${s}"><v>${isFinite(x.v) ? x.v : 0}</v></c>`;
+        else if (x.v === '') sd += `<c r="${ref}" s="${s}"/>`;
+        else sd += `<c r="${ref}" s="${s}" t="inlineStr"><is><t xml:space="preserve">${xesc(x.v)}</t></is></c>`;
+      }
+      sd += '</row>';
+    }
+    sd += '</sheetData>';
+    const mg = this.merges.length ? `<mergeCells count="${this.merges.length}">${this.merges.map(m => `<mergeCell ref="${m}"/>`).join('')}</mergeCells>` : '';
+    let pr = 0;
+    const cf = this.cf.map(c => `<conditionalFormatting sqref="${c.sq}">` + c.rules.map(u =>
+      `<cfRule type="cellIs" dxfId="${ST.dxf(u.fg, u.bg)}" priority="${++pr}" operator="equal"><formula>"${xesc(u.v.replace(/"/g, ''))}"</formula></cfRule>`).join('') + '</conditionalFormatting>').join('');
+    const dv = this.dv.length ? `<dataValidations count="${this.dv.length}">` + this.dv.map(d =>
+      `<dataValidation type="list" allowBlank="1" showInputMessage="1" showErrorMessage="0" sqref="${d.sq}"><formula1>"${xesc(d.list.join(','))}"</formula1></dataValidation>`).join('') + '</dataValidations>' : '';
+    let pane = '<selection activeCell="A1" sqref="A1"/>';
+    if (this.fx || this.fy) {
+      const tl = COLN(this.fx) + (this.fy + 1);
+      const ap = this.fx && this.fy ? 'bottomRight' : this.fy ? 'bottomLeft' : 'topRight';
+      pane = `<pane${this.fx ? ` xSplit="${this.fx}"` : ''}${this.fy ? ` ySplit="${this.fy}"` : ''} topLeftCell="${tl}" activePane="${ap}" state="frozen"/><selection pane="${ap}" activeCell="${tl}" sqref="${tl}"/>`;
+    }
+    return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+      '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+      '<sheetPr><pageSetUpPr fitToPage="1"/></sheetPr>' +
+      `<sheetViews><sheetView workbookViewId="0" showGridLines="0" zoomScale="100">${pane}</sheetView></sheetViews>` +
+      '<sheetFormatPr defaultRowHeight="16.5"/>' + cols + sd + mg + cf + dv +
+      '<printOptions horizontalCentered="1"/>' +
+      '<pageMargins left="0.3" right="0.3" top="0.4" bottom="0.4" header="0.2" footer="0.2"/>' +
+      `<pageSetup paperSize="${this.paper === 'A3' ? 8 : 9}" orientation="${this.land ? 'landscape' : 'portrait'}" fitToWidth="1" fitToHeight="${this.fitH == null ? 1 : this.fitH}"/>` +
+      '</worksheet>';
+  }
+}
+async function xlsxPack(sheets, title, ST) {
+  const f = (name, str) => ({ name, data: te8.encode(str) });
+  const sheetXml = sheets.map(s => s.xml(ST));       /* 스타일 번호를 먼저 다 매긴 뒤 styles.xml 을 쓴다 */
+  const ct = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">' +
+    '<Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/>' +
+    '<Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/>' +
+    sheets.map((s, i) => `<Override PartName="/xl/worksheets/sheet${i + 1}.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/>`).join('') +
+    '<Override PartName="/xl/styles.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.styles+xml"/>' +
+    '<Override PartName="/docProps/core.xml" ContentType="application/vnd.openxmlformats-package.core-properties+xml"/>' +
+    '<Override PartName="/docProps/app.xml" ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/></Types>';
+  const rels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/>' +
+    '<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/>' +
+    '<Relationship Id="rId3" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties" Target="docProps/app.xml"/></Relationships>';
+  const wb = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">' +
+    '<workbookPr/><bookViews><workbookView activeTab="0"/></bookViews><sheets>' +
+    sheets.map((s, i) => `<sheet name="${xesc(s.name)}" sheetId="${i + 1}" r:id="rId${i + 1}"/>`).join('') +
+    '</sheets><calcPr calcId="191029" fullCalcOnLoad="1"/></workbook>';
+  const wbRels = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">' +
+    sheets.map((s, i) => `<Relationship Id="rId${i + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet${i + 1}.xml"/>`).join('') +
+    `<Relationship Id="rId${sheets.length + 1}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/></Relationships>`;
+  const now = new Date().toISOString().replace(/\.\d+Z$/, 'Z');
+  const core = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">' +
+    `<dc:title>${xesc(title)}</dc:title><cp:lastModifiedBy>dictation</cp:lastModifiedBy><dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified></cp:coreProperties>`;
+  const app = '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties"><Application>dictation</Application></Properties>';
+  const files = [f('[Content_Types].xml', ct), f('_rels/.rels', rels), f('docProps/core.xml', core), f('docProps/app.xml', app),
+    f('xl/workbook.xml', wb), f('xl/_rels/workbook.xml.rels', wbRels)];
+  sheetXml.forEach((x, i) => files.push(f(`xl/worksheets/sheet${i + 1}.xml`, x)));
+  files.push(f('xl/styles.xml', ST.xml()));
+  return zipFiles(files, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+}
+
+/* ════════════════════════════════════════════════════════════
+   소리 내어 읽기 — 브라우저 내장 음성 합성(Web Speech API)
+   · 기기에 깔린 한국어 목소리를 쓴다(윈도 Heami·SunHi, 크롬 Google 한국의, 아이폰 Yuna 등)
+   · 안드로이드 앱 안 화면(WebView)에는 이 기능이 없다 → 어른이 읽어 주는 방식으로 돌린다
+   · 「띄어 읽기」는 어절마다 따로 말하고 사이를 쉰다 — 받아쓰기 선생님이 천천히 끊어 불러 주는 것처럼
+   · 아이폰 사파리는 끝 알림(onend)을 가끔 빠뜨려서, 글자 수로 잡은 시간이 지나면 끝난 것으로 본다
+   ════════════════════════════════════════════════════════════ */
+const PUNCT_NAME = { '.': '마침표', ',': '쉼표', '?': '물음표', '!': '느낌표' };
+const TTS = {
+  ok: typeof window !== 'undefined' && !!window.speechSynthesis && typeof SpeechSynthesisUtterance !== 'undefined',
+  voices: [], token: 0, speaking: false,
+  init(onChange) {
+    if (!this.ok) return;
+    const f = () => {
+      const all = speechSynthesis.getVoices() || [];
+      this.voices = all.filter(v => /^ko([-_]|$)/i.test(v.lang || ''));
+      if (onChange) onChange();
+    };
+    f();
+    try { speechSynthesis.addEventListener('voiceschanged', f); } catch (e) { speechSynthesis.onvoiceschanged = f; }
+    /* 크롬은 목록이 늦게 오는 일이 있어 한 번 더 */
+    setTimeout(f, 800); setTimeout(f, 2500);
+  },
+  /* 고른 이름 → 목소리. 안 되는 것으로 밝혀진 목소리(bad)는 건너뛰고,
+     고르지 않았으면 자연스러운 쪽부터 — 윈도 크롬은 기기 목소리(Heami)가 「synthesis-failed」로
+     실패하고 온라인 목소리(Google 한국의)만 되는 PC 가 있다(2026-10 이 도구를 만든 PC 에서 실측) */
+  bad: new Set(),
+  rank(v) {
+    const n = v.name;
+    return /Natural/i.test(n) ? 0 : /Online/i.test(n) ? 1 : /Google/i.test(n) ? 2 : /Yuna|유나/i.test(n) ? 3 : /SunHi|InJoon|Heami/i.test(n) ? 4 : 5;
+  },
+  voice(name) {
+    const vs = this.voices.filter(v => !this.bad.has(v.name));
+    if (!vs.length) return null;
+    return vs.find(v => v.name === name) || vs.slice().sort((a, b) => this.rank(a) - this.rank(b))[0];
+  },
+  stop() {
+    this.token++;
+    this.speaking = false;
+    if (this.ok) { try { speechSynthesis.cancel(); } catch (e) { /* 무시 */ } }
+  },
+  /* 한 덩어리 말하기 → 끝나면 true, 멈췄으면 false.
+     목소리가 「synthesis-failed」를 내면 그 목소리를 빼고 다음 한국어 목소리로 다시 말한다 */
+  async say(text, o, tk) {
+    for (;;) {
+      const r = await this.say1(text, o, tk);
+      if (r !== 'retry') return r;
+    }
+  },
+  say1(text, o, tk) {
+    return new Promise(res => {
+      if (!this.ok || tk !== this.token) { res(false); return; }
+      const u = new SpeechSynthesisUtterance(text);
+      u.lang = 'ko-KR';
+      const v = this.voice(o.voice); if (v) u.voice = v;
+      u.rate = o.rate || 0.85; u.pitch = 1; u.volume = 1;
+      let done = false;
+      const fin = ok => { if (done) return; done = true; clearTimeout(t); res(ok === 'retry' ? ok : ok && tk === this.token); };
+      u.onend = () => fin(true);
+      /* 멈춤(interrupted·canceled)이 아닌 오류는 소리를 못 낸 것 */
+      u.onerror = e => {
+        const er = e && e.error || 'error';
+        if (/interrupted|canceled/.test(er)) { fin(false); return; }
+        if (er === 'synthesis-failed' && v && tk === this.token) {
+          this.bad.add(v.name);
+          if (this.onBad) this.onBad(v.name);
+          if (this.voice(o.voice)) { fin('retry'); return; }
+        }
+        this.lastError = er; fin(false);
+      };
+      const t = setTimeout(() => fin(true), 2500 + Array.from(text).length * 420 / (o.rate || 0.85));
+      try { speechSynthesis.speak(u); } catch (e) { fin(false); }
+    });
+  },
+  wait(ms, tk) { return new Promise(r => setTimeout(() => r(tk === this.token), ms)); },
+  /* 문장 하나를 정해진 방식대로 읽는다
+     o = { rate, repeat(1~3), chunk('off'|'second'|'all'), num(번호 읽기), punct(부호 읽기), voice } */
+  async read(item, no, o, onStep) {
+    this.stop();
+    this.lastError = '';
+    const tk = this.token;
+    this.speaking = true;
+    await this.wait(60, tk);          /* cancel 바로 뒤의 speak 는 크롬에서 묻힐 때가 있다 */
+    const spoken = s => o.punct ? s.replace(/([.,?!])/g, (m, p) => ' ' + PUNCT_NAME[p] + ' ').replace(/\s+/g, ' ').trim() : s;
+    const text = item.t;
+    if (o.num) { if (!await this.say(no + '번.', o, tk)) return false; if (!await this.wait(450, tk)) return false; }
+    for (let r = 0; r < (o.repeat || 1); r++) {
+      if (onStep) onStep(r);
+      const chunk = o.chunk === 'all' || (o.chunk === 'second' && r > 0);
+      if (chunk) {
+        const words = text.split(' ').filter(Boolean);
+        for (let i = 0; i < words.length; i++) {
+          if (!await this.say(spoken(words[i]), o, tk)) return false;
+          if (i < words.length - 1 && !await this.wait(Math.round(650 / (o.rate || 0.85)), tk)) return false;
+        }
+      } else if (!await this.say(spoken(text), o, tk)) return false;
+      if (r < (o.repeat || 1) - 1 && !await this.wait(1100, tk)) return false;
+    }
+    this.speaking = false;
+    return true;
+  }
+};
+
+/* ════════════════════════════════════════════════════════════
+   채점 — 자판으로 쓴 답을 정답과 글자 단위로 맞대어 본다
+   · 편집 거리(바꾸기·빠뜨리기·더 쓰기 1점씩)로 맞춰 줄을 세우고, 틀린 곳을 셋으로 나눈다
+       글자    : 다른 글자를 썼거나 빠뜨렸거나 더 씀
+       띄어쓰기: 띄어야 할 곳을 붙였거나(∨) 붙여야 할 곳을 띄움(⌒)
+       문장 부호: . , ? ! 를 빠뜨리거나 다르게 씀
+   · 띄어쓰기·문장 부호는 끄면 틀린 것으로 세지 않는다(표시는 남긴다)
+   ════════════════════════════════════════════════════════════ */
+const PUNCT = /[.,?!·…~'"]/;
+function normAns(s) {
+  return String(s || '').normalize('NFC')
+    .replace(/[‘’‚′]/g, "'").replace(/[“”„″]/g, '"')
+    .replace(/[．。]/g, '.').replace(/[，、]/g, ',').replace(/？/g, '?').replace(/！/g, '!')
+    .replace(/\.{3}/g, '…').replace(/\s+/g, ' ').trim();
+}
+/* 정답 key 와 답 ans 를 맞춰 줄 세운 목록 [{k, a}] — 한쪽이 없으면 '' */
+function alignChars(key, ans) {
+  const K = Array.from(key), A = Array.from(ans);
+  const n = K.length, m = A.length;
+  const D = new Array((n + 1) * (m + 1));
+  const at = (i, j) => i * (m + 1) + j;
+  for (let i = 0; i <= n; i++) D[at(i, 0)] = i;
+  for (let j = 0; j <= m; j++) D[at(0, j)] = j;
+  for (let i = 1; i <= n; i++) for (let j = 1; j <= m; j++) {
+    const sub = D[at(i - 1, j - 1)] + (K[i - 1] === A[j - 1] ? 0 : 1);
+    D[at(i, j)] = Math.min(sub, D[at(i - 1, j)] + 1, D[at(i, j - 1)] + 1);
+  }
+  const out = [];
+  let i = n, j = m;
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0 && D[at(i, j)] === D[at(i - 1, j - 1)] + (K[i - 1] === A[j - 1] ? 0 : 1)) { out.push({ k: K[i - 1], a: A[j - 1] }); i--; j--; }
+    else if (i > 0 && D[at(i, j)] === D[at(i - 1, j)] + 1) { out.push({ k: K[i - 1], a: '' }); i--; }
+    else { out.push({ k: '', a: A[j - 1] }); j--; }
+  }
+  return out.reverse();
+}
+/* 채점 결과: { ok, letter, space, punct, marks:[정답 글자 순번마다 0 맞음/1 틀림], gaps, view } */
+function gradeTyped(key, ans, opt) {
+  key = normAns(key); ans = normAns(ans);
+  const al = alignChars(key, ans);
+  const r = { letter: 0, space: 0, punct: 0, marks: [], view: [] };
+  let ki = -1;
+  for (const p of al) {
+    if (p.k) ki++;
+    const ks = p.k === ' ', as = p.a === ' ';
+    if (p.k === p.a) { r.view.push({ c: p.k, s: 'ok' }); r.marks[ki] = 0; continue; }
+    /* 띄어쓰기: 정답은 띄었는데 붙였거나, 정답은 붙였는데 띄움 */
+    if ((ks && !p.a) || (as && !p.k)) {
+      r.space++;
+      r.view.push(ks ? { c: ' ', s: 'nosp' } : { c: '', s: 'xsp' });
+      if (p.k) r.marks[ki] = 1;
+      continue;
+    }
+    const kp = p.k && PUNCT.test(p.k), ap = p.a && PUNCT.test(p.a);
+    if ((kp || !p.k) && (ap || !p.a) && (kp || ap)) {
+      r.punct++;
+      r.view.push(p.k ? { c: p.k, s: 'punct', a: p.a } : { c: p.a, s: 'xpunct' });
+      if (p.k) r.marks[ki] = 1;
+      continue;
+    }
+    r.letter++;
+    if (p.k) { r.view.push({ c: p.k, s: p.a ? 'chg' : 'miss', a: p.a }); r.marks[ki] = 1; }
+    else r.view.push({ c: p.a, s: 'extra' });
+  }
+  r.ok = r.letter === 0 && (!opt.space || r.space === 0) && (!opt.punct || r.punct === 0);
+  r.empty = !ans;
+  return r;
+}
+/* 채점 화면에 그릴 HTML — 틀린 글자 빨강, 붙여 쓴 곳 ∨, 띄워 쓴 곳 ⌒ */
+function gradeHTML(view) {
+  return view.map(v => {
+    if (v.s === 'ok') return v.c === ' ' ? ' ' : esc(v.c);
+    if (v.s === 'nosp') return '<i class="gm sp" title="띄어 써야 해요">∨</i>';
+    if (v.s === 'xsp') return '<i class="gm xs" title="붙여 써야 해요">⌒</i>';
+    const tip = v.s === 'miss' ? '빠뜨렸어요' : v.s === 'extra' ? '더 썼어요' : v.a ? '「' + v.a + '」라고 썼어요' : '';
+    return '<b class="gm ' + v.s + '" title="' + esc(tip) + '">' + esc(v.c) + '</b>';
+  }).join('');
+}
+/* 틀린 곳 요약 한 줄 */
+function gradeNote(r, opt) {
+  const a = [];
+  if (r.empty) return '답을 쓰지 않았어요';
+  if (r.letter) a.push('글자 ' + r.letter);
+  if (r.space) a.push('띄어쓰기 ' + r.space + (opt.space ? '' : ' (봐줌)'));
+  if (r.punct) a.push('문장 부호 ' + r.punct + (opt.punct ? '' : ' (봐줌)'));
+  return a.length ? a.join(' · ') : '정답';
+}
+/* 점수 — 문제 수로 나눈 100점 만점(소수는 반올림) */
+const scoreOf = (ok, n) => n ? Math.round(ok / n * 100) : 0;
+
+/* ════════════════════════════════════════════════════════════
+   인쇄물 — A4 세로, 쪽마다 그리기 목록(ops)
+     sheet  시험지   번호 + 칸 공책(문장마다 같은 줄 수 — 길이로 답을 짐작하지 못하게)
+     key    정답지   시험지와 같은 칸에 정답 글자, 띄어 쓴 칸에는 ∨
+     trace  따라쓰기 흐린 글자 줄 + 빈 줄
+     list   급수표   급마다 문장 목록, 두 단으로
+     wrong  오답 노트 틀린 문장(틀린 글자 빨강) + 내가 쓴 답 + 따라 쓰는 줄
+   칸 공책 규칙: 한 글자 한 칸, 띄어쓰기도 한 칸, 줄 맨 앞에는 빈칸을 두지 않는다(원고지와 같다)
+   ════════════════════════════════════════════════════════════ */
+const MM = 72 / 25.4;
+const A4W = 595.28, A4H = 841.89;
+const PM = 14 * MM;                          /* 바깥 여백 */
+const CELL_MM = { L: 13, M: 11, S: 9 };
+const INK = '#1B232C', SUB = '#5F6B76', GRID = '#9AA6B2', GUIDE = '#D5DCE3', TRACE = '#B9C2CC', BLUE = '#1F5FD6', RED = '#D23B3B';
+const T = (pg, x, y, s, z, b, c) => { if (s !== '' && s != null) pg.ops.push({ o: 't', x, y, s: String(s), z, b: !!b, c: c || INK }); };
+const L = (pg, x1, y1, x2, y2, w, c, d) => pg.ops.push({ o: 'l', x1, y1, x2, y2, w, c: c || INK, d });
+const R = (pg, x, y, w, h, f, s, lw, rr) => pg.ops.push({ o: 'r', x, y, w, h, f, s, lw: lw || 0.6, rr });
+const C = (pg, x, y, r, f, s, lw) => pg.ops.push({ o: 'c', x, y, r, f, s, lw: lw || 0.6 });
+const newPage = () => ({ W: A4W, H: A4H, ops: [] });
+/* 가운데 맞춤 글자 */
+function TC(pg, cx, y, s, z, b, c) { T(pg, cx - textW(s, z, b) / 2, y, s, z, b, c); }
+
+/* 문장 → 칸 줄들. 줄 맨 앞 빈칸은 버린다 */
+function cellLines(text, cpl) {
+  const lines = [[]];
+  for (const ch of Array.from(normAns(text))) {
+    let cur = lines[lines.length - 1];
+    if (cur.length >= cpl) { cur = []; lines.push(cur); }
+    if (!cur.length && ch === ' ') continue;
+    cur.push(ch);
+  }
+  return lines;
+}
+function geom(o) {
+  const cs = (CELL_MM[o.cell] || CELL_MM.M) * MM;
+  const numW = 10 * MM;
+  const cpl = Math.floor((A4W - 2 * PM - numW) / cs);
+  const x0 = PM + numW + (A4W - 2 * PM - numW - cpl * cs) / 2;
+  return { cs, numW, cpl, x0 };
+}
+/* 칸 한 줄(빈 칸). guide 면 가운데 점선 십자 */
+function drawCells(pg, x0, y, n, cs, guide) {
+  if (guide) {
+    for (let i = 0; i < n; i++) {
+      const x = x0 + i * cs;
+      L(pg, x + cs / 2, y + 1.2, x + cs / 2, y + cs - 1.2, 0.35, GUIDE, [1.4, 1.6]);
+      L(pg, x + 1.2, y + cs / 2, x + cs - 1.2, y + cs / 2, 0.35, GUIDE, [1.4, 1.6]);
+    }
+  }
+  R(pg, x0, y, n * cs, cs, null, GRID, 0.8);
+  for (let i = 1; i < n; i++) L(pg, x0 + i * cs, y, x0 + i * cs, y + cs, 0.5, GRID);
+}
+/* 칸 안의 글자 하나 — 가운데에. 빈칸이면 sp 표시(∨) */
+function cellChar(pg, x, y, cs, ch, c, spMark) {
+  if (ch === ' ') { if (spMark) TC(pg, x + cs / 2, y + cs * 0.82, '∨', cs * 0.34, false, spMark); return; }
+  const z = cs * 0.64;
+  TC(pg, x + cs / 2, y + cs / 2 + z * 0.36, ch, z, false, c);
+}
+/* 쪽 머리: 제목 · 부제 · 이름/날짜 · 점수 동그라미 */
+function pageHead(pg, o, title, sub, opts) {
+  const y = PM + 2;
+  T(pg, PM, y + 18, title, 20, true);
+  if (sub) { const f = fitText(sub, A4W - 2 * PM - 230, 10.5, false, 8); T(pg, PM, y + 36, f.s, f.z, false, SUB); }
+  let rx = A4W - PM;
+  if (opts.score) {
+    C(pg, rx - 25, y + 21, 22, null, RED, 1.1);
+    T(pg, rx - 13, y + 36, '점', 8, false, RED);
+    rx -= 58;
+  }
+  if (opts.name) {
+    const w = 128;
+    T(pg, rx - w, y + 16, '이름', 9.5, false, SUB);
+    L(pg, rx - w + 24, y + 18, rx, y + 18, 0.6, GRID);
+    if (o.who) { const f = fitText(o.who, w - 30, 11, false, 8); T(pg, rx - w + 28, y + 15, f.s, f.z); }
+    T(pg, rx - w, y + 36, '날짜', 9.5, false, SUB);
+    L(pg, rx - w + 24, y + 38, rx, y + 38, 0.6, GRID);
+    T(pg, rx - w + 34, y + 35, '월', 9, false, GRID); T(pg, rx - w + 74, y + 35, '일', 9, false, GRID);
+  }
+  L(pg, PM, y + 48, A4W - PM, y + 48, 1, INK);
+  return y + 48 + 8 * MM;
+}
+function pageFoot(pg, i, n, label) {
+  const s = label + (n > 1 ? '  ·  ' + (i + 1) + ' / ' + n : '');
+  TC(pg, A4W / 2, A4H - 8 * MM, s, 7.5, false, GRID);
+}
+function numBadge(pg, x, y, cs, no) {
+  const r = Math.min(cs * 0.36, 4.4 * MM);
+  C(pg, x + 4.6 * MM, y + cs / 2, r, null, SUB, 0.7);
+  TC(pg, x + 4.6 * MM, y + cs / 2 + r * 0.42, String(no), r * 1.15, true, SUB);
+}
+/* 문항들을 쪽에 나눠 담는다 — 문항마다 높이 h(i) 와 그리기 draw(pg, i, y) */
+function flow(items, head, h, draw, gap) {
+  const pages = [];
+  let pg = null, y = 0;
+  items.forEach((it, i) => {
+    const hh = h(i);
+    if (!pg || y + hh > A4H - PM - 8 * MM) { pg = newPage(); pages.push(pg); y = head(pg, pages.length - 1); }
+    draw(pg, i, y);
+    y += hh + gap;
+  });
+  if (!pages.length) { pg = newPage(); head(pg, 0); pages.push(pg); }
+  return pages;
+}
+
+/* ── 시험지 · 정답지 ── */
+function sheetPages(G, o, withKey) {
+  const g = geom(o);
+  const lines = G.items.map(it => cellLines(it.t, g.cpl));
+  const nL = Math.max(1, Math.min(4, Math.max.apply(null, lines.map(l => l.length))));
+  const lg = 2.2 * MM;
+  const title = withKey ? '받아쓰기 정답' : '받아쓰기';
+  const pages = flow(G.items,
+    (pg) => pageHead(pg, o, title, G.title, { name: !withKey && o.nameBox, score: !withKey && o.nameBox }),
+    () => nL * g.cs + (nL - 1) * lg,
+    (pg, i, y) => {
+      numBadge(pg, PM, y, g.cs, i + 1);
+      for (let l = 0; l < nL; l++) {
+        const yy = y + l * (g.cs + lg);
+        drawCells(pg, g.x0, yy, g.cpl, g.cs, o.guide);
+        if (withKey && lines[i][l]) lines[i][l].forEach((ch, k) => cellChar(pg, g.x0 + k * g.cs, yy, g.cs, ch, BLUE, RED));
+      }
+    }, 5.5 * MM);
+  pages.forEach((p, i) => pageFoot(p, i, pages.length, withKey ? '정답지 — 띄어 쓰는 칸은 ∨' : '한 칸에 한 글자, 띄어쓰기도 한 칸'));
+  return pages;
+}
+
+/* ── 따라쓰기 ── */
+function tracePages(G, o) {
+  const g = geom(o);
+  const lines = G.items.map(it => cellLines(it.t, g.cpl));
+  const lg = 1.6 * MM;
+  const blank = o.blank || 1;
+  const pages = flow(G.items,
+    (pg) => pageHead(pg, o, '받아쓰기 따라쓰기', G.title, { name: o.nameBox, score: false }),
+    i => { const n = lines[i].length * (1 + blank); return n * g.cs + (n - 1) * lg; },
+    (pg, i, y) => {
+      numBadge(pg, PM, y, g.cs, i + 1);
+      let yy = y;
+      lines[i].forEach(ln => {
+        drawCells(pg, g.x0, yy, g.cpl, g.cs, o.guide);
+        ln.forEach((ch, k) => cellChar(pg, g.x0 + k * g.cs, yy, g.cs, ch, TRACE, o.spMark ? '#E7A3A3' : null));
+        yy += g.cs + lg;
+      });
+      for (let b = 0; b < blank; b++) lines[i].forEach(() => { drawCells(pg, g.x0, yy, g.cpl, g.cs, o.guide); yy += g.cs + lg; });
+    }, 4.5 * MM);
+  pages.forEach((p, i) => pageFoot(p, i, pages.length, '흐린 글자를 따라 쓰고, 아래 칸에 혼자 써 보세요'));
+  return pages;
+}
+
+/* ── 급수표 (두 단) ── */
+function listPages(groups, o, title) {
+  const colGap = 8 * MM;
+  const colW = (A4W - 2 * PM - colGap) / 2;
+  const rowH = 17.5, headH = 24, tailH = 18;
+  const pages = [];
+  let pg = null, col = 0, y = 0, top = 0;
+  const startPage = () => {
+    pg = newPage(); pages.push(pg);
+    top = pageHead(pg, o, '받아쓰기 급수표', title, { name: o.nameBox, score: false });
+    col = 0; y = top;
+  };
+  startPage();
+  for (const G of groups) {
+    const need = headH + G.items.length * rowH + tailH + 6 * MM;
+    if (y + need > A4H - PM - 8 * MM && y > top) {
+      if (col === 0) { col = 1; y = top; } else startPage();
+    }
+    const x = PM + col * (colW + colGap);
+    R(pg, x, y, colW, headH - 4, '#EEF3FB', null, 0.6, 4);
+    const hd = G.name + (G.sub ? '  ·  ' + G.sub : '');
+    const f = fitText(hd, colW - 14, 11, true, 8);
+    T(pg, x + 7, y + 14.5, f.s, f.z, true, '#1B3F8A');
+    y += headH;
+    G.items.forEach((it, i) => {
+      const no = (i + 1) + '.';
+      T(pg, x + 4, y + 12, no, 10, false, SUB);
+      const ft = fitText(it.t, colW - 24, 11.5, false, 8);
+      T(pg, x + 22, y + 12, ft.s, ft.z);
+      L(pg, x, y + rowH - 1.5, x + colW, y + rowH - 1.5, 0.35, '#E2E8EE');
+      y += rowH;
+    });
+    T(pg, x + 4, y + 12, '시험 본 날', 8.5, false, GRID);
+    L(pg, x + 48, y + 13, x + colW * 0.52, y + 13, 0.5, GRID);
+    T(pg, x + colW * 0.56, y + 12, '점수', 8.5, false, GRID);
+    L(pg, x + colW * 0.56 + 24, y + 13, x + colW - 4, y + 13, 0.5, GRID);
+    y += tailH + 6 * MM;
+  }
+  pages.forEach((p, i) => pageFoot(p, i, pages.length, '받아쓰기 급수표'));
+  return pages;
+}
+
+/* ── 오답 노트 ── */
+function wrongPages(W, o) {
+  const g = geom(o);
+  const lg = 1.6 * MM;
+  const pages = flow(W.items,
+    (pg) => pageHead(pg, o, '받아쓰기 오답 노트', W.title, { name: o.nameBox, score: false }),
+    i => {
+      const n = cellLines(W.items[i].t, g.cpl).length;
+      return 34 + (W.items[i].a ? 14 : 0) + n * 2 * (g.cs + lg);
+    },
+    (pg, i, y) => {
+      const it = W.items[i];
+      C(pg, PM + 4.6 * MM, y + 9, 4.2 * MM, null, RED, 0.8);
+      TC(pg, PM + 4.6 * MM, y + 13, String(it.no || i + 1), 10, true, RED);
+      /* 정답 문장 — 틀린 글자는 빨강 */
+      let x = g.x0;
+      const chars = Array.from(normAns(it.t));
+      const z = Math.min(15, (A4W - PM - g.x0 - 2) / Math.max(1, textW(chars.join(''), 1, true)));
+      let run = '', runC = null, runX = x;
+      const flush = () => { if (run) T(pg, runX, y + 15, run, z, true, runC); run = ''; };
+      chars.forEach((ch, k) => {
+        if (ch === ' ' && it.marks && it.marks[k]) {          /* 붙여 써서 틀린 자리는 ∨ 로 */
+          flush(); runC = null;
+          const sw = adv(fkey(true), ' ') * z;
+          TC(pg, x + sw / 2, y + 12, '∨', z * 0.62, true, RED);
+          x += sw; return;
+        }
+        const c = it.marks && it.marks[k] ? RED : INK;
+        if (c !== runC) { flush(); runC = c; runX = x; }
+        run += ch; x += adv(fkey(true), ch) * z;
+      });
+      flush();
+      let yy = y + 26;
+      if (it.a) {
+        const f = fitText('내가 쓴 답:  ' + it.a, A4W - PM - g.x0, 9.5, false, 7.5);
+        T(pg, g.x0, yy + 2, f.s, f.z, false, SUB);
+        yy += 14;
+      }
+      yy += 8;
+      const ls = cellLines(it.t, g.cpl);
+      ls.forEach(ln => { drawCells(pg, g.x0, yy, g.cpl, g.cs, o.guide); ln.forEach((ch, k) => cellChar(pg, g.x0 + k * g.cs, yy, g.cs, ch, TRACE, '#E7A3A3')); yy += g.cs + lg; });
+      ls.forEach(() => { drawCells(pg, g.x0, yy, g.cpl, g.cs, o.guide); yy += g.cs + lg; });
+    }, 6 * MM);
+  pages.forEach((p, i) => pageFoot(p, i, pages.length, '빨간 글자가 틀렸던 곳이에요 — 따라 쓰고 혼자 한 번 더'));
+  return pages;
+}
+
+/* ════════════════════════════════════════════════════════════
+   인앱 브라우저 (네이버·카카오톡 앱 안에서 열었을 때)
+
+   앱 안 화면은 OS 가 주는 WebView 인데 내려받기 기능이 없다. blob: 주소를 넘기면
+   아무 일도 일어나지 않고 끝난다(카카오 공식 안내: a[download] 는 안드로이드만,
+   iOS 는 data: 주소 방식). 서버가 없는 도구라 응답 헤더로 내려줄 수도 없다.
+     ① 저장은 blob: 대신 data: 주소로 시도한다
+     ② 시작하기 전에 창을 띄워 브라우저를 옮기게 한다 — 다 쓰고 나서 옮기면
+        내용을 다시 써야 한다(내용은 그 탭에만 보관)
+     ③ 아이폰은 사파리를 강제로 열 수 없어 주소 복사 + 메뉴 안내로 간다
+   ════════════════════════════════════════════════════════════ */
+const UA = navigator.userAgent || '';
+const IA = {
+  naver: /NAVER\(inapp/i.test(UA),
+  kakao: /KAKAOTALK/i.test(UA),
+  line: /\bLine\//i.test(UA),
+  ios: /iPhone|iPad|iPod/i.test(UA),
+  android: /Android/i.test(UA)
+};
+IA.on = IA.naver || IA.kakao || IA.line ||
+  /Instagram|FBAN|FBAV|FB_IAB|DaumApps|everytimeApp|band\/|KAKAOSTORY/i.test(UA) ||
+  (IA.android && /;\s*wv\)/i.test(UA));   /* 안드로이드 WebView 표시 */
+
+/* 다른 브라우저로 넘기기. 앱마다 길이 달라 순서대로 고른다 */
+function externalUrl() {
+  const url = location.href;
+  if (IA.kakao) return 'kakaotalk://web/openExternal?url=' + encodeURIComponent(url);
+  if (IA.line) return url + (url.indexOf('?') >= 0 ? '&' : '?') + 'openExternalBrowser=1';
+  /* 안드로이드는 크롬을 직접 연다. 크롬이 없으면 fallback 주소로 되돌아온다 */
+  if (IA.android) return 'intent://' + url.replace(/^https?:\/\//i, '') +
+    '#Intent;scheme=https;package=com.android.chrome;S.browser_fallback_url=' + encodeURIComponent(url) + ';end';
+  return '';          /* 아이폰은 사파리를 강제로 열 수 없다 */
+}
+function copyAddr(guide) {
+  const url = location.href;
+  const done = () => toast(guide ? '주소를 복사했습니다. 사파리를 열고 붙여 넣거나, 오른쪽 아래 메뉴에서 「다른 브라우저로 열기」를 누르세요.' : '주소를 복사했습니다.', 5200);
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(url).then(done, () => fallbackCopy(url, done)); return; }
+  } catch (e) { /* 아래로 */ }
+  fallbackCopy(url, done);
+}
+function fallbackCopy(text, done) {
+  const t = document.createElement('textarea');
+  t.value = text; t.setAttribute('readonly', ''); t.style.cssText = 'position:fixed;left:-9999px;top:0';
+  document.body.appendChild(t); t.select(); t.setSelectionRange(0, text.length);
+  try { document.execCommand('copy'); done(); } catch (e) { toast('주소를 길게 눌러 복사해 주세요.', 4200); }
+  t.remove();
+}
+/* 앱 안에서는 blob: 이 통하지 않아 data: 주소로 바꿔 넘긴다.
+   data: 는 문자열이라 너무 크면 앱이 통째로 거부한다 — 시험지 PDF 는 수백 KB 남짓이지만 이미지 저장은 커질 수 있어 상한을 둔다 */
+function downloadInApp(blob, name) {
+  const how = () => '위쪽 「' + $('iaGo').textContent + '」를 눌러 주세요.';
+  if (blob.size > 10 * 1024 * 1024) { toast('앱 안에서는 10MB가 넘는 파일을 저장할 수 없습니다. ' + how(), 5600); return; }
+  const go = href => {
+    const a = document.createElement('a');
+    a.href = href; a.download = name; a.rel = 'noopener';
+    document.body.appendChild(a); a.click(); a.remove();
+  };
+  const fr = new FileReader();
+  fr.onload = () => { try { go(fr.result); } catch (e) { /* 안내로 넘어간다 */ } };
+  fr.onerror = () => toast('앱 안에서는 저장이 막혀 있습니다. ' + how(), 5200);
+  fr.readAsDataURL(blob);
+}
+/* 앱 안에서 열렸을 때.
+   안드로이드 앱 안 화면(WebView)에는 소리 내어 읽기가 없다 — 받아쓰기의 핵심이라 처음부터 창을 띄워 옮기게 한다.
+   아이폰 앱 안 화면은 소리는 나므로 띠만 띄우고, 저장은 data: 주소로 시도한다 */
+function initInApp() {
+  if (!IA.on) return;
+  const app = IA.naver ? '네이버 앱' : IA.kakao ? '카카오톡' : IA.line ? '라인' : '앱';
+  const copyOnly = IA.ios && !IA.kakao && !IA.line;   /* 아이폰은 사파리를 강제로 열 수 없다 */
+  /* 카카오·라인은 앱의 자체 통로(kakaotalk:// · openExternalBrowser)로 기본 브라우저가 열린다.
+     크롬을 콕 집어 여는 것은 안드로이드 intent:// 뿐이라 단추 문구와 순서를 나눈다 */
+  const chromeIntent = IA.android && !IA.kakao && !IA.line;
+  const mute = !TTS.ok;
+
+  document.body.classList.add('inapp');
+  $('iaMsg').textContent = app + ' 안에서는 ' + (mute ? '소리 내어 읽기와 ' : '') + '파일 저장이 안 됩니다.';
+  $('doneInapp').classList.remove('hide');
+
+  $('iaTitle').textContent = mute ? '앱 안에서는 소리가 나지 않습니다' : '앱 안에서는 파일이 저장되지 않습니다';
+  $('iaDesc').innerHTML = '<b>' + app + '</b> 안에서 열렸습니다. 이 화면에서는 ' +
+    (mute ? '<b>문장을 소리로 불러 줄 수 없고</b>, 시험지·오답 노트 PDF도 저장되지 않습니다. ' : '<b>PDF·엑셀·이미지가 저장되지 않습니다.</b> ') +
+    '<b>크롬·사파리</b>로 옮기면 모두 됩니다.';
+  const steps = copyOnly
+    ? ['아래 <b>주소 복사</b>를 누르세요.',
+       '오른쪽 아래 <b>메뉴</b>에서 「다른 브라우저로 열기」를 누르거나, <b>사파리</b> 주소창에 붙여 넣으세요.']
+    : chromeIntent
+      ? ['아래 <b>크롬에서 열기</b>를 누르세요.',
+         '크롬이 없으면 오른쪽 위 <b>메뉴</b>에서 「다른 브라우저로 열기」를 누르세요.']
+      : ['아래 <b>다른 브라우저로 열기</b>를 누르세요.',
+         '열리지 않으면 ' + (IA.ios ? '화면의' : '오른쪽 위') + ' <b>메뉴</b>에서 「다른 브라우저로 열기」를 누르세요.'];
+  $('iaSteps').innerHTML = steps.map(s => '<li>' + s + '</li>').join('');
+  const label = copyOnly ? '주소 복사' : chromeIntent ? '크롬에서 열기' : '다른 브라우저로 열기';
+  $('iaGo').textContent = label;
+  $('iaGo2').textContent = label;
+  $('doneGo').textContent = label;
+  $('iaStay').textContent = mute ? '어른이 직접 읽어 줄게요 · 여기서 할게요' : '저장은 안 해도 돼요 · 여기서 할게요';
+  $('iaSub').textContent = copyOnly
+    ? '사파리에 붙여 넣거나, 오른쪽 아래 메뉴에서 「다른 브라우저로 열기」를 누르세요.'
+    : '크롬이나 사파리로 옮기면 됩니다.';
+
+  /* 윗머리 띠를 ✕ 로 닫았으면 새로 고쳐도 띠는 다시 띄우지 않는다(막는 창은 열 때마다 뜬다) */
+  let hidden = false;
+  try { hidden = sessionStorage.getItem('dictation.iahide') === '1'; } catch (e) { /* 무시 */ }
+  if (hidden) document.body.classList.remove('inapp');
+  if (mute) lockInApp(true);
+}
+/* 창이 떠 있는 동안에는 뒤쪽 입력칸을 아예 만지지 못하게 한다 */
+function lockInApp(on) {
+  document.body.classList.toggle('ia-lock', on);
+  const w = document.querySelector('.wrap');
+  if (on) w.setAttribute('inert', ''); else w.removeAttribute('inert');
+  if (!on) $('iaModal').blur();
+}
+/* 아이폰에서 주소를 복사했으면 창 안에서 바로 알려 준다 — 토스트는 창 위에 잠깐 떴다 사라진다 */
+function iaCopied() {
+  $('iaDesc').innerHTML = '주소를 <b>복사했습니다.</b> 이제 <b>사파리</b>를 열고 주소창에 붙여 넣으세요.';
+  $('iaSteps').innerHTML = '<li>홈 화면에서 <b>사파리</b>를 엽니다.</li>' +
+    '<li>주소창을 길게 눌러 <b>붙여넣기</b> 하세요.</li>' +
+    '<li>또는 이 화면 오른쪽 아래 <b>메뉴</b> → 「다른 브라우저로 열기」.</li>';
+}
+
+/* ════════════════════════════════════════════════════════════
+   광고 (카카오 애드핏) — 자리는 여기 한 곳에서만 만든다
+   · 한 화면 4곳까지 (애드핏 운영정책: 한 페이지 4개 초과 게재 금지)
+     모바일 ① 맨 위 320×50 ② 본문 320×100 ③ 저장 완료 카드 300×250 ④ 하단 오버형 320×50
+     PC     ① 맨 위 320×50 ② 옆 칸 맨 위 320×50 ③ 옆 칸 맨 아래 320×100 ④ 저장 완료 카드 300×250
+     (이 도구에서는 「옆 칸 맨 아래」가 받아쓰기 기록 카드 밑이다)
+   · ins 는 자리마다 미리 만들어 두고 ba.min.js 는 맨 끝에 한 번만 부른다 —
+     애드핏 로더는 자기가 뜰 때 있는 ins 만 읽어서, 뒤늦게 넣은 ins 는 빈 채로 남는다
+   · 문제를 고르거나 불러 주기·채점·미리보기·저장 중에는 오버형을 내려 둔다(핵심 행동 중 광고 노출 금지 · 단추 옆 오클릭 방지)
+   · 저장 완료 광고는 창으로 덮지 않고 본문에 카드로 펼친다(「콘텐츠를 덮거나 가리는 영역에 광고 배치 금지」)
+   · 앱 안에서 막는 창이 떠 있으면 광고를 부르지 않는다
+   ※ 단위 ID 는 애드핏에서 크기별로 따로 발급받아 아래 units 에만 적으면 된다.
+     DAN-XXXX… 로 남아 있는 자리는 점선 자리표시자만 그리고 요청은 보내지 않는다.
+     같은 ID 를 한 화면에 함께 뜨는 두 자리에 쓰면 두 번 노출되어 정책 위반이다. */
+const AD = {
+  /* 애드핏 배너 크기는 160×600 · 250×250 · 300×250 · 320×100 · 320×50 · 728×90 뿐인데,
+     이 도구는 그중 휴대폰에서도 들어가는 320×50 · 320×100 · 300×250 만 쓴다 */
+  units: {
+    top:     { id: 'DAN-XXXXXXXXXXXXXXXX', w: 320, h: 50 },   /* 맨 위 · 모바일과 PC 크기가 같아 하나로 겸한다 */
+    side_pc: { id: 'DAN-XXXXXXXXXXXXXXXX', w: 320, h: 50 },   /* PC 옆 칸 맨 위(미리보기 위) */
+    mid:     { id: 'DAN-XXXXXXXXXXXXXXXX', w: 320, h: 100 },  /* PC 옆 칸 맨 아래 / 휴대폰 본문 — 한 곳에만 뜨니 하나로 쓴다 */
+    done:    { id: 'DAN-XXXXXXXXXXXXXXXX', w: 300, h: 250 },  /* 저장 완료 카드 */
+    anchor:  { id: 'DAN-XXXXXXXXXXXXXXXX', w: 320, h: 50 }    /* 모바일 하단 오버형 */
+  },
+  iframeOk: true,   /* iframe 안에서도 띄운다(다른 도구들과 같게). 끄려면 false */
+  popup: true,      /* 저장 완료 카드 */
+  overlay: true,    /* 하단 오버형 */
+  init() {
+    if (this.started) return;
+    this.started = true;
+    this.off = window.top !== window.self && !this.iframeOk;
+    this.pc = window.matchMedia('(min-width:980px)').matches;
+    if (this.off) { document.body.classList.add('no-ad'); return; }  /* 빈 자리가 남지 않게 접는다 */
+    this.put($('ad-top'), 'top');
+    if (this.pc) this.put($('ad-side'), 'side_pc');
+    /* 320×100 은 PC 면 옆 칸 맨 아래, 휴대폰이면 본문 — 한 곳에만 넣어 단위 하나로 겸한다 */
+    this.put(this.pc ? $('ad-mid-pc') : $('ad-mid'), 'mid');
+    /* 숨어 있는 자리(하단 오버형·저장 완료 카드)는 화면에 나온 다음에 부른다 —
+       안 보이는 동안 부르면 보는 사람 없이 노출만 잡히고, 애드핏도 「노출수를 인위적으로 늘리는 수단」을 금지한다 */
+    this.load();
+  },
+  /* 자리에 ins 를 만들어 둔다. 단위 ID 를 아직 안 넣었으면 점선 자리만 그리고 요청은 보내지 않는다.
+     높이는 min-height 로 — 내려온 광고가 적어 놓은 높이보다 길어도 잘리지 않게 */
+  put(box, key, preload) {
+    const u = this.units[key];
+    if (!box || !u || box.dataset.ad) return;
+    if (document.querySelectorAll('ins.kakao_ad_area').length >= 4) return;
+    box.dataset.ad = key;
+    box.style.width = u.w + 'px';
+    if (/XXXX/.test(u.id)) { box.style.height = u.h + 'px'; box.innerHTML = '<div class="ad-ph">광고 ' + u.w + ' × ' + u.h + '</div>'; return; }
+    box.style.minHeight = u.h + 'px';
+    /* 광고가 안 내려오면 빈 칸이 남는다 — 공식 콜백으로 접는다. 단위가 여럿이면 이름이 서로 달라야 한다 */
+    const fail = 'adNone_' + key;
+    window[fail] = () => {
+      box.classList.add('ad-none');
+      if (key === 'anchor') { this.closed = true; this.sync(); }
+      if (key === 'done') { const w = $('doneAd'); if (w) w.classList.add('ad-none'); }
+    };
+    const ins = document.createElement('ins');
+    ins.className = 'kakao_ad_area'; ins.style.display = 'none';
+    ins.setAttribute('data-ad-unit', u.id);
+    ins.setAttribute('data-ad-width', String(u.w));
+    ins.setAttribute('data-ad-height', String(u.h));
+    ins.setAttribute('data-ad-onfail', fail);
+    /* preload 를 켜면 애드핏이 「보이는 자리인가」 검사를 건너뛰고 0.7초마다 도는
+       preload 차례에 그려 넣는다 — 방금 펼친 자리를 바로 채우려고 쓴다 */
+    if (preload) ins.setAttribute('data-ad-preload', 'Y');
+    box.appendChild(ins);
+    this.need = true;
+  },
+  /* 숨어 있던 자리를 화면에 내놓은 뒤에 부른다. 기다리지 않게 render 도 한 번 찔러 준다 */
+  show(box, key) {
+    if (this.off || !this.started || !box || box.dataset.ad) return;
+    this.put(box, key, true);
+    this.load();
+    try {
+      const ins = box.querySelector('ins');
+      if (ins && window.adfit && typeof window.adfit.render === 'function') window.adfit.render(ins);
+    } catch (e) { /* 안 되면 0.7초 뒤 preload 차례가 채운다 */ }
+  },
+  load() {
+    if (!this.need || this.loaded) return;
+    this.loaded = true;
+    const s = document.createElement('script');
+    s.type = 'text/javascript'; s.async = true;
+    s.src = 'https://t1.kakaocdn.net/kas/static/ba.min.js';
+    document.body.appendChild(s);
+  },
+  onScreen(el) {
+    if (!el || el.classList.contains('hide')) return false;
+    const r = el.getBoundingClientRect();
+    return r.height > 0 && r.bottom > 0 && r.top < window.innerHeight;
+  },
+  /* 하단 오버형 — 아래쪽 안내 글(쓰는 법·자주 묻는 것·주의)을 읽는 구간에서만 올라온다.
+     문제·불러 주기·채점 카드, 미리보기·완료 카드 가운데 하나라도 화면에 보이면 내린다 */
+  sync(barOn) {
+    if (this.off || this.pc || !this.overlay || !this.started) return;
+    const modal = document.body.classList.contains('ia-lock');
+    const ae = document.activeElement;
+    const typing = !!(ae && ae.closest && (ae.closest('#form') || ae.closest('#side')) &&
+      (/^(SELECT|TEXTAREA)$/.test(ae.tagName) || (ae.tagName === 'INPUT' && !/^(checkbox|radio|button|file|range|color)$/.test(ae.type))));
+    const working = WORK_CARDS.some(id => this.onScreen($(id)));
+    const show = !this.closed && !barOn && !modal && !typing && !working && window.scrollY > 320;
+    const was = document.body.classList.contains('anch');
+    const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+    $('anchor').classList.toggle('on', show);
+    document.body.classList.toggle('anch', show);
+    /* 이미 맨 아래였으면 늘어난 여백만큼 다시 내려 마지막 줄이 바에 가리지 않게 */
+    if (show && !was && atBottom) window.scrollTo(0, document.documentElement.scrollHeight);
+    if (show) this.show($('ad-anchor'), 'anchor');
+  },
+  /* 저장이 끝나면 미리보기 밑(PC 는 옆 칸)에 결과 카드를 펼치고 그쪽을 보여 준다 — 창으로 덮지 않는다 */
+  done(msg, steps) {
+    if (!this.popup) { toast(msg, 3200); return; }
+    $('doneMsg').textContent = msg;
+    $('doneSteps').innerHTML = (steps || []).map(x => '<li>' + x + '</li>').join('');
+    $('doneCard').classList.remove('hide');
+    if (!this.off) this.show($('ad-done'), 'done');
+    clearTimeout(this.goT);
+    this.goT = setTimeout(() => {
+      $('doneCard').scrollIntoView({ behavior: 'smooth', block: this.pc ? 'nearest' : 'center' });
+      updateMbar();
+    }, 250);
+  },
+  hideDone() { $('doneCard').classList.add('hide'); updateMbar(); }
+};
+/* 휴대폰 아래 막대 — 입력 카드를 지나 미리보기가 화면 아래에 있을 때만 「저장」으로 바로 가는 막대를 띄운다 */
+function updateMbar() {
+  const r = $('pvCard').getBoundingClientRect();
+  const on = $('form').getBoundingClientRect().top < -40 && r.top > window.innerHeight;
+  $('mbar').classList.toggle('on', on);
+  AD.sync(on);
+}
+
+/* ════════════════════════════════════════════════════════════
+   화면
+   ════════════════════════════════════════════════════════════ */
+const SKEY = 'dictation.v1', MKEY = 'dictation.mine.v1', HKEY = 'dictation.hist.v1';
+const WORK_CARDS = ['cSet', 'cPlay', 'cGrade', 'pvCard', 'doneCard'];
+const DEF = {
+  src: 'base', grade: '1', baseId: 'g1a', mine: 0, mineG: 0,
+  mode: 'note', rate: '0.85', repeat: '2', chunk: 'second', auto: '0',
+  num: true, punct: false, shuffle: false, self: false, voice: '',
+  space: true, punctG: true,
+  doc: 'sheet', cell: 'M', guide: true, nameBox: true, spMark: true, blank2: false, allGroups: false, who: ''
+};
+const CHK = { optNum: 'num', optPunct: 'punct', optShuffle: 'shuffle', optSelf: 'self', optSpace: 'space', optPunctG: 'punctG',
+  optGuide: 'guide', optNameBox: 'nameBox', optSpMark: 'spMark', optBlank2: 'blank2', optAllGroups: 'allGroups' };
+let S = null, MINE = [], HIST = [], RUN = null, LAY = { pages: [] };
+
+const lsGet = (k, d) => { try { const t = localStorage.getItem(k); return t ? JSON.parse(t) : d; } catch (e) { return d; } };
+const lsSet = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* 저장 공간이 없으면 넘어간다 */ } };
+let saveT = 0;
+function save() { clearTimeout(saveT); saveT = setTimeout(() => lsSet(SKEY, S), 200); }
+function loadAll() {
+  const o = lsGet(SKEY, {});
+  S = Object.assign({}, DEF, o && typeof o === 'object' ? o : {});
+  MINE = (lsGet(MKEY, []) || []).filter(m => m && Array.isArray(m.groups));
+  HIST = (lsGet(HKEY, []) || []).filter(h => h && typeof h.score === 'number');
+  if (!BASE_SETS.some(x => x.id === S.baseId)) S.baseId = 'g1a';
+}
+
+/* ── 지금 고른 문제 묶음 ── */
+function curSource() {
+  if (S.src === 'mine' && MINE[S.mine]) {
+    const m = MINE[S.mine];
+    return { label: m.name, groups: m.groups.map(g => ({ name: g.name, sub: '', items: g.items })) };
+  }
+  const g = +S.grade || 1;
+  return { label: g + '학년 받아쓰기', groups: baseGroups(g) };
+}
+function curGroup() {
+  const src = curSource();
+  if (!src.groups.length) return null;
+  let G;
+  if (S.src === 'mine') G = src.groups[Math.min(S.mineG, src.groups.length - 1)];
+  else G = src.groups.find(x => x.id === S.baseId) || src.groups[0];
+  const title = S.src === 'mine' ? src.label + ' · ' + G.name : G.name + ' · ' + G.sub;
+  return { title, name: G.name, sub: G.sub, d: G.d || '', items: G.items, src };
+}
+
+/* ── 한 판(불러 주기 → 채점) ── */
+function shuffled(n) { const a = Array.from({ length: n }, (_, i) => i); for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function newRun(items, title) {
+  TTS.stop(); stopCount();
+  const order = S.shuffle ? shuffled(items.length) : items.map((_, i) => i);
+  RUN = {
+    id: Date.now().toString(36), title, items: order.map(i => items[i]), idx: 0,
+    ans: order.map(() => ({ typed: '', ink: [], mark: null, marks: [], heard: false })), saved: false
+  };
+  $('typeIn').value = '';
+  renderPlayer(); renderAnsArea(); renderGrade();
+}
+function resetRun() { const G = curGroup(); newRun(G ? G.items : [], G ? G.title : ''); }
+
+/* ════════════════════════════════════════════════════════════
+   ① 문제 고르기
+   ════════════════════════════════════════════════════════════ */
+function renderSet() {
+  $('srcBase').classList.toggle('hide', S.src !== 'base');
+  $('srcMine').classList.toggle('hide', S.src !== 'mine');
+  const tile = (on, attr, name, sub) => `<button type="button" class="${on ? 'on' : ''}" ${attr}><b>${esc(name)}</b><small>${esc(sub)}</small></button>`;
+  $('baseGrid').innerHTML = baseGroups(+S.grade || 1).map(g => tile(g.id === S.baseId, 'data-base="' + g.id + '"', g.name.replace(/^\d학년 /, ''), g.sub)).join('');
+  $('mineList').innerHTML = MINE.map((m, i) => `<div class="mitem${i === S.mine ? ' on' : ''}"><button type="button" class="mt" data-mine="${i}">${esc(m.name)}<small>${m.groups.length}급 · 문장 ${m.groups.reduce((a, g) => a + g.items.length, 0)}개</small></button><button type="button" class="mx" data-mdel="${i}" aria-label="${esc(m.name)} 지우기">지우기</button></div>`).join('');
+  const m = MINE[S.mine];
+  $('mineGradeRow').classList.toggle('hide', !m);
+  $('mineGrid').innerHTML = m ? m.groups.map((g, i) => tile(i === S.mineG, 'data-mg="' + i + '"', g.name, '문장 ' + g.items.length + '개 · ' + (g.items[0] ? g.items[0].t : ''))).join('') : '';
+  if (S.src === 'mine' && !MINE.length) $('mineAdd').open = true;
+  const G = curGroup();
+  $('setInfo').textContent = G ? G.items.length + '문장' : '';
+  $('setDesc').innerHTML = G ? '<b>' + esc(G.title) + '</b>' + (G.d ? ' — ' + esc(G.d) : '') : '문제를 골라 주세요.';
+  $('peekList').innerHTML = G ? G.items.map(it => '<li>' + esc(it.t) + (it.h ? '<span class="h">[' + esc(it.h) + ']</span>' : '') + '</li>').join('') : '';
+}
+function addMine(name, text) {
+  const groups = parseList(text);
+  if (!groups.length) { $('parseInfo').className = 'rinfo warn'; $('parseInfo').textContent = '한글 문장을 찾지 못했습니다. 한 줄에 문장 하나씩 붙여 넣어 주세요.'; return; }
+  const n = groups.reduce((a, g) => a + g.items.length, 0);
+  name = (name || '').trim() || '내 급수표 ' + (MINE.length + 1);
+  MINE.unshift({ name, groups, at: todayISO() });
+  if (MINE.length > 20) MINE.length = 20;
+  lsSet(MKEY, MINE);
+  S.src = 'mine'; S.mine = 0; S.mineG = 0; save();
+  $('parseInfo').className = 'rinfo ok';
+  $('parseInfo').textContent = '「' + name + '」 ' + groups.length + '급 · 문장 ' + n + '개를 만들었습니다' + (groups.length > 1 ? ' (' + groups.map(g => g.name).slice(0, 6).join(', ') + (groups.length > 6 ? ' …' : '') + ')' : '') + '.';
+  $('mineText').value = ''; $('mineName').value = '';
+  $('mineAdd').open = false;
+  applyAll(true);
+}
+
+/* ════════════════════════════════════════════════════════════
+   ② 불러 주기
+   ════════════════════════════════════════════════════════════ */
+const readOpts = () => ({ rate: +S.rate || 0.85, repeat: +S.repeat || 1, chunk: S.chunk, num: S.num, punct: S.punct, voice: S.voice });
+const selfRead = () => S.self || !TTS.ok || (TTS.ok && TTS.voices.length === 0 && TTS.checked);
+let showText = false, cdT = 0, cdLeft = 0, playing = false;
+function stopCount() { clearInterval(cdT); cdT = 0; }
+function setMsg(t, cls) { const m = $('pMsg'); m.innerHTML = t; m.className = 'pmsg' + (cls ? ' ' + cls : ''); }
+function renderPlayer() {
+  const n = RUN ? RUN.items.length : 0, i = RUN ? RUN.idx : 0;
+  $('pNo').textContent = n ? i + 1 : 0;
+  $('pOf').textContent = '/ ' + n;
+  $('pDots').innerHTML = RUN ? RUN.items.map((_, k) => `<button type="button" data-go="${k}" class="${k === i ? 'cur' : RUN.ans[k].heard ? 'done' : ''}" aria-label="${k + 1}번으로">${k + 1}</button>`).join('') : '';
+  const it = RUN && RUN.items[i];
+  const self = selfRead();
+  const pt = $('pText');
+  pt.classList.toggle('hide', !(it && (showText || self)));
+  pt.classList.toggle('big', self);
+  pt.innerHTML = it ? esc(it.t) + (it.h ? '<span class="h">소리 [' + esc(it.h) + ']</span>' : '') : '';
+  $('pShow').setAttribute('aria-pressed', showText ? 'true' : 'false');
+  $('pShow').classList.toggle('hide', self);
+  $('pPrev').disabled = !n || i === 0;
+  $('pNext').disabled = !n;
+  const heard = it && RUN.ans[i].heard;
+  $('pPlayLab').textContent = self ? (heard ? '읽었어요' : '읽을게요') : playing ? '읽는 중' : heard ? '다시 듣기' : '시작';
+  $('pPlay').firstChild.textContent = playing ? '🔊' : heard ? '↻' : '▶';
+  $('pPlay').classList.toggle('busy', playing);
+  $('pEnd').classList.toggle('hide', !(n && i === n - 1 && heard));
+  if (!playing && !cdT) {
+    if (!n) setMsg('불러 줄 문제를 먼저 고르세요.');
+    else if (self && !heard) setMsg('어른이 위 문장을 <b>천천히 ' + (+S.repeat || 1) + '번</b> 읽어 주세요.');
+    else if (TTS.failed && heard) setMsg('소리를 내지 못했어요. 위 문장을 <b>어른이 읽어 주세요.</b>');
+    else if (!heard) setMsg(i === 0 ? '「시작」을 누르면 1번부터 불러 줍니다.' : '「시작」을 누르면 ' + (i + 1) + '번을 불러 줍니다.');
+    else if (i === n - 1) setMsg('다 썼으면 「채점하러 가기」를 누르세요.');
+    else setMsg('다 썼으면 「다음」을 누르세요.');
+  }
+  $('inkNo').textContent = (i + 1) + '번'; $('typeNo').textContent = (i + 1) + '번';
+}
+let playSeq = 0;
+async function play() {
+  if (!RUN || !RUN.items.length) { toast('불러 줄 문제를 먼저 고르세요.'); return; }
+  stopCount();
+  const seq = ++playSeq;
+  const i = RUN.idx, it = RUN.items[i];
+  if (selfRead()) {
+    RUN.ans[i].heard = true; renderPlayer(); afterRead(); return;
+  }
+  playing = true; renderPlayer();
+  const rep = +S.repeat || 1;
+  setMsg('🔊 듣고 쓰세요', 'speak');
+  const ok = await TTS.read(it, i + 1, readOpts(), r => { if (playing && RUN && RUN.idx === i) setMsg('🔊 듣고 쓰세요' + (rep > 1 ? ' <small>(' + (r + 1) + '/' + rep + ')</small>' : ''), 'speak'); });
+  if (!RUN || RUN.idx !== i || seq !== playSeq) return;
+  playing = false;
+  if (!ok && TTS.lastError) {
+    /* 목소리는 있는데 소리를 못 냈다 — 문장을 보여 주고 어른이 읽게 한다 */
+    TTS.failed = TTS.lastError;
+    showText = true; RUN.ans[i].heard = true;
+    renderVoices();
+    return;
+  }
+  if (ok) { RUN.ans[i].heard = true; TTS.failed = ''; renderVoices(); }
+  renderPlayer();
+  if (ok) afterRead();
+}
+/* 읽은 뒤 — 자동 넘김이면 세어서 다음으로 */
+function afterRead() {
+  const sec = +S.auto || 0;
+  if (!sec || !RUN || RUN.idx >= RUN.items.length - 1) return;
+  cdLeft = sec;
+  const tick = () => {
+    if (cdLeft <= 0) { stopCount(); go(RUN.idx + 1, true); return; }
+    setMsg('다음 문장까지 <b>' + cdLeft + '초</b> <button class="mini" type="button" id="cdStop">기다려 주세요</button>');
+    cdLeft--;
+  };
+  tick();
+  cdT = setInterval(tick, 1000);
+}
+function go(k, autoplay) {
+  if (!RUN) return;
+  TTS.stop(); playing = false; playSeq++; stopCount();
+  commitInk();
+  RUN.idx = clamp(k, 0, RUN.items.length - 1);
+  $('typeIn').value = RUN.ans[RUN.idx].typed || '';
+  renderPlayer(); drawInk();
+  if (autoplay) play();
+  if (S.mode === 'type' && !IA.ios) setTimeout(() => { try { $('typeIn').focus({ preventScroll: true }); } catch (e) { /* 무시 */ } }, 30);
+}
+function nextOrGrade() {
+  if (!RUN) return;
+  if (RUN.idx < RUN.items.length - 1) go(RUN.idx + 1, true);
+  else toGrade();
+}
+function toGrade() {
+  TTS.stop(); playing = false; stopCount(); commitInk(); renderPlayer();
+  renderGrade();
+  $('cGrade').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function renderAnsArea() {
+  $('ansInk').classList.toggle('hide', S.mode !== 'ink');
+  $('ansType').classList.toggle('hide', S.mode !== 'type');
+  $('noteTip').classList.toggle('hide', S.mode !== 'note');
+  $('gOpts').classList.toggle('hide', S.mode !== 'type');
+  $('gradeTip').innerHTML = S.mode === 'type'
+    ? '자판으로 쓴 답은 <b>저절로 채점</b>됩니다. 붙여 써도 되는 말이면 ⭕ 를 눌러 바꾸세요.'
+    : '정답과 견주어 ⭕·❌ 를 누르세요. <b>틀린 글자를 누르면</b> 빨갛게 표시되어 오답 노트에 들어갑니다.';
+  if (S.mode === 'ink') sizeInk();
+}
+
+/* ── 화면에 손으로 쓰기 — 칸 공책 위에 그은 획을 폭 기준(0~1) 좌표로 문제마다 보관 ── */
+let ink = null;
+function inkGeom(w) {
+  const len = RUN ? Math.max.apply(null, RUN.items.map(it => Array.from(it.t).length).concat([8])) : 10;
+  const cols = w < 520 ? 6 : w < 760 ? 8 : 10;
+  const rows = Math.max(2, Math.min(5, Math.ceil((len + 1) / cols)));
+  const cell = (w - 16) / cols;
+  return { cols, rows, cell, pad: 8, h: rows * cell + 16 };
+}
+function sizeInk() {
+  const cv = $('inkPad');
+  const w = cv.clientWidth || cv.parentNode.clientWidth;
+  if (!w) return;
+  const g = inkGeom(w), dpr = Math.min(2.5, window.devicePixelRatio || 1);
+  cv.width = Math.round(w * dpr); cv.height = Math.round(g.h * dpr);
+  cv.style.height = g.h + 'px';
+  ink = { cv, ctx: cv.getContext('2d'), w, g, dpr, cur: null };
+  drawInk();
+}
+function paintInkGrid(ctx, w, g) {
+  ctx.fillStyle = '#ffffff'; ctx.fillRect(0, 0, w, g.h);
+  ctx.strokeStyle = '#9AA6B2'; ctx.lineWidth = 1;
+  const x0 = g.pad, y0 = g.pad;
+  for (let r = 0; r < g.rows; r++) for (let c = 0; c < g.cols; c++) ctx.strokeRect(x0 + c * g.cell + 0.5, y0 + r * g.cell + 0.5, g.cell, g.cell);
+  ctx.strokeStyle = '#E1E6EB'; ctx.setLineDash([3, 4]);
+  ctx.beginPath();
+  for (let r = 0; r < g.rows; r++) for (let c = 0; c < g.cols; c++) {
+    const x = x0 + c * g.cell, y = y0 + r * g.cell;
+    ctx.moveTo(x + g.cell / 2, y + 4); ctx.lineTo(x + g.cell / 2, y + g.cell - 4);
+    ctx.moveTo(x + 4, y + g.cell / 2); ctx.lineTo(x + g.cell - 4, y + g.cell / 2);
+  }
+  ctx.stroke(); ctx.setLineDash([]);
+}
+function paintStrokes(ctx, w, strokes, cell) {
+  ctx.strokeStyle = '#1B232C'; ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  ctx.lineWidth = Math.max(2.4, cell * 0.075);
+  for (const s of strokes) {
+    if (!s.length) continue;
+    ctx.beginPath(); ctx.moveTo(s[0][0] * w, s[0][1] * w);
+    if (s.length === 1) ctx.lineTo(s[0][0] * w + 0.1, s[0][1] * w);
+    for (let k = 1; k < s.length; k++) ctx.lineTo(s[k][0] * w, s[k][1] * w);
+    ctx.stroke();
+  }
+}
+function drawInk() {
+  if (!ink || S.mode !== 'ink') return;
+  const { ctx, w, g, dpr } = ink;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  paintInkGrid(ctx, w, g);
+  if (RUN && RUN.items.length) paintStrokes(ctx, w, RUN.ans[RUN.idx].ink, g.cell);
+}
+function inkPos(e) { const r = ink.cv.getBoundingClientRect(); return [(e.clientX - r.left) / ink.w, (e.clientY - r.top) / ink.w]; }
+function commitInk() { if (ink) ink.cur = null; }
+/* 채점 화면용 손글씨 그림 */
+/* 획은 칸 공책 폭 기준이라, 쓸 때와 같은 칸 배치(가로 칸 수·줄 수)로 그려야 글자가 칸에 맞는다 */
+function inkImage(strokes) {
+  const base = ink ? ink.w : 560, g = ink ? ink.g : inkGeom(560);
+  const W = 560, s = W / base;
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = Math.round(g.h * s);
+  const ctx = cv.getContext('2d');
+  ctx.scale(s, s);
+  paintInkGrid(ctx, base, g); paintStrokes(ctx, base, strokes, g.cell);
+  return cv.toDataURL('image/png');
+}
+
+/* ════════════════════════════════════════════════════════════
+   ③ 채점
+   ════════════════════════════════════════════════════════════ */
+const gopt = () => ({ space: S.space, punct: S.punctG });
+function autoGrade(i) {
+  const a = RUN.ans[i];
+  if (S.mode !== 'type') return;
+  if (!a.typed.trim()) { a.res = null; if (!a.user) { a.mark = a.heard ? 'x' : null; a.marks = []; a.auto = true; } return; }
+  a.res = gradeTyped(RUN.items[i].t, a.typed, gopt());
+  if (!a.user) { a.mark = a.res.ok ? 'o' : 'x'; a.marks = a.res.marks.slice(); a.auto = true; }
+}
+function renderGrade() {
+  const L = $('gList');
+  if (!RUN || !RUN.items.length) { L.innerHTML = ''; renderScore(); return; }
+  RUN.items.forEach((_, i) => autoGrade(i));
+  L.innerHTML = RUN.items.map((it, i) => {
+    const a = RUN.ans[i];
+    const chars = Array.from(normAns(it.t));
+    /* 어절마다 묶어 줄바꿈은 띄어쓰기 자리에서만 */
+    let keys = '', word = '';
+    chars.forEach((ch, k) => {
+      const b = `<button type="button" data-k="${k}" class="${ch === ' ' ? 'sp' : ''}${a.marks[k] ? ' bad' : ''}" aria-label="${ch === ' ' ? '띄어쓰기' : esc(ch)} 틀림 표시">${ch === ' ' ? '∨' : esc(ch)}</button>`;
+      if (ch === ' ') { if (word) keys += '<span class="w">' + word + '</span>'; word = ''; keys += b; } else word += b;
+    });
+    if (word) keys += '<span class="w">' + word + '</span>';
+    let body = '';
+    if (it.h) body += `<div class="ghint">소리 [${esc(it.h)}]</div>`;
+    if (S.mode === 'type') {
+      body += a.typed.trim()
+        ? `<div class="gans"><span class="lb">쓴 답</span>${gradeHTML(a.res.view)}</div><div class="gnote">${esc(gradeNote(a.res, gopt()))}</div>`
+        : '<div class="gnote">아직 쓰지 않았어요</div>';
+    } else if (S.mode === 'ink' && a.ink.length) body += `<img class="gink" alt="${i + 1}번 손글씨" src="${inkImage(a.ink)}">`;
+    return `<li class="gi${a.mark ? ' m-' + a.mark : ''}" data-i="${i}"><div class="gtop"><span class="gno">${i + 1}</span><div class="gkey">${keys}</div>` +
+      `<div class="gox"><button type="button" class="bo${a.mark === 'o' ? ' on' : ''}" data-m="o" aria-label="${i + 1}번 맞음">⭕</button><button type="button" class="bx${a.mark === 'x' ? ' on' : ''}" data-m="x" aria-label="${i + 1}번 틀림">❌</button></div></div>${body}</li>`;
+  }).join('');
+  renderScore();
+}
+function runStat() {
+  const n = RUN ? RUN.items.length : 0;
+  const marked = RUN ? RUN.ans.filter(a => a.mark).length : 0, ok = RUN ? RUN.ans.filter(a => a.mark === 'o').length : 0;
+  return { n, marked, ok, score: scoreOf(ok, n), all: n > 0 && marked === n };
+}
+function renderScore() {
+  const st = runStat();
+  $('scoreBox').classList.toggle('wait', !st.all);
+  $('scNum').textContent = st.all ? st.score : '–';
+  $('gradeInfo').textContent = st.n ? st.marked + '/' + st.n + ' 채점' : '';
+  if (!st.n) { $('scLine').textContent = '아직 채점 전이에요'; $('scSub').textContent = '문제를 고르고 불러 준 뒤 채점하세요.'; }
+  else if (!st.all) {
+    $('scLine').textContent = st.marked ? st.n + '문제 중 ' + st.marked + '문제 채점했어요' : '아직 채점 전이에요';
+    $('scSub').textContent = S.mode === 'type' ? '아직 불러 주지 않은 문제가 있어요 — 「불러 주기」에서 마저 쓰거나 ⭕·❌ 를 눌러 주세요.' : '정답을 보고 문제마다 ⭕·❌ 를 눌러 주세요.';
+  } else {
+    $('scLine').textContent = st.score === 100 ? '참 잘했어요! 모두 맞혔어요' : st.n + '문제 중 ' + st.ok + '문제 맞혔어요';
+    $('scSub').textContent = st.score === 100 ? '다음 급으로 넘어가도 좋아요.' : '틀린 ' + (st.n - st.ok) + '문제는 「틀린 것만 다시」로 한 번 더 연습하세요.';
+    recordRun(st);
+  }
+  $('btnRetry').disabled = !(st.all && st.ok < st.n);
+  $('btnCardImg').disabled = !st.all;
+  if (S.doc === 'wrong') refreshSoon();
+}
+/* 다 채점되면 기록에 남긴다(같은 판은 고쳐 쓰기) */
+function recordRun(st) {
+  const wrong = RUN.items.filter((_, i) => RUN.ans[i].mark === 'x').map(it => it.t);
+  const rec = { id: RUN.id, d: new Date().toISOString(), title: RUN.title, n: st.n, ok: st.ok, score: st.score, wrong };
+  const k = HIST.findIndex(h => h.id === RUN.id);
+  if (k >= 0) HIST[k] = Object.assign(HIST[k], rec, { d: HIST[k].d }); else HIST.unshift(rec);
+  if (HIST.length > 300) HIST.length = 300;
+  lsSet(HKEY, HIST);
+  renderHist();
+}
+function wrongDoc() {
+  const out = [];
+  if (RUN) RUN.items.forEach((it, i) => {
+    const a = RUN.ans[i];
+    if (a.mark === 'x') out.push({ t: it.t, no: i + 1, marks: a.marks, a: S.mode === 'type' ? normAns(a.typed) : '' });
+  });
+  return { title: (RUN ? RUN.title : '') + '  ·  ' + kDate(todayISO()), items: out };
+}
+
+/* ── 기록 ── */
+function missCounts() {
+  const m = new Map();
+  for (const h of HIST) for (const t of h.wrong || []) m.set(t, (m.get(t) || 0) + 1);
+  return Array.from(m.entries()).sort((a, b) => b[1] - a[1]);
+}
+function renderHist() {
+  const recent = HIST.slice(0, 14).reverse();
+  $('hBars').innerHTML = recent.map(h => `<i class="${h.score === 100 ? 'full' : ''}" style="height:${Math.max(4, h.score)}%" title="${esc(h.title)} ${h.score}점"><span>${h.score}</span></i>`).join('');
+  $('hList').innerHTML = HIST.slice(0, 6).map(h => {
+    const d = new Date(h.d), ds = (d.getMonth() + 1) + '/' + d.getDate();
+    return `<li class="${h.score === 100 ? 'ok' : h.score >= 70 ? 'info' : 'warn'}"><b>${h.score}점</b> ${esc(h.title)} <span class="nw">· ${ds} · ${h.ok}/${h.n}</span></li>`;
+  }).join('');
+  const mc = missCounts().slice(0, 5);
+  $('hMiss').innerHTML = mc.length ? '<b>자주 틀린 문장</b><ol>' + mc.map(([t, c]) => '<li>' + esc(t) + (c > 1 ? '<em>' + c + '번</em>' : '') + '</li>').join('') + '</ol>' : '';
+  $('histInfo').textContent = HIST.length ? HIST.length + '번' : '';
+  $('btnMissSet').classList.toggle('hide', !mc.length);
+  $('btnHistClear').classList.toggle('hide', !HIST.length);
+}
+
+/* ════════════════════════════════════════════════════════════
+   인쇄물 미리보기
+   ════════════════════════════════════════════════════════════ */
+const docOpts = () => ({ cell: S.cell, guide: S.guide, nameBox: S.nameBox, spMark: S.spMark, blank: S.blank2 ? 2 : 1, who: S.who.trim() });
+const DOC_NAME = { sheet: '시험지', key: '정답지', trace: '따라쓰기', list: '급수표', wrong: '오답 노트' };
+function buildPages(doc) {
+  const G = curGroup(), o = docOpts();
+  if (doc === 'wrong') {
+    const W = wrongDoc();
+    if (!W.items.length) {
+      const pg = newPage();
+      pageHead(pg, o, '받아쓰기 오답 노트', W.title.replace(/^ {2}· /, ''), { name: false, score: false });
+      TC(pg, A4W / 2, 300, '아직 틀린 문장이 없어요', 16, true, SUB);
+      TC(pg, A4W / 2, 326, '채점에서 ❌ 를 누른 문장이 여기에 모입니다', 11, false, GRID);
+      return [pg];
+    }
+    return wrongPages(W, o);
+  }
+  if (!G) { const pg = newPage(); TC(pg, A4W / 2, 300, '문제를 골라 주세요', 16, true, SUB); return [pg]; }
+  if (doc === 'list') {
+    const groups = S.allGroups ? G.src.groups : [G];
+    return listPages(groups, o, S.allGroups ? G.src.label : G.title);
+  }
+  const g = { title: G.title, items: G.items };
+  if (doc === 'trace') return tracePages(g, o);
+  return sheetPages(g, o, doc === 'key');
+}
+function missingGlyphs(pages) {
+  const out = [], seen = new Set();
+  for (const pg of pages) for (const op of pg.ops) {
+    if (op.o !== 't') continue;
+    const key = fkey(op.b);
+    for (const ch of op.s) {
+      if (/\s/.test(ch)) continue;
+      const k = key + '|' + ch;
+      if (!_trace.has(k) && !seen.has(k)) { seen.add(k); out.push([key, ch]); }
+    }
+  }
+  return out;
+}
+async function prepGlyphs(pages) {
+  const todo = missingGlyphs(pages);
+  for (let i = 0; i < todo.length; i++) { traceGlyph(todo[i][0], todo[i][1]); if (i % 16 === 15) await yieldUI(); }
+}
+let traceJob = 0;
+async function traceLater(todo, job) {
+  for (let i = 0; i < todo.length; i++) {
+    if (job !== traceJob) return;
+    traceGlyph(todo[i][0], todo[i][1]);
+    if (i % 12 === 11) await yieldUI();
+  }
+  if (job === traceJob) renderPreview();
+}
+function renderPreview() {
+  const box = $('pvPages');
+  const pages = LAY.pages;
+  const w = Math.max(200, box.clientWidth - 24);
+  const dpr = Math.min(2.5, window.devicePixelRatio || 1);
+  const todo = missingGlyphs(pages);
+  const vector = todo.length === 0;
+  while (box.children.length > pages.length) box.lastChild.remove();
+  pages.forEach((pg, i) => {
+    let cv = box.children[i];
+    if (!cv || cv.tagName !== 'CANVAS') { cv = document.createElement('canvas'); cv.setAttribute('role', 'img'); if (box.children[i]) box.replaceChild(cv, box.children[i]); else box.appendChild(cv); }
+    cv.setAttribute('aria-label', DOC_NAME[S.doc] + ' ' + (i + 1) + '쪽 미리보기');
+    const sc = w * dpr / pg.W;
+    const W = Math.round(pg.W * sc), H = Math.round(pg.H * sc);
+    if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+    paintPage(cv.getContext('2d'), pg, sc, vector);
+  });
+  $('pvInfo').textContent = 'A4 · ' + pages.length + '쪽';
+  $('mbarTxt').textContent = '받아쓰기 ' + DOC_NAME[S.doc];
+  $('mbarGo').textContent = DOC_NAME[S.doc] + ' 보러 가기 ↓';
+  const job = ++traceJob;
+  if (!vector) traceLater(todo, job);
+}
+let refreshT = 0;
+function refreshSoon(ms) { clearTimeout(refreshT); refreshT = setTimeout(refresh, ms == null ? 200 : ms); }
+function refresh() {
+  clearTimeout(refreshT); refreshT = 0;
+  LAY = { pages: buildPages(S.doc), doc: S.doc };
+  pdfCache = null;
+  renderPreview();
+}
+function syncDocOpts() {
+  const d = S.doc;
+  $('spRow').classList.toggle('hide', d !== 'trace');
+  $('blankRow').classList.toggle('hide', d !== 'trace');
+  $('allRow').classList.toggle('hide', d !== 'list');
+  document.querySelector('.seg[data-seg="cell"]').classList.toggle('hide', d === 'list');
+  $('optGuide').closest('label').classList.toggle('hide', d === 'list');
+}
+
+/* ════════════════════════════════════════════════════════════
+   저장 · 인쇄
+   ════════════════════════════════════════════════════════════ */
+const safeName = s => String(s || '').replace(/[\\/:*?"<>|\n\r\t·]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 40);
+function fileBase(doc) {
+  const G = curGroup();
+  const t = doc === 'list' && S.allGroups && G ? G.src.label : doc === 'wrong' ? (RUN ? RUN.title : '') : G ? G.title : '';
+  return safeName('받아쓰기 ' + DOC_NAME[doc] + ' ' + t) || '받아쓰기';
+}
+function download(blob, name) {
+  if (IA.on) { downloadInApp(blob, name); return; }     /* 앱 안 WebView 는 blob: 을 받지 못한다 */
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = name; a.rel = 'noopener';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
+}
+async function busy(btn, label, fn) {
+  if (btn.disabled) return;
+  const old = btn.innerHTML;
+  btn.disabled = true; btn.textContent = label;
+  try { await fn(); } catch (e) { console.error(e); toast('만드는 중 문제가 생겼습니다: ' + (e && e.message || e)); }
+  finally { btn.disabled = false; btn.innerHTML = old; }
+}
+let pdfCache = null;
+async function pdfOf(pages, title, btn) {
+  return makePDF(pages, title, f => { if (btn) btn.textContent = `PDF 만드는 중 ${Math.round(f * 100)}%`; });
+}
+async function buildPdfBlob(btn) {
+  if (refreshT) refresh();
+  const lay = LAY;
+  if (pdfCache && pdfCache.lay === lay) return pdfCache.blob;
+  const blob = await pdfOf(lay.pages, fileBase(lay.doc), btn);
+  pdfCache = { lay, blob };
+  return blob;
+}
+let printUrls = [];
+async function preparePrint(pages) {
+  const pa = $('printArea');
+  pa.textContent = '';
+  const P0 = pages[0];
+  const mm = [P0.W / 72 * 25.4, P0.H / 72 * 25.4].map(v => Math.round(v * 10) / 10);
+  let st = $('printStyle');
+  if (!st) { st = document.createElement('style'); st.id = 'printStyle'; document.head.appendChild(st); }
+  st.textContent = `@media print{@page{size:${mm[0]}mm ${mm[1]}mm;margin:0}#printArea img{width:${mm[0]}mm !important;height:${mm[1]}mm !important}}`;
+  await prepGlyphs(pages);
+  const urls = [];
+  for (const pg of pages) {
+    const cv = pageCanvas(pg, 2.6, true);
+    const blob = await canvasBlob(cv, 'image/png');
+    const u = URL.createObjectURL(blob); urls.push(u);
+    const im = new Image(); im.src = u; im.alt = '';
+    pa.appendChild(im);
+    await yieldUI();
+  }
+  await Promise.all(Array.from(pa.querySelectorAll('img')).map(im => im.decode ? im.decode().catch(() => 0) : 0));
+  printUrls = urls;
+}
+async function doPrint() {
+  if (IA.on) toast('앱 안에서는 인쇄 창이 뜨지 않을 수 있습니다. 위쪽 「' + $('iaGo').textContent + '」를 눌러 주세요.', 4600);
+  if (refreshT) refresh();
+  await preparePrint(LAY.pages);
+  const pa = $('printArea'), urls = printUrls;
+  const done = () => { pa.textContent = ''; urls.forEach(u => URL.revokeObjectURL(u)); window.removeEventListener('afterprint', done); };
+  window.addEventListener('afterprint', done);
+  window.print();
+  setTimeout(() => { if (pa.children.length) done(); }, 120000);
+}
+/* 미리보기 쪽들을 세로로 이어 붙인 그림 한 장(3쪽까지) */
+async function pagesPNG(pages) {
+  const list = pages.slice(0, 3);
+  await prepGlyphs(list);
+  const sc = 1400 / list[0].W, gap = 24;
+  const W = Math.round(list[0].W * sc), H1 = Math.round(list[0].H * sc);
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H1 * list.length + gap * (list.length - 1);
+  const ctx = cv.getContext('2d');
+  ctx.fillStyle = '#DDE3EA'; ctx.fillRect(0, 0, cv.width, cv.height);
+  list.forEach((pg, i) => ctx.drawImage(pageCanvas(pg, sc, true), 0, i * (H1 + gap)));
+  return canvasBlob(cv, 'image/png');
+}
+/* 엑셀 — 급수표 시트 + 채점 기록 시트 */
+async function buildXLSX() {
+  const ST = new XStyles();
+  const G = curGroup();
+  const src = G ? G.src : { label: '받아쓰기', groups: [] };
+  const TH = ['thin', 'FFC8D1DA'];
+  const bd = { l: TH, r: TH, t: TH, b: TH };
+  const head = { b: 1, sz: 10, h: 'center', fill: 'FFEEF3FB', bd };
+  const sh = new XSheet('급수표');
+  sh.land = false; sh.fitH = 0;
+  sh.colW = [12, 6, 50, 20];
+  sh.put(0, 0, src.label + ' 급수표', { b: 1, sz: 15 }); sh.merge(0, 0, 0, 3); sh.rowH[0] = 28;
+  ['급', '번호', '문장', '소리 나는 대로'].forEach((t, c) => sh.put(2, c, t, head));
+  let r = 3;
+  for (const g of src.groups) {
+    g.items.forEach((it, i) => {
+      sh.put(r, 0, i === 0 ? g.name + (g.sub ? ' ' + g.sub : '') : '', { sz: 10, b: 1, wrap: 1, v: 'top', bd });
+      sh.put(r, 1, i + 1, { sz: 10, h: 'center', bd });
+      sh.put(r, 2, it.t, { sz: 11, bd });
+      sh.put(r, 3, it.h ? '[' + it.h + ']' : '', { sz: 10, c: 'FF5F6B76', bd });
+      sh.rowH[r] = 20; r++;
+    });
+  }
+  sh.fy = 3;
+  const hs = new XSheet('채점 기록');
+  hs.land = true; hs.fitH = 0;
+  hs.colW = [18, 30, 8, 8, 8, 70];
+  hs.put(0, 0, '받아쓰기 채점 기록', { b: 1, sz: 15 }); hs.merge(0, 0, 0, 5); hs.rowH[0] = 28;
+  ['날짜', '문제', '문제 수', '맞힌 수', '점수', '틀린 문장'].forEach((t, c) => hs.put(2, c, t, head));
+  HIST.forEach((h, i) => {
+    const d = new Date(h.d);
+    const ds = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0') + ' ' + String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0');
+    const rr = 3 + i;
+    hs.put(rr, 0, ds, { sz: 10, bd });
+    hs.put(rr, 1, h.title, { sz: 10, bd });
+    hs.put(rr, 2, h.n, { sz: 10, h: 'center', bd });
+    hs.put(rr, 3, h.ok, { sz: 10, h: 'center', bd });
+    hs.put(rr, 4, h.score, { sz: 10, h: 'center', b: 1, c: h.score === 100 ? 'FF0F766E' : 'FF1B232C', bd });
+    hs.put(rr, 5, (h.wrong || []).join(' / '), { sz: 10, wrap: 1, bd });
+  });
+  if (!HIST.length) hs.put(3, 0, '아직 기록이 없습니다. 채점을 마치면 여기에 쌓입니다.', { sz: 10, c: 'FF5F6B76' });
+  hs.fy = 3;
+  return xlsxPack([sh, hs], src.label + ' 급수표', ST);
+}
+/* 점수 카드 그림(1080×1350) */
+async function scoreCard() {
+  const st = runStat();
+  const W = 1080, H = 1350;
+  const cv = document.createElement('canvas'); cv.width = W; cv.height = H;
+  const x = cv.getContext('2d');
+  const F = (px, b) => (b ? 'bold ' : '') + px + 'px ' + FACES.sans;
+  x.fillStyle = '#FFF8EC'; x.fillRect(0, 0, W, H);
+  x.fillStyle = '#FFE7B8'; x.fillRect(0, 0, W, 210);
+  x.fillStyle = '#1B232C'; x.textAlign = 'center'; x.textBaseline = 'alphabetic';
+  x.font = F(74, true); x.fillText('✏️ 받아쓰기', W / 2, 120);
+  x.font = F(34); x.fillStyle = '#6B5A3A';
+  const sub = RUN.title.length > 30 ? RUN.title.slice(0, 29) + '…' : RUN.title;
+  x.fillText(sub, W / 2, 178);
+  x.fillStyle = '#5F6B76'; x.font = F(32);
+  x.fillText((S.who.trim() ? S.who.trim() + '  ·  ' : '') + kDate(todayISO()), W / 2, 284);
+  /* 점수 동그라미 */
+  x.save(); x.translate(W / 2, 600); x.rotate(-0.12);
+  x.strokeStyle = '#D23B3B'; x.lineWidth = 16;
+  x.beginPath(); x.arc(0, 0, 230, 0, Math.PI * 2); x.stroke();
+  x.lineWidth = 5; x.beginPath(); x.arc(0, 0, 200, 0, Math.PI * 2); x.stroke();
+  x.fillStyle = '#D23B3B'; x.font = F(st.score === 100 ? 190 : 210, true);
+  x.fillText(String(st.score), -18, 70);
+  x.font = F(70, true); x.fillText('점', st.score === 100 ? 168 : 140, 74);
+  x.restore();
+  const word = st.score === 100 ? '참 잘했어요' : st.score >= 80 ? '잘했어요' : st.score >= 50 ? '조금만 더!' : '다시 해 봐요';
+  x.save(); x.translate(W / 2 + 250, 830); x.rotate(-0.2);
+  x.strokeStyle = '#D23B3B'; x.lineWidth = 7;
+  x.font = F(46, true);
+  const ww = x.measureText(word).width + 60;
+  x.beginPath(); x.roundRect ? x.roundRect(-ww / 2, -50, ww, 84, 18) : x.rect(-ww / 2, -50, ww, 84); x.stroke();
+  x.fillStyle = '#D23B3B'; x.fillText(word, 0, 8);
+  x.restore();
+  x.fillStyle = '#1B232C'; x.font = F(44, true);
+  x.fillText(st.n + '문제 중 ' + st.ok + '문제 맞혔어요', W / 2, 960);
+  const wrong = RUN.items.filter((_, i) => RUN.ans[i].mark === 'x').map(it => it.t);
+  if (wrong.length) {
+    x.textAlign = 'left'; x.fillStyle = '#8A6D3B'; x.font = F(30, true);
+    x.fillText('다시 써 볼 문장', 120, 1050);
+    x.fillStyle = '#1B232C'; x.font = F(34);
+    wrong.slice(0, 4).forEach((t, i) => { const s = t.length > 26 ? t.slice(0, 25) + '…' : t; x.fillText('· ' + s, 120, 1106 + i * 52); });
+    if (wrong.length > 4) { x.fillStyle = '#8A6D3B'; x.font = F(28); x.fillText('그 밖에 ' + (wrong.length - 4) + '문장', 120, 1106 + 4 * 52); }
+  } else {
+    x.fillStyle = '#0F766E'; x.font = F(40, true);
+    x.fillText('하나도 안 틀렸어요! 🎉', W / 2, 1090);
+  }
+  return canvasBlob(cv, 'image/png');
+}
+function doneSteps(kind) {
+  if (kind === 'xlsx') return ['「급수표」 시트에 급마다 문장과 소리 나는 대로 적은 것이, 「채점 기록」 시트에 날짜·점수·틀린 문장이 들어 있습니다.', '기록은 이 브라우저에만 남으니 가끔 엑셀로 받아 두세요.'];
+  if (kind === 'img') return ['단톡방·학급 알림장에 그림으로 바로 올릴 수 있어요.', '인쇄할 때는 PDF가 더 또렷합니다.'];
+  if (kind === 'card') return ['아이에게 보여 주거나 가족 단톡방에 자랑해 보세요.', '틀린 문장은 오답 노트 PDF로 따라 쓰게 하면 좋아요.'];
+  return ['인쇄할 때 <b>실제 크기(100%)</b>를 고르면 칸이 반듯하게 나옵니다.', S.doc === 'sheet' ? '채점할 때는 「정답지」를 같이 뽑아 옆에 두세요.' : S.doc === 'trace' ? '흐린 글자를 따라 쓴 뒤 아래 빈 칸에 혼자 써 보게 하세요.' : '태블릿이면 PDF를 굿노트·노타빌리티로 열어 필기해도 됩니다.'];
+}
+
+/* ════════════════════════════════════════════════════════════
+   설정 반영
+   ════════════════════════════════════════════════════════════ */
+function syncControls() {
+  document.querySelectorAll('.seg[data-seg]').forEach(sg => {
+    const k = sg.dataset.seg;
+    sg.querySelectorAll('button').forEach(b => b.classList.toggle('on', String(S[k]) === b.dataset.v));
+  });
+  for (const id in CHK) $(id).checked = !!S[CHK[id]];
+  if (document.activeElement !== $('who')) $('who').value = S.who;
+  const R = { '0.7': '느리게', '0.85': '보통', '1': '조금 빠르게' };
+  $('howInfo').textContent = selfRead() ? '어른이 읽기' : (R[S.rate] || '') + ' · ' + S.repeat + '번' + (S.chunk !== 'off' ? ' · 띄어 읽기' : '') + (+S.auto ? ' · ' + S.auto + '초 뒤 다음' : '');
+}
+function renderVoices() {
+  const sel = $('voiceSel');
+  const vs = TTS.voices;
+  sel.innerHTML = vs.length ? vs.map(v => `<option value="${esc(v.name)}"${TTS.bad.has(v.name) ? ' disabled' : ''}>${esc(v.name.replace(/^Microsoft /, '').replace(/ - Korean.*$/, ''))}${v.localService === false ? ' (온라인)' : ''}${TTS.bad.has(v.name) ? ' — 이 기기에서 안 됨' : ''}</option>`).join('') : '<option value="">한국어 목소리 없음</option>';
+  const cur = TTS.voice(S.voice);
+  if (cur) sel.value = cur.name;
+  $('voiceRow').classList.toggle('hide', !TTS.ok);
+  $('voiceInfo').textContent = !TTS.ok ? '소리 없음' : vs.length ? '🔊 목소리 ' + vs.length + '개' : TTS.checked ? '한국어 목소리 없음' : '';
+  const w = $('ttsWarn');
+  let msg = '';
+  if (!TTS.ok) msg = '이 브라우저는 소리 내어 읽기를 못 합니다' + (IA.on ? '(앱 안 화면)' : '') + '. 크롬·사파리·엣지로 열거나, 어른이 화면의 문장을 읽어 주세요.';
+  else if (TTS.failed) msg = '이 기기에서 소리 내어 읽기가 실패했습니다(' + TTS.failed + '). 기기 소리를 켜고 다른 목소리를 골라 보세요. 그동안은 문장을 보여 드리니 어른이 읽어 주세요.';
+  else if (TTS.checked && !vs.length) msg = '이 기기에 한국어 목소리가 없습니다. 기기 설정의 「텍스트 음성 변환(TTS)」에서 한국어를 내려받거나, 어른이 화면의 문장을 읽어 주세요.';
+  w.textContent = msg; w.classList.toggle('hide', !msg);
+  renderPlayer();
+}
+function applyAll(newSet) {
+  syncControls(); renderSet(); syncDocOpts();
+  if (newSet) resetRun(); else { renderPlayer(); renderAnsArea(); renderGrade(); }
+  refreshSoon(newSet ? 0 : 150);
+}
+function fillBaseTable() {
+  $('baseTable').innerHTML = GRADES.map(g => baseGroups(g).map((x, i) =>
+    `<tr><td class="k">${i === 0 ? g + '학년' : ''}</td><td>${i + 1}급</td><td>${esc(x.sub)}</td><td>${esc(x.items[0].t)}</td></tr>`).join('')).join('');
+}
+
+/* ════════════════════════════════════════════════════════════
+   시작
+   ════════════════════════════════════════════════════════════ */
+function init() {
+  loadAll();
+  fillBaseTable();
+
+  /* 고르기 단추 묶음 */
+  document.addEventListener('click', e => {
+    const b = e.target.closest('.seg[data-seg] button');
+    if (!b) return;
+    const k = b.closest('.seg').dataset.seg, v = b.dataset.v;
+    if (String(S[k]) === v) return;
+    S[k] = v; save();
+    if (k === 'src' || k === 'grade') {
+      if (k === 'grade') { const gs = baseGroups(+v); if (!gs.some(g => g.id === S.baseId)) S.baseId = gs[0].id; }
+      applyAll(true);
+    } else if (k === 'mode') { applyAll(false); if (v === 'ink') setTimeout(sizeInk, 30); }
+    else if (k === 'doc') { syncControls(); syncDocOpts(); refresh(); }
+    else { syncControls(); if (k === 'cell') refreshSoon(0); }
+  });
+  for (const id in CHK) $(id).addEventListener('change', e => {
+    S[CHK[id]] = e.target.checked; save(); syncControls();
+    if (id === 'optSpace' || id === 'optPunctG') renderGrade();
+    else if (id === 'optSelf') renderPlayer();
+    else if (id === 'optShuffle') resetRun();
+    else refreshSoon(0);
+  });
+  $('who').addEventListener('input', e => { S.who = e.target.value; save(); refreshSoon(300); });
+
+  /* ① 문제 */
+  $('baseGrid').addEventListener('click', e => { const b = e.target.closest('[data-base]'); if (!b || S.baseId === b.dataset.base) return; S.baseId = b.dataset.base; save(); applyAll(true); });
+  $('mineGrid').addEventListener('click', e => { const b = e.target.closest('[data-mg]'); if (!b || S.mineG === +b.dataset.mg) return; S.mineG = +b.dataset.mg; save(); applyAll(true); });
+  $('mineList').addEventListener('click', e => {
+    const d = e.target.closest('[data-mdel]');
+    if (d) {
+      const i = +d.dataset.mdel;
+      if (!confirm('「' + MINE[i].name + '」를 지울까요?')) return;
+      MINE.splice(i, 1); lsSet(MKEY, MINE);
+      S.mine = 0; S.mineG = 0; save(); applyAll(true); return;
+    }
+    const b = e.target.closest('[data-mine]');
+    if (b && S.mine !== +b.dataset.mine) { S.mine = +b.dataset.mine; S.mineG = 0; save(); applyAll(true); }
+  });
+  $('btnParse').addEventListener('click', () => addMine($('mineName').value, $('mineText').value));
+  $('mineFile').addEventListener('change', async e => {
+    const f = e.target.files && e.target.files[0]; e.target.value = '';
+    if (!f) return;
+    try {
+      const t = await fileText(f);
+      $('mineText').value = t;
+      if (!$('mineName').value.trim()) $('mineName').value = f.name.replace(/\.[^.]+$/, '').slice(0, 30);
+      addMine($('mineName').value, t);
+    } catch (er) { $('parseInfo').className = 'rinfo warn'; $('parseInfo').textContent = (er && er.message) || '파일을 읽지 못했습니다.'; }
+  });
+
+  /* ② 불러 주기 */
+  $('pPlay').addEventListener('click', () => {
+    play();
+  });
+  $('pNext').addEventListener('click', nextOrGrade);
+  $('pPrev').addEventListener('click', () => go(RUN.idx - 1, false));
+  $('pStop').addEventListener('click', () => { TTS.stop(); playing = false; stopCount(); renderPlayer(); });
+  $('pShow').addEventListener('click', () => { showText = !showText; renderPlayer(); });
+  $('pDots').addEventListener('click', e => { const b = e.target.closest('[data-go]'); if (b) go(+b.dataset.go, false); });
+  $('player').addEventListener('click', e => { if (e.target.id === 'cdStop') { stopCount(); renderPlayer(); } });
+  $('goGrade').addEventListener('click', toGrade);
+  $('typeIn').addEventListener('input', e => { if (RUN && RUN.items.length) { const a = RUN.ans[RUN.idx]; a.typed = e.target.value; a.user = false; } });
+  $('typeIn').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.isComposing) { e.preventDefault(); nextOrGrade(); } });
+  $('voiceSel').addEventListener('change', e => { S.voice = e.target.value; save(); });
+  /* 손으로 쓰기 */
+  const pad = $('inkPad');
+  pad.addEventListener('pointerdown', e => {
+    if (!ink || !RUN || !RUN.items.length) return;
+    e.preventDefault();
+    try { pad.setPointerCapture(e.pointerId); } catch (er) { /* 무시 */ }
+    ink.cur = [inkPos(e)];
+    RUN.ans[RUN.idx].ink.push(ink.cur);
+    drawInk();
+  });
+  pad.addEventListener('pointermove', e => {
+    if (!ink || !ink.cur) return;
+    e.preventDefault();
+    let evs = e.getCoalescedEvents ? e.getCoalescedEvents() : null;
+    if (!evs || !evs.length) evs = [e];
+    for (const ev of evs) ink.cur.push(inkPos(ev));
+    drawInk();
+  });
+  const end = () => { if (ink) ink.cur = null; };
+  pad.addEventListener('pointerup', end); pad.addEventListener('pointercancel', end); pad.addEventListener('pointerleave', end);
+  $('inkClear').addEventListener('click', () => { if (RUN && RUN.items.length) { RUN.ans[RUN.idx].ink = []; drawInk(); } });
+
+  /* ③ 채점 */
+  $('gList').addEventListener('click', e => {
+    const li = e.target.closest('.gi'); if (!li) return;
+    const i = +li.dataset.i, a = RUN.ans[i];
+    const m = e.target.closest('[data-m]');
+    if (m) {
+      a.mark = a.mark === m.dataset.m ? null : m.dataset.m; a.user = true;
+      if (a.mark === 'o') a.marks = [];
+      renderGrade(); return;
+    }
+    const k = e.target.closest('[data-k]');
+    if (k) {
+      const n = +k.dataset.k;
+      a.marks[n] = a.marks[n] ? 0 : 1; a.user = true;
+      if (a.marks.some(Boolean)) a.mark = 'x';
+      renderGrade();
+    }
+  });
+  $('btnRetry').addEventListener('click', () => {
+    const items = RUN.items.filter((_, i) => RUN.ans[i].mark === 'x');
+    if (!items.length) return;
+    const t = RUN.title.replace(/ · 틀린 문제$/, '') + ' · 틀린 문제';
+    newRun(items, t);
+    $('cPlay').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('btnAgain').addEventListener('click', () => { resetRun(); $('cPlay').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+  $('btnCardImg').addEventListener('click', e => busy(e.currentTarget, '그림 만드는 중…', async () => {
+    download(await scoreCard(), safeName('받아쓰기 점수 ' + RUN.title) + '.png');
+    AD.done('점수 카드를 저장했습니다.', doneSteps('card'));
+  }));
+  $('btnWrongPdf').addEventListener('click', e => busy(e.currentTarget, 'PDF 만드는 중…', async () => {
+    const W = wrongDoc();
+    if (!W.items.length) { toast('틀린 문장이 없어요. 채점에서 ❌ 를 누른 문장이 오답 노트에 들어갑니다.', 3600); return; }
+    const pages = wrongPages(W, docOpts());
+    download(await pdfOf(pages, fileBase('wrong'), e.currentTarget), fileBase('wrong') + '.pdf');
+    AD.done('오답 노트 PDF를 저장했습니다.', doneSteps('pdf'));
+  }));
+
+  /* 기록 */
+  $('btnMissSet').addEventListener('click', () => {
+    const mc = missCounts().slice(0, 10);
+    if (!mc.length) return;
+    newRun(mc.map(([t]) => ({ t, h: '' })), '자주 틀린 문장');
+    $('cPlay').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+  $('btnHistClear').addEventListener('click', () => {
+    if (!confirm('받아쓰기 기록을 모두 지울까요? 지우기 전에 엑셀로 받아 둘 수 있습니다.')) return;
+    HIST = []; lsSet(HKEY, HIST); renderHist();
+  });
+
+  /* 인쇄 · 저장 */
+  $('btnPdf').addEventListener('click', e => busy(e.currentTarget, 'PDF 만드는 중…', async () => {
+    const blob = await buildPdfBlob(e.currentTarget);
+    download(blob, fileBase(S.doc) + '.pdf');
+    AD.done(DOC_NAME[S.doc] + ' PDF를 저장했습니다.', doneSteps('pdf'));
+  }));
+  $('btnPrint').addEventListener('click', e => busy(e.currentTarget, '인쇄 준비 중…', doPrint));
+  $('btnXlsx').addEventListener('click', e => busy(e.currentTarget, '엑셀 만드는 중…', async () => {
+    download(await buildXLSX(), safeName('받아쓰기 ' + (curGroup() ? curGroup().src.label : '') + ' 급수표와 기록') + '.xlsx');
+    AD.done('엑셀 파일을 저장했습니다.', doneSteps('xlsx'));
+  }));
+  $('btnImg').addEventListener('click', e => busy(e.currentTarget, '이미지 만드는 중…', async () => {
+    if (refreshT) refresh();
+    download(await pagesPNG(LAY.pages), fileBase(S.doc) + '.png');
+    AD.done(DOC_NAME[S.doc] + ' 그림을 저장했습니다' + (LAY.pages.length > 3 ? ' (앞 3쪽)' : '') + '.', doneSteps('img'));
+  }));
+  $('doneHide').addEventListener('click', () => AD.hideDone());
+  $('mbarGo').addEventListener('click', () => { $('pvCard').scrollIntoView({ behavior: 'smooth', block: 'start' }); });
+
+  /* 앱 안 브라우저 */
+  initInApp();
+  const goOut = () => { const u = externalUrl(); if (u) { location.href = u; return; } copyAddr(true); iaCopied(); };
+  $('iaGo').addEventListener('click', goOut);
+  $('iaGo2').addEventListener('click', goOut);
+  $('doneGo').addEventListener('click', goOut);
+  $('iaX').addEventListener('click', () => {
+    document.body.classList.remove('inapp');
+    try { sessionStorage.setItem('dictation.iahide', '1'); } catch (er) { /* 무시 */ }
+  });
+  $('iaStay').addEventListener('click', () => { lockInApp(false); if (!TTS.ok) { S.self = true; save(); syncControls(); renderPlayer(); } updateMbar(); AD.init(); });
+
+  /* 하단 바 · 오버형 */
+  const sync = () => updateMbar();
+  window.addEventListener('scroll', sync, { passive: true });
+  let rzT = 0, lastW = window.innerWidth;
+  window.addEventListener('resize', () => {
+    sync(); clearTimeout(rzT);
+    rzT = setTimeout(() => { renderPreview(); if (window.innerWidth !== lastW) { lastW = window.innerWidth; if (S.mode === 'ink') sizeInk(); } }, 140);
+  });
+  document.addEventListener('focusin', sync);
+  document.addEventListener('focusout', () => setTimeout(sync, 60));
+  $('anchorX').addEventListener('click', () => { AD.closed = true; AD.sync(true); });
+  /* 화면을 떠나면 읽기를 멈춘다 */
+  document.addEventListener('visibilitychange', () => { if (document.hidden && playing) { TTS.stop(); playing = false; renderPlayer(); } });
+
+  TTS.init(renderVoices);
+  TTS.onBad = name => { if (S.voice === name) { S.voice = ''; save(); } renderVoices(); toast('「' + name.replace(/^Microsoft /, '').replace(/ - Korean.*$/, '') + '」 목소리가 이 기기에서 안 되어 다른 목소리로 읽습니다.', 3600); };
+  setTimeout(() => { TTS.checked = true; renderVoices(); syncControls(); }, 3000);
+  applyAll(true);
+  renderHist();
+  renderVoices();
+  sync();
+  /* 광고 — 막는 창이 떠 있으면 창을 닫을 때 부른다 */
+  if (!document.body.classList.contains('ia-lock')) AD.init();
+  document.body.dataset.ready = '1';
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
